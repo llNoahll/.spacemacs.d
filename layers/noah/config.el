@@ -42,7 +42,17 @@
 (electric-pair-mode t)
 (delete-selection-mode t)
 (global-font-lock-mode t)
-(semantic-mode t)
+
+;;; setq semantic
+;; disable emacs-lisp-mode
+(add-hook 'semantic-inhibit-functions
+          (lambda ()
+            (member major-mode '(emacs-lisp-mode))))
+;; enable cc-mode
+;; (setq semantic-inhibit-functions
+;;       '(lambda ()
+;;          (not (and (featurep 'cc-defs)
+;;                    c-buffer-is-cc-mode))))
 
 ;; set alpha-list
 (setq alpha-list '((95 65) (85 55) (75 45) (65 35) (0 0) (100 100)))
