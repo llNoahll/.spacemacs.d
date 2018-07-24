@@ -243,15 +243,17 @@
 
 
 ;; define delete
+(define-key evil-insert-state-map (kbd "C-D") 'nil)
+(define-key evil-insert-state-map (kbd "C-S-d") 'nil)
 (define-key evil-insert-state-map (kbd "C-d") 'nil)
 (global-set-key (kbd "M-d") 'kill-word)
 (global-set-key (kbd "M-D") 'backward-kill-word)
 (global-set-key (kbd "M-S-d") 'backward-kill-word)
 (define-key clean-aindent-mode--keymap (kbd "M-<backspace>") 'kill-word)
 (define-key evil-ex-completion-map (kbd "C-d") 'nil)
-(global-set-key (kbd "C-d") 'delete-char)
 (global-set-key (kbd "C-D") 'delete-backward-char)
 (global-set-key (kbd "C-S-d") 'delete-backward-char)
+(global-set-key (kbd "C-d") 'delete-char)
 (define-key evil-normal-state-map (kbd "x") 'delete-char)
 (define-key evil-normal-state-map (kbd "X") 'delete-backward-char)
 
