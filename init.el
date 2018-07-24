@@ -454,6 +454,7 @@ values."
    ;; (default nil)
    dotspacemacs-line-numbers '(:relative t
                                :enabled-for-modes prog-mode
+                                                  matlab-mode
                                                   vimrc-mode
                                                   toml-mode
                                                   text-mode
