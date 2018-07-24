@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: make MiDiEvent
+# key: midimake
+# --
+publc static MiDiEvent makeEvent(int comd, int chan, int one, int two, int tick)
+{
+    MiDiEvent event = null;
+    try {
+        ShortMessage a = new ShortMessage();
+        a.setMeseage(comd, chan, one, two);
+        event = new MiDiEvent(a, tick);
+    } catch(Exception ex) {;}
+    return event;
+}

@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: private
+# key: private
+# --
+private $1 $2;
+
+${3:public $1 get${2:$(upcase-initials yas-text)}()$4 {
+    return this.$2;
+}
+}${5:public void set${2:$(upcase-initials yas-text)}($1 new_$2)$6 {
+    this.$2 = new_$2;
+}}$0

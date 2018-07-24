@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: protected
+# key: protected
+# --
+protected $1 $2;
+
+public $1 get${2:$(upcase-initials yas-text)}()$3 {
+    return this.$2;
+}
+public void set${2:$(upcase-initials yas-text)}($1 new_$2)$4 {
+    this.$2 = new_$2;
+}$0

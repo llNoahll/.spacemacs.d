@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: equals
+# key: equals
+# --
+public boolean equals(Object other)
+{
+    boolean flag = false;
+
+    if(this == other) {
+        flag = true;
+    } else if(!(other instanceof ${1:Class})) {
+        flag = false;
+    } else {
+        $1 another = ($1) other;
+
+        if($2)$0 {
+                flag = true;
+        }
+    }
+
+    return flag;
+} // close boolean equals(Object other)

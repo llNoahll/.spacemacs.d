@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: main part of C++ program
+# key: main
+# --
+#include <iostream>
+#include <cstdio>
+${1:#include <cstdlib>
+}${2:#include <cstring>
+}${3:#include <cmath>
+}$4
+
+int main(${5:int argc, char *argv[]})
+{
+    $0
+
+
+    return 0;
+} // close main

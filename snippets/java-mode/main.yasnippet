@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: public static void main (String[] args) { ... }
+# key: main
+# --
+${1:package ${2:pers}${3:.noah}${4:.headfirstjava}${5:.`(downcase (file-name-sans-extension (buffer-name)))`};
+
+}${8:import java.util.Scanner;
+}${9:import java.util.Objects;
+}${10:import java.util.ArrayList;
+}${11:
+}
+public class `(file-name-sans-extension (buffer-name))`
+{
+    public static void main(String[] args)${6: throws ${7:Exception}}
+    {
+        $0
+    } // close main
+} // close `(file-name-sans-extension (buffer-name))`

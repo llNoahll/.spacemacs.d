@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: main part of Python program
+# key: main
+# --
+${1:#! /usr/bin/env ${2:python3}
+}${3:# -*- ${4:coding: ${5:utf-8}} -*-
+
+}import sys
+${6:import numpy as np
+}${7:import pandas as pd
+}${8:import matplotlib.pyplot as plt
+}$9
+
+def main(argv=None):
+    if argv is None:
+        argv = sys.argv
+
+
+    $0
+
+
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())
