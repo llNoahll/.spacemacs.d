@@ -33,6 +33,7 @@
 (setq c-basic-offset 4)
 (setq c-default-style "ellemtel")
 (setq default-tab-width 4)
+(setq octave-block-offset 4)
 ;; SPC instand of Tab
 (setq-default indent-tabs-mode nil)
 
@@ -97,6 +98,11 @@
           '(lambda ()
              (setq-local evil-move-cursor-back nil)
              (geiser-mode t)))
+
+;; define octave-mode
+(add-hook 'octave-mode-hook
+          '(lambda ()
+             (setq-local comment-start "% ")))
 
 ;; set LaTeX-mode
 (add-hook 'LaTeX-mode-hook
