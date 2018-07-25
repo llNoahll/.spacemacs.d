@@ -188,7 +188,7 @@
 ;; set evil-shift
 (define-key evil-insert-state-map (kbd "C-S-t") 'evil-shift-left-line)
 
-;; delete four spaces and semi in c, c++, java mode.
+;; delete four spaces and semi in c, c++, java , octave, matlab mode.
 (add-hook 'c-mode-hook
           '(lambda ()
              (define-key c-mode-map (kbd ";") 'self-insert-command)
@@ -203,6 +203,14 @@
           '(lambda ()
              (define-key java-mode-map (kbd ";") 'self-insert-command)
              (define-key java-mode-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
+
+(add-hook 'matlab-mode-hook
+          '(lambda ()
+             (define-key matlab-mode-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
+
+(add-hook 'octave-mode-hook
+          '(lambda ()
+             (define-key octave-mode-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
 
 ;; define web-mode
 (add-hook 'web-mode-hook
