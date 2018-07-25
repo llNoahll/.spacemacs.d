@@ -114,6 +114,10 @@
           '(lambda ()
              (setq-local comment-start "% ")))
 
+(add-hook 'inferior-octave-mode-hook
+          '(lambda ()
+             (company-mode t)))
+
 ;; set LaTeX-mode
 (add-hook 'LaTeX-mode-hook
           '(lambda ()
