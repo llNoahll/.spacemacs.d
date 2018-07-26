@@ -96,6 +96,7 @@
              (vline-mode t)))
 
 ;; set treemacs-mode
+(setq treemacs-width 28)
 (add-hook 'treemacs-mode-hook
           '(lambda ()
              (vline-mode t)
