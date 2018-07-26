@@ -143,10 +143,10 @@
 Removes the automatic guessing of the initial value based on thing at point. "
   (interactive "P")
 
-  (setq winum--current-window-number (winum-get-number))
+  (setq spacemacs/helm-find-files-window-number (winum-get-number))
   (setq treemacs-position 'right)
   (treemacs)
-  (winum-select-window-by-number winum--current-window-number)
+  (winum-select-window-by-number spacemacs/helm-find-files-window-number)
 
   (let* ((hist (and arg helm-ff-history (helm-find-files-history)))
          (default-input hist)
@@ -160,7 +160,7 @@ Removes the automatic guessing of the initial value based on thing at point. "
 
   (setq treemacs-position 'left)
   (treemacs)
-  (winum-select-window-by-number winum--current-window-number))
+  (winum-select-window-by-number spacemacs/helm-find-files-window-number))
 
  ;; Key bindings
 

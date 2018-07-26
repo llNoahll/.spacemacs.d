@@ -639,6 +639,10 @@ you should place your code here."
   (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)
   (symon-mode t)
 
+
+  ;; set current window's number
+  (defvar spacemacs/helm-find-files-window-number 0)
+
   ;; Solve the problem of alignment between Chinese and English in the org table
   (when (configuration-layer/layer-usedp 'chinese)
     (when (and (spacemacs/system-is-mac) window-system)
