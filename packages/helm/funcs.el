@@ -142,6 +142,12 @@
   "Custom spacemacs implementation for calling helm-find-files-1.
 Removes the automatic guessing of the initial value based on thing at point. "
   (interactive "P")
+
+  (setq winum--current-window-number (winum-get-number))
+  (setq treemacs-position 'right)
+  (treemacs)
+  (winum-select-window-by-number winum--current-window-number)
+
   (let* ((hist (and arg helm-ff-history (helm-find-files-history)))
          (default-input hist)
          (input (cond ((and (eq major-mode 'dired-mode) default-input)
@@ -150,7 +156,11 @@ Removes the automatic guessing of the initial value based on thing at point. "
                             default-input))
                       (t (expand-file-name (helm-current-directory))))))
     (set-text-properties 0 (length input) nil input)
-    (helm-find-files-1 input)))
+    (helm-find-files-1 input))
+
+  (setq treemacs-position 'left)
+  (treemacs)
+  (winum-select-window-by-number winum--current-window-number))
 
  ;; Key bindings
 
@@ -257,4 +267,5 @@ to buffers)."
   "Remove limit on number of candidates on `helm-themes'"
   (interactive)
   (let (helm-candidate-number-limit)
-    (helm-themes)))
+    (helm-themes))
+  (set-face-background vline-face (face-attribute hl-line-face :background)))

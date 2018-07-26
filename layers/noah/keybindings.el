@@ -92,6 +92,7 @@
 (spacemacs/set-leader-keys "-" 'treemacs-select-window)
 (define-key winum-keymap (kbd "M--") 'treemacs-select-window)
 (define-key winum-keymap (kbd "C-x w -") 'treemacs-select-window)
+(global-set-key (kbd "C-x 1") 'treemacs-delete-other-windows)
 
 (add-hook 'treemacs-mode-hook
           '(lambda ()

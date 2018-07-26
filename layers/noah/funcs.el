@@ -72,13 +72,6 @@
 
 ;;; defun spacemacs/
 
-(defun spacemacs/helm-themes ()
-  "Remove limit on number of candidates on `helm-themes'"
-  (interactive)
-  (let (helm-candidate-number-limit)
-    (helm-themes))
-  (set-face-background vline-face (face-attribute hl-line-face :background)))
-
 (defun spacemacs/check-large-file ()
   "If the buffer-size is more than 500000, open the file by fundamental-mode"
   (when (> (buffer-size) 500000)
