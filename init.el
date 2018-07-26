@@ -134,7 +134,7 @@ values."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
-   ;; A list of packages treemacs-projectile.that will not be installed and loaded.
+   ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '()
 
    ;; Defines the behaviour of Spacemacs when installing packages.
@@ -731,6 +731,12 @@ you should place your code here."
       (indent-according-to-mode)))
 
 
+;;; add some functions to treemacs-mode
+  (defun treemacs--current-visibility ()
+    "Init treemacs--current-visibility function."
+    'none)
+
+
 ;;; add some functions to occur-mode
   (defun occur-dwim ()
     "Call 'occur' with a same default."
@@ -746,7 +752,7 @@ you should place your code here."
     (call-interactively 'occur))
 
 
-;;; add some functions to racket
+;;; add some functions to racket-mode
   (defun racket-better-send-last-sexp ()
     "Send the previous sexp to the Racket REPL.
   When the previous sexp is a sexp comment the sexp itself is sent,
