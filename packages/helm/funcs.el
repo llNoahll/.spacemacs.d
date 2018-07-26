@@ -58,35 +58,35 @@
 ;; Search tools integration
 
 (defun spacemacs//helm-do-grep-region-or-symbol
-          (&optional targs use-region-or-symbol-p)
-        "Version of `helm-do-grep' with a default input."
-        (interactive)
-        (require 'helm)
-        (cl-letf*
-            (((symbol-function 'this-fn) (symbol-function 'helm-do-grep-1))
-             ((symbol-function 'helm-do-grep-1)
-              (lambda (targets &optional recurse zgrep exts
-                               default-input region-or-symbol-p)
-                (let* ((new-input (when region-or-symbol-p
-                                    (if (region-active-p)
-                                        (buffer-substring-no-properties
-                                         (region-beginning) (region-end))
-                                      (thing-at-point 'symbol t))))
-                       (quoted-input (when new-input
-                                       (rxt-quote-pcre new-input))))
-                  (this-fn targets recurse zgrep exts
-                           default-input quoted-input))))
-             (preselection (or (dired-get-filename nil t)
-                               (buffer-file-name (current-buffer))))
-             (targets   (if targs
-                            targs
-                          (helm-read-file-name
-                           "Search in file(s): "
-                           :marked-candidates t
-                           :preselect (if helm-ff-transformer-show-only-basename
-                                          (helm-basename preselection)
-                                        preselection)))))
-          (helm-do-grep-1 targets nil nil nil nil use-region-or-symbol-p)))
+    (&optional targs use-region-or-symbol-p)
+  "Version of `helm-do-grep' with a default input."
+  (interactive)
+  (require 'helm)
+  (cl-letf*
+      (((symbol-function 'this-fn) (symbol-function 'helm-do-grep-1))
+       ((symbol-function 'helm-do-grep-1)
+        (lambda (targets &optional recurse zgrep exts
+                         default-input region-or-symbol-p)
+          (let* ((new-input (when region-or-symbol-p
+                              (if (region-active-p)
+                                  (buffer-substring-no-properties
+                                   (region-beginning) (region-end))
+                                (thing-at-point 'symbol t))))
+                 (quoted-input (when new-input
+                                 (rxt-quote-pcre new-input))))
+            (this-fn targets recurse zgrep exts
+                     default-input quoted-input))))
+       (preselection (or (dired-get-filename nil t)
+                         (buffer-file-name (current-buffer))))
+       (targets   (if targs
+                      targs
+                    (helm-read-file-name
+                     "Search in file(s): "
+                     :marked-candidates t
+                     :preselect (if helm-ff-transformer-show-only-basename
+                                    (helm-basename preselection)
+                                  preselection)))))
+    (helm-do-grep-1 targets nil nil nil nil use-region-or-symbol-p)))
 
 (defun spacemacs/helm-file-do-grep ()
   "Search in current file with `grep' using a default input."
@@ -143,10 +143,12 @@
 Removes the automatic guessing of the initial value based on thing at point. "
   (interactive "P")
 
-  (setq spacemacs/helm-find-files-window-number (winum-get-number))
-  (setq treemacs-position 'right)
-  (treemacs)
-  (winum-select-window-by-number spacemacs/helm-find-files-window-number)
+  (if (winum-get-number)
+      (setq spacemacs/helm-find-files-window-number (winum-get-number))
+    (setq spacemacs/helm-find-files-window-number 1))
+  (if (string-equal 'visible (treemacs--current-visibility))
+      (treemacs)
+    (setq spacemacs/helm-find-files-window-number 0))
 
   (let* ((hist (and arg helm-ff-history (helm-find-files-history)))
          (default-input hist)
@@ -158,9 +160,9 @@ Removes the automatic guessing of the initial value based on thing at point. "
     (set-text-properties 0 (length input) nil input)
     (helm-find-files-1 input))
 
-  (setq treemacs-position 'left)
-  (treemacs)
-  (winum-select-window-by-number spacemacs/helm-find-files-window-number))
+  (when (/= spacemacs/helm-find-files-window-number 0)
+    (treemacs)
+    (winum-select-window-by-number spacemacs/helm-find-files-window-number)))
 
  ;; Key bindings
 
@@ -240,9 +242,9 @@ to buffers)."
   (with-current-buffer "*helm ag results*"
     (setq spacemacs--gne-min-line 5
           spacemacs--gne-max-line (save-excursion
-            (goto-char (point-max))
-            (previous-line)
-            (line-number-at-pos))
+                                    (goto-char (point-max))
+                                    (previous-line)
+                                    (line-number-at-pos))
           spacemacs--gne-line-func
           (lambda (c)
             (helm-ag--find-file-action
