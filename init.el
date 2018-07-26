@@ -736,6 +736,10 @@ you should place your code here."
     "Init treemacs--current-visibility function."
     'none)
 
+  (defun treemacs-delete-other-windows ()
+    "Init treemacs-delete-other-windows."
+    (delete-other-windows))
+
 
 ;;; add some functions to occur-mode
   (defun occur-dwim ()
