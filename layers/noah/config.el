@@ -43,16 +43,18 @@
 (delete-selection-mode t)
 (global-font-lock-mode t)
 
-;;; setq semantic
+;;; set semantic
 ;; disable emacs-lisp-mode
 (add-hook 'semantic-inhibit-functions
-          (lambda ()
-            (member major-mode '(emacs-lisp-mode))))
-;; enable cc-mode
+          '(lambda ()
+             (member major-mode '(emacs-lisp-mode))))
+
+;; only enable cc-mode
 ;; (setq semantic-inhibit-functions
 ;;       '(lambda ()
 ;;          (not (and (featurep 'cc-defs)
 ;;                    c-buffer-is-cc-mode))))
+
 
 ;; set alpha-list
 (setq alpha-list '((95 65) (85 55) (75 45) (65 35) (0 0) (100 100)))
@@ -109,6 +111,7 @@
              (setq-local evil-move-cursor-back nil)
              (geiser-mode t)))
 
+
 ;; define octave-mode
 (add-hook 'octave-mode-hook
           '(lambda ()
@@ -117,6 +120,7 @@
 (add-hook 'inferior-octave-mode-hook
           '(lambda ()
              (company-mode t)))
+
 
 ;; set LaTeX-mode
 (add-hook 'LaTeX-mode-hook
