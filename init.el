@@ -75,7 +75,6 @@ values."
      github
      markdown
      smex
-     treemacs
      imenu-list
      ipython-notebook
      spell-checking
@@ -98,6 +97,9 @@ values."
           magit-revert-buffers 'silent
           magit-refs-show-commit-count 'all
           magit-revision-show-gravatars nil)
+     (treemacs :variables
+               treemacs--width-is-locked nil
+               treemacs-width 28)
      (ibuffer :variables
               ibuffer-group-buffers-by 'projects)
      (auto-completion :variables
