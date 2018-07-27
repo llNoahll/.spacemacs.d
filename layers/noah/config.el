@@ -22,8 +22,8 @@
 ;; set fundamental-mode for big files
 (add-hook 'find-file-hook 'spacemacs/check-large-file)
 
-;; reload python-mode to fix company-backends bugs
-(add-hook 'find-file-hook 'spacemacs/reload-python-mode)
+;; ;; reload python-mode to fix company-backends bugs
+;; (add-hook 'find-file-hook 'spacemacs/reload-python-mode)
 
 ;; change the tab's space
 (setq c-basic-offset 4)
