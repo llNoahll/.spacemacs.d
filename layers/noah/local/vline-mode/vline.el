@@ -156,7 +156,7 @@ if `truncate-lines' is non-nil."
   :type 'boolean
   :group 'vline)
 
-(defcustom vline-idle-time 0.618
+(defcustom vline-idle-time 1
   "Idle time for highlighting column."
   :type 'number
   :group 'vline)
