@@ -69,7 +69,6 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     spacemacs-evil
      ;; ivy
      helm
      github
@@ -87,9 +86,6 @@ values."
      ;; (osx :variables
      ;;      osx-dictionary-dictionary-choice "Simplified Chinese - English"
      ;;      osx-command-as 'super)
-     (spacemacs-layouts :variables
-                        layouts-enable-autosave nil
-                        layouts-autosave-delay 300)
      (git :variables
           git-magit-status-fullscreen t
           magit-push-always-verify nil
@@ -624,6 +620,10 @@ you should place your code here."
 ;;;; require packages
   (require 'package)
   (require 'youdao-dictionary)
+
+
+;;;; add keybindings
+
 
 
 ;;;; configurations

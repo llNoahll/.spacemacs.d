@@ -16,11 +16,6 @@
 ;; set "C-Tab" as "Esc"
 (define-key key-translation-map (kbd "<C-tab>") (kbd "<escape>"))
 
-;; add some keybindings for evil-evilified-mode
-(define-key evil-evilified-state-map (kbd "%") 'evil-jump-item)
-(define-key evil-evilified-state-map (kbd "m") 'evil-set-marker)
-(define-key evil-evilified-state-map (kbd "'") 'evil-goto-mark-line)
-
 ;; change hjkl to ijkl
 (define-key evil-normal-state-map (kbd "H") 'evil-insert-line)
 (define-key evil-normal-state-map (kbd "I") 'nil)
@@ -171,7 +166,7 @@
 (define-key evil-motion-state-map (kbd "C-w C-e") 'mwim-end-of-code-or-line)
 (define-key evil-motion-state-map (kbd "C-w C-a") 'mwim-beginning-of-code-or-line)
 
-;; change emacs state to hybrid hstate
+;; change emacs state to hybrid state
 (define-key evil-hybrid-state-map (kbd "C-z") 'evil-exit-hybrid-state)
 (define-key evil-insert-state-map (kbd "C-z") 'evil-hybrid-state)
 (define-key evil-motion-state-map (kbd "C-z") 'evil-hybrid-state)
@@ -180,6 +175,15 @@
 ;; set eval-jump in normal
 (define-key evil-normal-state-map (kbd "C-k") 'evil-jump-backward)
 (define-key evil-normal-state-map (kbd "C-j") 'evil-jump-forward)
+
+;; add some keybindings for evil-evilified-mode
+(add-hook 'evil-evilified-state-entry-hook
+          '(lambda ()
+             (define-key evil-evilified-state-map (kbd "?") 'evil-ex-search-backward)
+             (define-key evil-evilified-state-map (kbd "%") 'evil-jump-item)
+             (define-key evil-evilified-state-map (kbd "m") 'evil-set-marker)
+             (define-key evil-evilified-state-map (kbd "'") 'evil-goto-mark-line)
+             (define-key evil-evilified-state-map  (kbd "C-o") 'evil-execute-in-insert-state)))
 
 ;; switch to another state temporarily
 (define-key evil-emacs-state-map   (kbd "C-o") 'evil-execute-in-normal-state)
