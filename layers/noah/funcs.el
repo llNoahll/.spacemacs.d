@@ -85,7 +85,7 @@
 (defun spacemacs/reload-python-mode ()
   "Reload python-mode to fix company-backends bugs"
   (defvar reload-python-times 0)
-  (when (and (= reload-python-times 0) (string-equal major-mode "python-mode"))
+  (when (and (= reload-python-times 0) (string-equal major-mode 'python-mode))
     (python-mode)
     (setq reload-python-times 1)))
 

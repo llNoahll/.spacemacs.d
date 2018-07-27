@@ -113,6 +113,10 @@ selected."
 (make-variable-buffer-local 'sublimity-map--active-overlay)
 (make-variable-buffer-local 'sublimity-map--current-overlay)
 
+;;;###autoload
+(define-derived-mode minimap-mode fundamental-mode "MINIMAP"
+  "Major mode for view sublimity minimap.")
+
 ;; + create/kill the minimap
 
 (defun sublimity-map--delete-window ()
@@ -151,6 +155,7 @@ selected."
   (let ((ind (make-indirect-buffer
               base (concat " *minimap/" (buffer-name base) "*"))))
     (with-current-buffer ind
+      (minimap-mode)
       (setq vertical-scroll-bar             nil
             truncate-lines                  t
             buffer-read-only                t

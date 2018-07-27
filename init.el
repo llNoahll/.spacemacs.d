@@ -460,6 +460,7 @@ values."
                                                   markdown-mode
                                                   dired-mode
                                                   occur-mode
+                                                  minimap-mode
                                                   treemacs-mode
                                                   ibuffer-mode
                                                   magit-mode
