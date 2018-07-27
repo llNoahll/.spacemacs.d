@@ -1,6 +1,6 @@
 # -*- coding: utf-8; mode: snippet -*-
 # name: thing under cursor selected region
-# key: thing
+# key: thing.
 # contributor: Chen Bin <chenbin DOT sh AT gmail>
 # --
 (if (region-active-p)

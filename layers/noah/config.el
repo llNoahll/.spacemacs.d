@@ -9,7 +9,7 @@
 ;;
 ;;; License: GPLv3
 
-;;;; add list
+;;;; add packages
 (add-to-list 'load-path "~/.spacemacs.d/packages/vline-mode")
 (add-to-list 'load-path "~/.spacemacs.d/packages/nyan-mode")
 
@@ -43,6 +43,13 @@
 (delete-selection-mode t)
 (global-font-lock-mode t)
 
+;; set comment-style
+(setq comment-style 'multi-line)
+
+;; add auto-mode-lists
+(add-to-list 'auto-mode-alist '("\\.snippet\\'" . snippet-mode))
+(add-to-list 'auto-mode-alist '("\\.yasnippet\\'" . snippet-mode))
+
 ;;; set semantic
 ;; disable emacs-lisp-mode
 (add-hook 'semantic-inhibit-functions
@@ -70,7 +77,7 @@
 ;; set default configs in prog-mode
 (add-hook 'prog-mode-hook
           '(lambda ()
-             (setq require-final-newline nil)
+             (setq-local require-final-newline nil)
              (company-mode t)
              (highlight-indent-guides-mode t)))
 
@@ -82,7 +89,7 @@
 ;; set company for text-mode
 (add-hook 'text-mode-hook
           '(lambda ()
-             (setq require-final-newline nil)
+             (setq-local require-final-newline nil)
              (company-mode t)))
 
 ;; set magit-mode
@@ -100,6 +107,35 @@
           '(lambda ()
              (vline-mode t)
              (highlight-indentation-mode t)))
+
+;; set c-mode
+(add-hook 'c-mode-hook
+          '(lambda ()
+             (setq-local comment-start "// ")
+             (setq-local comment-end "")))
+
+;; ;; set c++-mode
+;; (add-hook 'c++-mode-hook
+;;           '(lambda ()
+;;              (setq-local comment-start "/* ")
+;;              (setq-local comment-end   " */")))
+
+;; ;; set java-mode
+;; (add-hook 'java-mode-hook
+;;           '(lambda ()
+;;              (setq-local comment-start "/* ")
+;;              (setq-local comment-end   " */")))
+
+;; set css-mode
+(add-hook 'css-mode-hook
+          '(lambda ()
+             (setq-local comment-start "/* ")
+             (setq-local comment-end   " */")))
+
+;; set emacs-lisp-mode
+(add-hook 'emacs-lisp-mode-hook
+          '(lambda ()
+             (setq-local comment-start "; ")))
 
 ;; set racket-mode
 (add-hook 'racket-mode-hook
@@ -127,9 +163,15 @@
           '(lambda ()
              (rainbow-delimiters-mode t)))
 
+;; set python-mode
+(add-hook 'python-mode-hook
+          '(lambda ()
+             (setq-local comment-add 1)))
+
 ;; set ein:ml-mode
 (add-hook 'ein:notebook-multilang-mode-hook
           '(lambda ()
+             (setq-local comment-add 1)
              (yas-activate-extra-mode 'python-mode)))
 
 

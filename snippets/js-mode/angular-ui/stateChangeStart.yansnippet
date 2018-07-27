@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: $rootScope.$on('$stateChangeStart', ...)
-# key: aon
+# key: aon.
 # group: angular
 # --
 $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {

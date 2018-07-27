@@ -16,6 +16,11 @@
 ;; set "C-Tab" as "Esc"
 (define-key key-translation-map (kbd "<C-tab>") (kbd "<escape>"))
 
+;; add some keybindings for evil-evilified-mode
+(define-key evil-evilified-state-map (kbd "%") 'evil-jump-item)
+(define-key evil-evilified-state-map (kbd "m") 'evil-set-marker)
+(define-key evil-evilified-state-map (kbd "'") 'evil-goto-mark-line)
+
 ;; change hjkl to ijkl
 (define-key evil-normal-state-map (kbd "H") 'evil-insert-line)
 (define-key evil-normal-state-map (kbd "I") 'nil)
@@ -49,11 +54,6 @@
 (define-key evil-motion-state-map (kbd "<down>") 'next-line)
 (define-key evil-motion-state-map (kbd "<left>") 'left-char)
 (define-key evil-motion-state-map (kbd "<right>") 'right-char)
-
-(define-key evil-evilified-state-map (kbd "h") 'nil)
-(define-key evil-evilified-state-map (kbd "i") 'evil-previous-line)
-(define-key evil-evilified-state-map (kbd "k") 'evil-next-line)
-(define-key evil-evilified-state-map (kbd "j") 'evil-backward-char)
 
 (define-key evil-operator-state-map (kbd "i") 'evil-previous-line)
 (define-key evil-operator-state-map (kbd "h") evil-inner-text-objects-map)
