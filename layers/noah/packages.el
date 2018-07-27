@@ -30,9 +30,12 @@
 ;;; Code:
 
 (defconst noah-packages
-  '(highlight-indent-guides
+  '(
+    highlight-indent-guides
     tabbar-ruler
-    sublimity))
+    (vline-mode :location local)
+    (sublimity :location local)
+    ))
 
 
 
@@ -40,16 +43,21 @@
   (use-package highlight-indent-guides
     :defer t
     :init
-    (setq highlight-indent-guides-method 'character)
-    ))
+    (setq highlight-indent-guides-method 'character)))
 
 (defun noah/init-tabbar-ruler()
   (use-package tabbar-ruler
     :defer t
     :init
     (tabbar-mode t)
-    (setq tabbar-separator (list 0.5))
-    ))
+    (setq tabbar-separator (list 0.5))))
+
+(defun noah/init-vline-mode()
+  (use-package vline-mode
+    :defer t
+    :init
+    (require 'vline)
+    (spacemacs/set-leader-keys "t C-v" 'vline-mode)))
 
 (defun noah/init-sublimity()
   (use-package sublimity
@@ -59,8 +67,7 @@
     (require 'sublimity-map)
     ;; (require 'sublimity-scroll)
     ;; (require 'sublimity-attractive)
-    (spacemacs/set-leader-keys "t M" 'sublimity-mode)
-    ))
+    (spacemacs/set-leader-keys "t M" 'sublimity-mode)))
 
 
 

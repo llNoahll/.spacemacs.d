@@ -272,6 +272,8 @@ if `truncate-lines' is non-nil."
   (if visual-p
       vline-visual-face
     vline-face))
+;; set the highlight column color
+(set-face-background vline-face (face-attribute hl-line-face :background))
 
 (defun vline-show (&optional point)
   (vline-clear)

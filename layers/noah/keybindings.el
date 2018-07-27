@@ -88,6 +88,14 @@
 ;; modify "C-x b" list-buffers
 (global-set-key (kbd "C-x b") 'helm-mini)
 
+;; set count-words-region
+(global-set-key (kbd "C-=") 'count-words-region)
+
+;; set winum-mode
+(spacemacs/set-leader-keys "=" 'winum-select-window-max)
+(define-key winum-keymap (kbd "M-=") 'winum-select-window-max)
+(define-key winum-keymap (kbd "C-x w =") 'winum-select-window-max)
+
 ;; set treemacs
 (spacemacs/set-leader-keys "-" 'treemacs-select-window)
 (define-key winum-keymap (kbd "M--") 'treemacs-select-window)
@@ -342,9 +350,6 @@
 ;; set transparency
 (global-set-key (kbd "<f11>") 'noah/loop-alpha-down)
 (global-set-key (kbd "<f12>") 'noah/loop-alpha-up)
-
-;; set vline-mode
-(spacemacs/set-leader-keys "t C-v" 'vline-mode)
 
 ;; set occur-dwim
 (spacemacs/set-leader-keys "o d" 'occur-dwim)

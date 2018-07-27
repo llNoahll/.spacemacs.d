@@ -15,7 +15,6 @@
 
 
 ;;;; require packages
-(require 'vline)
 (require 'python)
 (require 'nyan-mode)
 
@@ -25,9 +24,6 @@
 
 ;; reload python-mode to fix company-backends bugs
 (add-hook 'find-file-hook 'spacemacs/reload-python-mode)
-
-;; set the highlight column color
-(set-face-background vline-face (face-attribute hl-line-face :background))
 
 ;; change the tab's space
 (setq c-basic-offset 4)

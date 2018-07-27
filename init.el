@@ -799,6 +799,13 @@ you should place your code here."
         (delete-backward-char 1))))
 
 
+;;; add some functions to winum-mode
+  (defun winum-select-window-max ()
+    "Jump to the max window."
+    (interactive)
+    (winum-select-window-by-number winum--window-count))
+
+
 ;;; add some functions to youdao
   (defun youdao-search-at-point-or-from-input ()
     "Search word at point or word from input
