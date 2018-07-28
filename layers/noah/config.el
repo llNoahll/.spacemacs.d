@@ -10,7 +10,6 @@
 ;;; License: GPLv3
 
 ;;;; add packages
-(add-to-list 'load-path "~/.spacemacs.d/packages/vline-mode")
 (add-to-list 'load-path "~/.spacemacs.d/packages/nyan-mode")
 
 
