@@ -41,6 +41,9 @@
 ;; set comment-style
 (setq comment-style 'multi-line)
 
+;; cancel paste indent
+(add-hook 'spacemacs-indent-sensitive-modes 'snippet-mode)
+
 ;; add auto-mode-lists
 (add-to-list 'auto-mode-alist '("\\.snippet\\'" . snippet-mode))
 (add-to-list 'auto-mode-alist '("\\.yasnippet\\'" . snippet-mode))
@@ -87,8 +90,8 @@
              (setq-local require-final-newline nil)
              (company-mode t)))
 
-;; set magit-mode
-(add-hook 'magit-mode-hook
+;; set magit-status-mode
+(add-hook 'magit-status-mode-hook
           '(lambda ()
              (display-line-numbers-mode t)))
 
