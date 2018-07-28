@@ -67,6 +67,7 @@
     (require 'sublimity-map)
     ;; (require 'sublimity-scroll)
     ;; (require 'sublimity-attractive)
+    (sublimity-map-set-delay nil)
     (spacemacs/set-leader-keys "t M" 'sublimity-mode)))
 
 
