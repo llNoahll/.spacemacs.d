@@ -8,19 +8,20 @@ ${1:#! /usr/bin/env ${2:python3}
 }import sys
 ${6:import numpy as np
 }${7:import pandas as pd
-}${8:import matplotlib.pyplot as plt
-}$9
+}${8:import networkx as nx
+}${9:import matplotlib.pyplot as plt
+}$10
 
 def main(argv=None):
-    if argv is None:
-        argv = sys.argv
+if argv is None:
+argv = sys.argv
 
 
-    $0
+$0
 
 
-    return 0
+return 0
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+sys.exit(main())
