@@ -31,13 +31,47 @@
 
 (defconst noah-packages
   '(
+    (eaf :location local)
+    (sublimity :location local)
+    (vline-mode :location local)
     highlight-indent-guides
     tabbar-ruler
-    (vline-mode :location local)
-    (sublimity :location local)
     ))
 
 
+
+(defun noah/init-eaf()
+  (use-package eaf
+    :defer t
+    :init
+    (require 'eaf)
+    (spacemacs/declare-prefix  "a f" "frame")
+    (spacemacs/set-leader-keys "a f o" 'eaf-open)
+    (spacemacs/set-leader-keys "a f a" 'eaf-open-application)
+    (spacemacs/set-leader-keys "a f u" 'eaf-upload-file)
+
+    (spacemacs/declare-prefix  "F a" "applications")
+    (spacemacs/set-leader-keys "F a o" 'eaf-open)
+    (spacemacs/set-leader-keys "F a o" 'eaf-open-application)
+    (spacemacs/set-leader-keys "F a u" 'eaf-upload-file)))
+
+(defun noah/init-sublimity()
+  (use-package sublimity
+    :defer t
+    :init
+    ;;; set the sublimity
+    (require 'sublimity-map)
+    ;; (require 'sublimity-scroll)
+    ;; (require 'sublimity-attractive)
+    (sublimity-map-set-delay 0.2)
+    (spacemacs/set-leader-keys "t M" 'sublimity-mode)))
+
+(defun noah/init-vline-mode()
+  (use-package vline-mode
+    :defer t
+    :init
+    (require 'vline)
+    (spacemacs/set-leader-keys "t C-v" 'vline-mode)))
 
 (defun noah/init-highlight-indent-guides()
   (use-package highlight-indent-guides
@@ -51,24 +85,6 @@
     :init
     (tabbar-mode t)
     (setq tabbar-separator (list 0.5))))
-
-(defun noah/init-vline-mode()
-  (use-package vline-mode
-    :defer t
-    :init
-    (require 'vline)
-    (spacemacs/set-leader-keys "t C-v" 'vline-mode)))
-
-(defun noah/init-sublimity()
-  (use-package sublimity
-    :defer t
-    :init
-    ;;; set the sublimity
-    (require 'sublimity-map)
-    ;; (require 'sublimity-scroll)
-    ;; (require 'sublimity-attractive)
-    (sublimity-map-set-delay nil)
-    (spacemacs/set-leader-keys "t M" 'sublimity-mode)))
 
 
 

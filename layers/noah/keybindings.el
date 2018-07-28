@@ -356,6 +356,7 @@
 (global-set-key (kbd "<f12>") 'noah/loop-alpha-up)
 
 ;; set occur-dwim
+(spacemacs/declare-prefix "o" "occur")
 (spacemacs/set-leader-keys "o d" 'occur-dwim)
 
 ;; set youdao translation
