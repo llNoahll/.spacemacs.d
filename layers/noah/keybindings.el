@@ -230,16 +230,13 @@
 ;; define web-mode
 (add-hook 'web-mode-hook
           '(lambda ()
-             (define-key evil-insert-state-local-map (kbd "<") 'noah/complete-apex-beackets)
-             (define-key evil-insert-state-local-map (kbd ">") 'noah/close-apex-beackets)
-             (define-key evil-insert-state-local-map (kbd "<backspace>") 'noah/delete-backward-char)))
+             (setq-local electric-pair-pairs (append electric-pair-pairs '((?\< . ?\>))))))
+
 
 ;; define html-mode
 (add-hook 'html-mode-hook
           '(lambda ()
-             (define-key evil-insert-state-local-map (kbd "<") 'noah/complete-apex-beackets)
-             (define-key evil-insert-state-local-map (kbd ">") 'noah/close-apex-beackets)
-             (define-key evil-insert-state-local-map (kbd "<backspace>") 'noah/delete-backward-char)))
+             (setq-local electric-pair-pairs (append electric-pair-pairs '((?\< . ?\>))))))
 
 
 ;; define racket-mode

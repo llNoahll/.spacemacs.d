@@ -35,40 +35,6 @@
     (setq alpha-list (butlast (append (list g) alpha-list) 1))))
 
 
-;; Complete apex brackets
-(defun noah/complete-apex-beackets (count)
-  "Complete apex brackets"
-  (interactive "P")
-  (let ((count (or count 1)))
-    (self-insert-command count)
-    (when (looking-back "<")
-      (loop for i below count
-            do (insert ">"))
-      (left-char count))))
-
-;; Close apex brackets
-(defun noah/close-apex-beackets (count)
-  "Close apex brackets"
-  (interactive "P")
-  (let ((count (or count 1)))
-    (if (or (and (looking-back "<") (looking-at ">"))
-            (and (looking-back ">") (looking-at ">")))
-        (loop for i below count
-              do (right-char))
-      (self-insert-command count))))
-
-;; Delete apex brackets
-(defun noah/delete-backward-char (count)
-  "evil-delete-backward-char-and-join and delete apex backets"
-  (interactive "P")
-  (let ((count (or count 1)))
-    (if (and (looking-back "<") (looking-at ">"))
-        (progn
-          (delete-backward-char count)
-          (delete-char 1))
-      (delete-backward-char count))))
-
-
 
 ;;; defun spacemacs/
 

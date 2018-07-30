@@ -1,4 +1,4 @@
-;; Without this comment emacs25 adds (package-initialize) here
+;; Without this comment emacs26 adds (package-initialize) here
 ;; (package-initialize)
 
 (setenv "HOME" "D:/EDA-tools/emacs/emacs-26.1")
