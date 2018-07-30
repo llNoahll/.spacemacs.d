@@ -90,6 +90,8 @@
 (spacemacs/set-leader-keys "=" 'winum-select-window-max)
 (define-key winum-keymap (kbd "M-=") 'winum-select-window-max)
 (define-key winum-keymap (kbd "C-x w =") 'winum-select-window-max)
+(spacemacs/set-leader-keys "0" 'winum-select-window-0-or-10)
+(define-key winum-keymap (kbd "M-0") 'winum-select-window-0-or-10)
 
 ;; set treemacs
 (spacemacs/set-leader-keys "-" 'treemacs-select-window)
@@ -375,10 +377,6 @@
 
 ;; set tabbar-mode
 (spacemacs/set-leader-keys "t t" 'tabbar-mode)
-
-;; set winum-select-window-9
-(spacemacs/set-leader-keys "0" 'winum-select-window-0-or-10)
-(define-key winum-keymap (kbd "M-0") 'winum-select-window-0-or-10)
 
 
 
