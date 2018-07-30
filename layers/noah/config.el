@@ -170,6 +170,7 @@
 (add-hook 'ein:notebook-multilang-mode-hook
           '(lambda ()
              (setq-local comment-add 1)
+             (smartparens-mode t)
              (yas-activate-extra-mode 'python-mode)))
 
 
