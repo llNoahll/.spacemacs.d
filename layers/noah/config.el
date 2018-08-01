@@ -98,6 +98,7 @@
 ;; set eww-mode
 (add-hook 'eww-mode-hook
           '(lambda ()
+             (setq-local truncate-lines nil)
              (vline-mode t)))
 
 ;; set treemacs-mode
