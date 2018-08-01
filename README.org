@@ -9,5 +9,6 @@ You can use my configuration by two steps:
 
    or git clone -b master https://github.com/syl20bnr/spacemacs ~/.emacs.d
 
+And you can use spacemacs-theme and helm layers in ~/.spacemacs.d/packages/ instand of initial layers.
 
 Happy Hacking!  <(~︶~)> 

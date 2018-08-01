@@ -641,16 +641,10 @@ you should place your code here."
   (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)
   (symon-mode t)
 
-
-  ;; set current window's number
-  (defvar spacemacs/helm-find-files-window-number 0)
-
   ;; Solve the problem of alignment between Chinese and English in the org table
   (when (configuration-layer/layer-usedp 'chinese)
     (when (and (spacemacs/system-is-mac) window-system)
       (spacemacs//set-monospaced-font "Ubuntu Mono" "Hiragino Sans GB" 14 16)))
-  ;; org-mode automatic transfer
-  (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
 
   ;; Setting Chinese Font
   (when (and (spacemacs/system-is-mswindows) window-system)
@@ -661,9 +655,6 @@ you should place your code here."
       (set-fontset-font (frame-parameter nil 'font)
                         charset
                         (font-spec :family "Microsoft Yahei" :size 14))))
-
-  ;; set spelling-checking
-  (add-hook 'text-mode-hook 'spacemacs/toggle-spelling-checking-on)
 
 
 

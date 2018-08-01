@@ -48,6 +48,20 @@
 (add-to-list 'auto-mode-alist '("\\.snippet\\'" . snippet-mode))
 (add-to-list 'auto-mode-alist '("\\.yasnippet\\'" . snippet-mode))
 
+;; set current window's number
+(defvar spacemacs/helm-find-files-window-number 0)
+
+;; set alpha-list
+(setq alpha-list '((95 65) (85 55) (75 45) (65 35) (0 0) (100 100)))
+
+;; display time
+(setq display-time-24hr-format t)
+(setq display-time-day-and-date t)
+(setq display-time-use-mail-icon t)
+(setq display-time-interval 60)
+(setq display-time-format "%m.%d %A %H:%M")
+(display-time-mode t)
+
 ;;; set semantic
 ;; disable emacs-lisp-mode
 (add-hook 'semantic-inhibit-functions
@@ -60,17 +74,6 @@
 ;;          (not (and (featurep 'cc-defs)
 ;;                    c-buffer-is-cc-mode))))
 
-
-;; set alpha-list
-(setq alpha-list '((95 65) (85 55) (75 45) (65 35) (0 0) (100 100)))
-
-;; display time
-(setq display-time-24hr-format t)
-(setq display-time-day-and-date t)
-(setq display-time-use-mail-icon t)
-(setq display-time-interval 60)
-(setq display-time-format "%m.%d %A %H:%M")
-(display-time-mode t)
 
 ;; set default configs in prog-mode
 (add-hook 'prog-mode-hook
@@ -187,6 +190,15 @@
              (yas-activate-extra-mode 'python-mode)))
 
 
+;; set spelling-checking
+(add-hook 'text-mode-hook
+          '(lambda ()
+             (quote spacemacs/toggle-spelling-checking-on)))
+
+;; set org-mode
+(add-hook 'org-mode-hook
+          '(lambda ()
+             (setq-local truncate-lines nil)))
 ;; font-lock-mode in org file
 (setq-default org-src-fontify-natively t)
 
