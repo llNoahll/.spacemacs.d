@@ -166,13 +166,15 @@
 ;; set python-mode
 (add-hook 'python-mode-hook
           '(lambda ()
-             (setq-local comment-add 1)))
+             (setq-local comment-add 1)
+             (setq-local yas-indent-line 'fixed)))
 
 ;; set ein:ml-mode
 (add-hook 'ein:notebook-multilang-mode-hook
           '(lambda ()
-             (setq-local comment-add 1)
              (smartparens-mode t)
+             (setq-local comment-add 1)
+             (setq-local yas-indent-line 'fixed)
              (yas-activate-extra-mode 'python-mode)))
 
 
