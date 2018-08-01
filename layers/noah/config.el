@@ -160,6 +160,7 @@
 (add-hook 'LaTeX-mode-hook
           '(lambda ()
              (setq-local comment-add 1)
+             (setq-local comment-start "% ")
              (rainbow-delimiters-mode t)))
 
 ;; set python-mode
