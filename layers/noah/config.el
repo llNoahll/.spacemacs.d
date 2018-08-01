@@ -157,9 +157,17 @@
              (company-mode t)))
 
 
+;; define matlab-mode
+(add-hook 'matlab-mode-hook
+          '(lambda ()
+             (setq-local yas-indent-line 'fixed)
+             (setq-local comment-add 1)
+             (setq-local comment-start "% ")))
+
 ;; set LaTeX-mode
 (add-hook 'LaTeX-mode-hook
           '(lambda ()
+             (setq-local yas-indent-line 'fixed)
              (setq-local comment-add 1)
              (setq-local comment-start "% ")
              (rainbow-delimiters-mode t)))

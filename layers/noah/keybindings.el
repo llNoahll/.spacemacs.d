@@ -221,6 +221,7 @@
 
 (add-hook 'matlab-mode-hook
           '(lambda ()
+             (define-key matlab-mode-map (kbd "M-;") 'nil)
              (define-key matlab-mode-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
 
 (add-hook 'octave-mode-hook
