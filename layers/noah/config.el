@@ -99,7 +99,7 @@
              (display-line-numbers-mode t)))
 
 ;; set eww-mode
-(add-hook 'eww-mode-hook
+(add-hook 'eww-after-render-hook
           '(lambda ()
              (setq-local truncate-lines nil)
              (vline-mode t)))

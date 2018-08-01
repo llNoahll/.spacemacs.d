@@ -60,7 +60,7 @@
   (evil-define-key state evil-org-mode-map (kbd "h r") 'evil-org-inner-greater-element)
   (evil-define-key state evil-org-mode-map (kbd "h R") 'evil-org-inner-subtree))
 
-(add-hook 'eww-mode-hook
+(add-hook 'eww-after-render-hook
           '(lambda ()
              (define-key eww-link-keymap (kbd "h") 'shr-browse-image)
              (define-key eww-link-keymap (kbd "i") 'nil)
