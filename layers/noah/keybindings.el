@@ -40,15 +40,10 @@
 (define-key evil-motion-state-map (kbd "k") 'evil-next-line)
 (define-key evil-motion-state-map (kbd "j") 'evil-backward-char)
 
-(define-key evil-normal-state-map (kbd "<up>") 'previous-line)
-(define-key evil-normal-state-map (kbd "<down>") 'next-line)
-(define-key evil-normal-state-map (kbd "<left>") 'left-char)
-(define-key evil-normal-state-map (kbd "<right>") 'right-char)
-
-(define-key evil-motion-state-map (kbd "<up>") 'previous-line)
-(define-key evil-motion-state-map (kbd "<down>") 'next-line)
-(define-key evil-motion-state-map (kbd "<left>") 'left-char)
-(define-key evil-motion-state-map (kbd "<right>") 'right-char)
+(define-key evil-motion-state-map (kbd "<up>") 'nil)
+(define-key evil-motion-state-map (kbd "<down>") 'nil)
+(define-key evil-motion-state-map (kbd "<left>") 'nil)
+(define-key evil-motion-state-map (kbd "<right>") 'nil)
 
 (define-key evil-operator-state-map (kbd "i") 'evil-previous-line)
 (define-key evil-operator-state-map (kbd "h") evil-inner-text-objects-map)
@@ -155,9 +150,9 @@
              (define-key evil-normal-state-local-map (kbd "j") 'evil-next-line)
              (define-key evil-normal-state-local-map (kbd "h") 'evil-backward-char)))
 
-(define-key evil-insert-state-map (kbd "C-n") 'next-line)
-(define-key evil-insert-state-map (kbd "C-p") 'previous-line)
-(define-key evil-ex-completion-map (kbd "C-b") 'backward-char)
+(define-key evil-insert-state-map (kbd "C-n") 'nil)
+(define-key evil-insert-state-map (kbd "C-p") 'nil)
+(define-key evil-ex-completion-map (kbd "C-b") 'nil)
 
 (progn
   (define-prefix-command 'mwim-leader-key)
@@ -267,7 +262,6 @@
 (define-key evil-insert-state-map (kbd "C-D") 'nil)
 (define-key evil-insert-state-map (kbd "C-S-d") 'nil)
 (define-key evil-insert-state-map (kbd "C-d") 'nil)
-(global-set-key (kbd "M-d") 'kill-word)
 (global-set-key (kbd "M-D") 'backward-kill-word)
 (global-set-key (kbd "M-S-d") 'backward-kill-word)
 (define-key clean-aindent-mode--keymap (kbd "M-<backspace>") 'kill-word)
