@@ -43,8 +43,7 @@
 (define-key evil-motion-state-map (kbd "<up>") 'nil)
 (define-key evil-motion-state-map (kbd "<down>") 'nil)
 (define-key evil-motion-state-map (kbd "<left>") 'nil)
-(define-key evil-motion-state-map (kbd "<right>") 'nil)
-(global-set-key (kbd "<right>") 'noah/right-char)
+(define-key evil-motion-state-map (kbd "<right>") 'noah/right-char)
 
 (define-key evil-operator-state-map (kbd "i") 'evil-previous-line)
 (define-key evil-operator-state-map (kbd "h") evil-inner-text-objects-map)
