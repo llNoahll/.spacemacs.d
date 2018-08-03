@@ -73,6 +73,7 @@
     (or (derived-mode-p 'prog-mode)
         (derived-mode-p 'text-mode)
         (derived-mode-p 'matlab-mode)
+        (derived-mode-p 'magit-status-mode)
         (derived-mode-p 'css-mode))
     (<= (/ sublimity-map-size (window-total-width) 1.0)
         sublimity-map-max-fraction))
