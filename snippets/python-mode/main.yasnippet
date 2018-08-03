@@ -8,14 +8,15 @@ ${1:#! /usr/bin/env ${2:python3}
 }import sys
 ${6:import os
 }${7:import re
-}${8:import numpy as np
+}${8:import sympy as sy
 }${9:import scipy as sp
-}${10:import pandas as pd
-}${11:import networkx as nx
-}${12:import matplotlib as mpl
-}${13:import matplotlib.pyplot as plt
-}${14:from mpl_toolkits.mplot3d import Axes3D
-}$15
+}${10:import numpy as np
+}${11:import pandas as pd
+}${12:import networkx as nx
+}${13:import matplotlib as mpl
+}${14:import matplotlib.pyplot as plt
+}${15:from mpl_toolkits.mplot3d import Axes3D
+}$16
 
 def main(argv=None):
     if argv is None:
