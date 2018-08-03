@@ -44,6 +44,7 @@
 (define-key evil-motion-state-map (kbd "<down>") 'nil)
 (define-key evil-motion-state-map (kbd "<left>") 'nil)
 (define-key evil-motion-state-map (kbd "<right>") 'nil)
+(global-set-key (kbd "<right>") 'noah/right-char)
 
 (define-key evil-operator-state-map (kbd "i") 'evil-previous-line)
 (define-key evil-operator-state-map (kbd "h") evil-inner-text-objects-map)
@@ -74,6 +75,11 @@
              (define-key evil-normal-state-local-map (kbd "k") 'evil-previous-line)
              (define-key evil-normal-state-local-map (kbd "j") 'evil-next-line)
              (define-key evil-normal-state-local-map (kbd "h") 'evil-backward-char)))
+
+;; basic hack
+(define-key evil-insert-state-map (kbd "C-n") 'nil)
+(define-key evil-insert-state-map (kbd "C-p") 'nil)
+(define-key evil-ex-completion-map (kbd "C-b") 'nil)
 
 ;; modify "C-x b" list-buffers
 (global-set-key (kbd "C-x b") 'helm-mini)
@@ -143,17 +149,7 @@
              (define-key evil-emacs-state-local-map  (kbd "n") 'evil-ex-search-next)
              (define-key evil-emacs-state-local-map  (kbd "N") 'evil-ex-search-previous)))
 
-(add-hook 'dired-mode-hook
-          '(lambda ()
-             (define-key evil-normal-state-local-map (kbd "<escape>") 'evil-insert)
-             (define-key evil-normal-state-local-map (kbd "k") 'evil-previous-line)
-             (define-key evil-normal-state-local-map (kbd "j") 'evil-next-line)
-             (define-key evil-normal-state-local-map (kbd "h") 'evil-backward-char)))
-
-(define-key evil-insert-state-map (kbd "C-n") 'nil)
-(define-key evil-insert-state-map (kbd "C-p") 'nil)
-(define-key evil-ex-completion-map (kbd "C-b") 'nil)
-
+;; set beginning/end-of-code-or-line
 (progn
   (define-prefix-command 'mwim-leader-key)
   (define-key evil-insert-state-map (kbd "C-w") mwim-leader-key))
@@ -198,6 +194,49 @@
 ;; set evil-shift
 (define-key evil-insert-state-map (kbd "C-S-t") 'evil-shift-left-line)
 
+;; define delete
+(define-key evil-insert-state-map (kbd "C-D") 'nil)
+(define-key evil-insert-state-map (kbd "C-S-d") 'nil)
+(define-key evil-insert-state-map (kbd "C-d") 'nil)
+(global-set-key (kbd "M-D") 'backward-kill-word)
+(global-set-key (kbd "M-S-d") 'backward-kill-word)
+(define-key clean-aindent-mode--keymap (kbd "M-<backspace>") 'kill-word)
+(define-key evil-ex-completion-map (kbd "C-d") 'nil)
+(global-set-key (kbd "C-D") 'delete-backward-char)
+(global-set-key (kbd "C-S-d") 'delete-backward-char)
+(global-set-key (kbd "C-d") 'delete-char)
+(define-key evil-normal-state-map (kbd "x") 'delete-char)
+(define-key evil-normal-state-map (kbd "X") 'delete-backward-char)
+
+;; add yasnippet
+(define-key evil-emacs-state-map  (kbd "C-q") 'company-yasnippet)
+(define-key evil-hybrid-state-map (kbd "C-q") 'company-yasnippet)
+(define-key evil-insert-state-map (kbd "C-q") 'company-yasnippet)
+(global-set-key (kbd "C-c y") 'company-yasnippet)
+
+;; set hs-toggle-hiding
+(global-set-key (kbd "<f4>") 'hs-toggle-hiding)
+
+;; set transparency
+(global-set-key (kbd "<f11>") 'noah/loop-alpha-down)
+(global-set-key (kbd "<f12>") 'noah/loop-alpha-up)
+
+;; set occur-dwim
+(spacemacs/declare-prefix "o" "occur")
+(spacemacs/set-leader-keys "o d" 'occur-dwim)
+
+;; set youdao translation
+(global-set-key (kbd "<f1>") 'youdao-search-at-point-or-from-input)
+
+;; set smex-mode
+(spacemacs/set-leader-keys "M-m" 'spacemacs/smex)
+
+;; set symon-mode
+(spacemacs/set-leader-keys "t m s" 'symon-mode)
+
+;; set tabbar-mode
+(spacemacs/set-leader-keys "t t" 'tabbar-mode)
+
 ;; delete four spaces and semi in c, c++, java , octave, matlab mode.
 (add-hook 'c-mode-hook
           '(lambda ()
@@ -223,6 +262,7 @@
           '(lambda ()
              (define-key octave-mode-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
 
+
 ;; define web-mode
 (add-hook 'web-mode-hook
           '(lambda ()
@@ -233,7 +273,6 @@
 (add-hook 'html-mode-hook
           '(lambda ()
              (setq-local electric-pair-pairs (append electric-pair-pairs '((?\< . ?\>))))))
-
 
 ;; define racket-mode
 (add-hook 'racket-mode-hook
@@ -251,35 +290,16 @@
              (define-key racket-repl-mode-map (kbd "C-w") 'nil)
              (define-key racket-repl-mode-map (kbd "C-x C-e") 'racket-repl-send-last-sexp)))
 
+;; define geiser
 (add-hook 'geiser-repl-mode-hook
           '(lambda ()
              (define-key evil-insert-state-local-map (kbd "<C-return>") 'newline-and-indent)
              (define-key geiser-repl-mode-map (kbd "C-d") 'nil)
-             (define-key geiser-repl-mode-map (kbd "C-x C-e") 'racket-repl-send-last-sexp)))
+             (define-key geiser-repl-mode-map (kbd "C-x C-e") 'geiser-better-eval-last-sexp)))
 
-
-;; define delete
-(define-key evil-insert-state-map (kbd "C-D") 'nil)
-(define-key evil-insert-state-map (kbd "C-S-d") 'nil)
-(define-key evil-insert-state-map (kbd "C-d") 'nil)
-(global-set-key (kbd "M-D") 'backward-kill-word)
-(global-set-key (kbd "M-S-d") 'backward-kill-word)
-(define-key clean-aindent-mode--keymap (kbd "M-<backspace>") 'kill-word)
-(define-key evil-ex-completion-map (kbd "C-d") 'nil)
-(global-set-key (kbd "C-D") 'delete-backward-char)
-(global-set-key (kbd "C-S-d") 'delete-backward-char)
-(global-set-key (kbd "C-d") 'delete-char)
-(define-key evil-normal-state-map (kbd "x") 'delete-char)
-(define-key evil-normal-state-map (kbd "X") 'delete-backward-char)
-
-;; add yasnippet
-(define-key evil-emacs-state-map  (kbd "C-q") 'company-yasnippet)
-(define-key evil-hybrid-state-map (kbd "C-q") 'company-yasnippet)
-(define-key evil-insert-state-map (kbd "C-q") 'company-yasnippet)
-(global-set-key (kbd "C-c y") 'company-yasnippet)
-
-;; set hs-toggle-hiding
-(global-set-key (kbd "<f4>") 'hs-toggle-hiding)
+(add-hook 'geiser-mode-hook
+          '(lambda ()
+             (define-key geiser-mode-map (kbd "C-x C-e") 'geiser-better-eval-last-sexp)))
 
 ;; set eshell
 (add-hook 'eshell-mode-hook
@@ -344,31 +364,18 @@
              (define-key magit-mode-map (kbd "C-M-3") 'magit-section-show-level-3-all)
              (define-key magit-mode-map (kbd "C-M-4") 'magit-section-show-level-4-all)))
 
-
-;; set transparency
-(global-set-key (kbd "<f11>") 'noah/loop-alpha-down)
-(global-set-key (kbd "<f12>") 'noah/loop-alpha-up)
-
-;; set occur-dwim
-(spacemacs/declare-prefix "o" "occur")
-(spacemacs/set-leader-keys "o d" 'occur-dwim)
-
-;; set youdao translation
-(global-set-key (kbd "<f1>") 'youdao-search-at-point-or-from-input)
+;; set dired-mode
+(add-hook 'dired-mode-hook
+          '(lambda ()
+             (define-key evil-normal-state-local-map (kbd "<escape>") 'evil-insert)
+             (define-key evil-normal-state-local-map (kbd "k") 'evil-previous-line)
+             (define-key evil-normal-state-local-map (kbd "j") 'evil-next-line)
+             (define-key evil-normal-state-local-map (kbd "h") 'evil-backward-char)))
 
 ;; set company-complete
 (add-hook 'company-search-mode-hook
           '(lambda ()
              (define-key company-search-map (kbd "C-l") 'company-complete)))
-
-;; set smex-mode
-(spacemacs/set-leader-keys "M-m" 'spacemacs/smex)
-
-;; set symon-mode
-(spacemacs/set-leader-keys "t m s" 'symon-mode)
-
-;; set tabbar-mode
-(spacemacs/set-leader-keys "t t" 'tabbar-mode)
 
 
 

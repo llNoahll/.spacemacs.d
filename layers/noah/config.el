@@ -98,7 +98,7 @@
           '(lambda ()
              (display-line-numbers-mode t)))
 
-;; set eww-mode
+;; set eww
 (add-hook 'eww-after-render-hook
           '(lambda ()
              (setq-local truncate-lines nil)

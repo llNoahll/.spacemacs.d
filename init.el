@@ -751,6 +751,58 @@ you should place your code here."
     (call-interactively 'occur))
 
 
+;;; add some functions to geiser-repl-mode
+  (defun geiser-better-eval-last-sexp (print-to-buffer-p)
+    "Eval the previous sexp in the Geiser REPL.
+  With a prefix, revert the effect of `geiser-mode-eval-last-sexp-to-buffer'."
+    (interactive "P")
+
+    (cond ((or (looking-at ")\n")
+               (looking-at "]\n")
+               (looking-at "}\n"))
+           (right-char 2))
+          ((or (looking-at ")")
+               (looking-at "]")
+               (looking-at "}"))
+           (right-char 1)))
+
+    (let* (bosexp
+           (eosexp (save-excursion (backward-sexp)
+                                   (setq bosexp (point))
+                                   (forward-sexp)
+                                   (point)))
+	         (ret-transformer (or geiser-mode-eval-to-buffer-transformer
+			                          (lambda (msg is-error?)
+				                          (format "%s%s%s"
+                                          geiser-mode-eval-to-buffer-prefix
+					                                (if is-error? "ERROR" "")
+                                          msg))))
+           (ret (save-excursion
+                  (geiser-eval-region bosexp ;beginning of sexp
+                                      eosexp ;end of sexp
+                                      nil
+                                      t
+                                      print-to-buffer-p)))
+	         (err (geiser-eval--retort-error ret))
+	         (will-eval-to-buffer (if print-to-buffer-p
+				                            (not geiser-mode-eval-last-sexp-to-buffer)
+				                          geiser-mode-eval-last-sexp-to-buffer))
+	         (str (geiser-eval--retort-result-str ret
+                                                (when will-eval-to-buffer ""))))
+      (cond  ((not will-eval-to-buffer) str)
+	           (err (insert (funcall ret-transformer
+                                   (geiser-eval--error-str err) t)))
+	           ((string= "" str))
+	           (t (push-mark)
+                (insert (funcall ret-transformer str nil)))))
+
+    (cond ((looking-back "\n") (left-char 2))
+          ((or (looking-at ")")
+               (looking-at "]")
+               (looking-at "}"))
+           (left-char 1))))
+
+
 ;;; add some functions to racket-mode
   (defun racket-better-send-last-sexp ()
     "Send the previous sexp to the Racket REPL.

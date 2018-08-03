@@ -34,6 +34,16 @@
        ) (car h) (car (cdr h)))
     (setq alpha-list (butlast (append (list g) alpha-list) 1))))
 
+(defun noah/right-char (&optional n)
+  "Move point N characters to the right (to the left if N is negative).
+If right characters is \n, skip it."
+  (interactive "^p")
+  (right-char 1)
+  (if (looking-at "\n")
+      (right-char (+ n 1))
+    (right-char n))
+  (left-char 1))
+
 
 
 ;;; defun spacemacs/
