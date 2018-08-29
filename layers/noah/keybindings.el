@@ -154,8 +154,12 @@
   (define-key evil-insert-state-map (kbd "C-w") mwim-leader-key))
 
 (define-key evil-insert-state-map (kbd "C-w C-e") 'mwim-end-of-code-or-line)
+(define-key evil-insert-state-map (kbd "C-w C-S-a") 'mwim-end-of-code-or-line)
+(define-key evil-insert-state-map (kbd "C-S-a") 'mwim-end-of-code-or-line)
 (define-key evil-insert-state-map (kbd "C-w C-a") 'mwim-beginning-of-code-or-line)
 (define-key evil-motion-state-map (kbd "C-w C-e") 'mwim-end-of-code-or-line)
+(define-key evil-motion-state-map (kbd "C-w C-S-a") 'mwim-end-of-code-or-line)
+(define-key evil-motion-state-map (kbd "C-S-a") 'mwim-end-of-code-or-line)
 (define-key evil-motion-state-map (kbd "C-w C-a") 'mwim-beginning-of-code-or-line)
 
 ;; change emacs state to hybrid state
