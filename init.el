@@ -732,8 +732,8 @@ you should place your code here."
 
 
 ;;; add some functions to treemacs-mode
-  (defun treemacs--current-visibility ()
-    "Init treemacs--current-visibility function."
+  (defun treemacs-current-visibility ()
+    "Init treemacs-current-visibility function."
     (interactive)
     (quote none))
 

@@ -146,7 +146,7 @@ Removes the automatic guessing of the initial value based on thing at point. "
   (if (winum-get-number)
       (setq spacemacs/helm-find-files-window-number (winum-get-number))
     (setq spacemacs/helm-find-files-window-number 1))
-  (if (string-equal 'visible (treemacs--current-visibility))
+  (if (string-equal 'visible (treemacs-current-visibility))
       (treemacs)
     (setq spacemacs/helm-find-files-window-number 0))
 
