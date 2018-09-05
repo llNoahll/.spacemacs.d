@@ -175,6 +175,12 @@
              (setq-local comment-start "% ")
              (rainbow-delimiters-mode t)))
 
+;; set nasm-mode
+(add-hook 'nasm-mode-hook
+          '(lambda ()
+             (setq-local comment-add 1)
+             (setq-local comment-start "; ")))
+
 ;; set python-mode
 (add-hook 'python-mode-hook
           '(lambda ()
