@@ -134,14 +134,25 @@
              (setq-local comment-start "/* ")
              (setq-local comment-end   " */")))
 
+;; set lisp-mode
+(add-hook 'lisp-mode-hook
+          '(lambda ()
+             (setq-local comment-start "; ")))
+
 ;; set emacs-lisp-mode
 (add-hook 'emacs-lisp-mode-hook
+          '(lambda ()
+             (setq-local comment-start "; ")))
+
+;; set scheme-mode
+(add-hook 'scheme-mode-hook
           '(lambda ()
              (setq-local comment-start "; ")))
 
 ;; set racket-mode
 (add-hook 'racket-mode-hook
           '(lambda ()
+             (setq-local comment-start "; ")
              (geiser-mode t)))
 
 (add-hook 'racket-repl-mode-hook
