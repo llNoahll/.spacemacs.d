@@ -1,4 +1,4 @@
-;;; funcs.el --- matlab layer packages file for Spacemacs.
+;;; layers.el --- noah-scheme layer packages file for Spacemacs.
 ;;
 ;; Copyright (c) 2012-2018 Sylvain Benner & Contributors
 ;;
@@ -9,7 +9,10 @@
 ;;
 ;;; License: GPLv3
 
+(configuration-layer/declare-layers
+ '()
+ )
 
 
 
-;;; funcs.el ends here
+;;; layer.el ends here

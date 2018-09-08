@@ -1,4 +1,4 @@
-;;; config.el --- matlab layer packages file for Spacemacs.
+;;; config.el --- noah-scheme layer packages file for Spacemacs.
 ;;
 ;; Copyright (c) 2012-2018 Sylvain Benner & Contributors
 ;;
@@ -9,6 +9,9 @@
 ;;
 ;;; License: GPLv3
 
+(defalias 'λ 'lambda "λ is an alias for ‘lambda’.")
+(defalias '-λ '-lambda "-λ is an alias for ‘-lambda’.")
+(setq else 't)
 
 
 
