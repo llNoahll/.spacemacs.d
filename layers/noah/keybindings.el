@@ -375,6 +375,12 @@
              (define-key evil-normal-state-local-map (kbd "j") 'evil-next-line)
              (define-key evil-normal-state-local-map (kbd "h") 'evil-backward-char)))
 
+;; set org-mode
+(add-hook 'org-mode-hook
+          '(lambda ()
+             (define-key evil-normal-state-local-map (kbd "I") 'evil-window-top)
+             (define-key evil-normal-state-local-map (kbd "H") 'evil-org-insert-line)))
+
 ;; set company-complete
 (add-hook 'company-search-mode-hook
           '(lambda ()
