@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: λ
+# key: λ.
+# --
+(define-syntax λ
+  (syntax-rules ()
+    ((_ param body ...)
+     (lambda param body ...))))
