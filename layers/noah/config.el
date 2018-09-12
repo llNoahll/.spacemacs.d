@@ -66,7 +66,7 @@
 ;; disable emacs-lisp-mode
 (add-hook 'semantic-inhibit-functions
           '(lambda ()
-             (member major-mode '(emacs-lisp-mode))))
+             (member major-mode '(emacs-lisp-mode scheme-mode))))
 
 ;; only enable cc-mode
 ;; (setq semantic-inhibit-functions
@@ -148,6 +148,14 @@
 (add-hook 'scheme-mode-hook
           '(lambda ()
              (setq-local comment-start "; ")))
+
+;; setq scheme's default geiser-implementations
+(setq geiser-implementations-alist
+      '(((regexp "\\.scm$")
+         chez)
+        ((regexp "\\.ss$")
+         chez)))
+
 
 ;; set racket-mode
 (add-hook 'racket-mode-hook
