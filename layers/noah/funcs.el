@@ -20,7 +20,7 @@
     ((lambda (a ab)
        (set-frame-parameter (selected-frame) 'alpha (list a ab))
        (add-to-list 'default-frame-alist (cons 'alpha (list a ab)))
-       ) (car h) (car (cdr h)))
+       ) (car h) (cadr h))
     (setq alpha-list (cdr (append alpha-list (list h))))))
 
 (defun noah/loop-alpha-up ()
@@ -31,7 +31,7 @@
     ((lambda (a ab)
        (set-frame-parameter (selected-frame) 'alpha (list a ab))
        (add-to-list 'default-frame-alist (cons 'alpha (list a ab)))
-       ) (car h) (car (cdr h)))
+       ) (car h) (cadr h))
     (setq alpha-list (butlast (append (list g) alpha-list) 1))))
 
 (defun noah/right-char (&optional n)

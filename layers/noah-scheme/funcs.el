@@ -19,7 +19,7 @@
     (setq body (cons docstring body))
     (setq docstring 'nil))
   (when (and (cdr body)
-             (not (cdr (cdr body))))
+             (not (cddr body)))
     (setq body (car body)))
   (list 'defun (car name) (cdr name)
         docstring
@@ -32,12 +32,12 @@
     (setq body (cons docstring body))
     (setq docstring 'nil))
   (when (and (not (cdr body))
-             (not (cdr (car body)))
-             (cdr (car (car body))))
+             (not (cdar body))
+             (cdaar body))
     (setq body (car body)))
-  (list 'defun name (car (cdr (car body)))
+  (list 'defun name (cadar body)
         docstring
-        (cons 'progn (cdr (cdr (car body))))))
+        (cons 'progn (cddar body))))
 
 (defmacro define-3 (name &optional docstring &rest body)
   "(define A B)"
@@ -46,7 +46,7 @@
     (setq body (cons docstring body))
     (setq docstring 'nil))
   (when (and (cdr body)
-             (not (cdr (cdr body))))
+             (not (cddr body)))
     (setq body (car body)))
   (defvar name '0 docstring)
   (list 'setq name
@@ -62,8 +62,8 @@
          (list 'define-1 name docstring (car body)))
         ((and
           (listp (car body))
-          (or (string-equal (car (car body)) 'lambda)
-              (string-equal (car (car body)) 'λ)))
+          (or (string-equal (caar body) 'lambda)
+              (string-equal (caar body) 'λ)))
          (list 'define-2 name docstring (car body)))
         ('t
          (list 'define-3 name docstring (car body)))))
