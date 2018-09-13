@@ -645,6 +645,7 @@ you should place your code here."
   ;; basic hack
   (setq symon-delay 2)
   (setq nyan-bar-length 27)
+  (setq electric-pair-delete-adjacent-pairs 'nil)
   (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)
   (symon-mode t)
 
