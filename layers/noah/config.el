@@ -172,6 +172,7 @@
 ;; define octave-mode
 (add-hook 'octave-mode-hook
           '(lambda ()
+             (setq-local evil-shift-width 4)
              (setq-local comment-start "% ")))
 
 (add-hook 'inferior-octave-mode-hook
@@ -184,6 +185,7 @@
           '(lambda ()
              (setq-local yas-indent-line 'fixed)
              (setq-local comment-add 1)
+             (setq-local evil-shift-width 4)
              (setq-local comment-start "% ")))
 
 ;; set LaTeX-mode
@@ -211,6 +213,7 @@
           '(lambda ()
              (smartparens-mode t)
              (setq-local comment-add 1)
+             (setq-local evil-shift-width 4)
              (setq-local yas-indent-line 'fixed)
              (yas-activate-extra-mode 'python-mode)))
 
