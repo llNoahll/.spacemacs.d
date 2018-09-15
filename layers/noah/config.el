@@ -28,6 +28,7 @@
 (setq c-basic-offset 4)
 (setq c-default-style "ellemtel")
 (setq default-tab-width 4)
+(setq nasm-basic-offset 4)
 (setq octave-block-offset 4)
 ;; SPC instand of Tab
 (setq-default indent-tabs-mode nil)
@@ -172,7 +173,6 @@
 ;; define octave-mode
 (add-hook 'octave-mode-hook
           '(lambda ()
-             (setq-local evil-shift-width 4)
              (setq-local comment-start "% ")))
 
 (add-hook 'inferior-octave-mode-hook
@@ -199,7 +199,6 @@
 ;; set nasm-mode
 (add-hook 'nasm-mode-hook
           '(lambda ()
-             (setq-local comment-add 1)
              (setq-local comment-start "; ")))
 
 ;; set python-mode

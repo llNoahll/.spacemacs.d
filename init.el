@@ -41,16 +41,19 @@ values."
      ;; Languages
      ;; ----------------------------------------------------------------
      latex
-     octave
      major-modes
      c-c++
-     asm
      java
      javascript
      emacs-lisp common-lisp scheme racket
      vimscript
      rust
      html
+     (asm :variables
+          comment-add 1
+          evil-shift-width 4)
+     (octave :variables
+             evil-shift-width 4)
      (python :variables
              python-backend 'anaconda)
 
