@@ -96,6 +96,7 @@ to 'auto, tags may not be properly aligned. "
         (bg3           (if (eq variant 'dark) (if (true-color-p) "#100a14" "#121212") (if (true-color-p) "#e3dedd" "#d0d0d0")))
         (bg4           (if (eq variant 'dark) (if (true-color-p) "#0a0814" "#080808") (if (true-color-p) "#d2ceda" "#bcbcbc")))
         (bg5           (if (eq variant 'dark) (if (true-color-p) "#686868" "#585858") (if (true-color-p) "#e7e7fc" "#d7d7ff")))
+        (bg6           (if (eq variant 'dark) (if (true-color-p) "#484848" "#585858") (if (true-color-p) "#ddeeff" "#d7d7ff")))
         (border        (if (eq variant 'dark) (if (true-color-p) "#5d4d7a" "#111111") (if (true-color-p) "#b3b9be" "#b3b9be")))
         (cblk          (if (eq variant 'dark) (if (true-color-p) "#cbc1d5" "#b2b2b2") (if (true-color-p) "#655370" "#5f5f87")))
         (cblk-bg       (if (eq variant 'dark) (if (true-color-p) "#2f2b33" "#262626") (if (true-color-p) "#e8e3f0" "#ffffff")))
@@ -782,7 +783,7 @@ to 'auto, tags may not be properly aligned. "
      `(tabbar-highlight ((,class (:underline t))))
      `(tabbar-selected ((,class (:inherit tabbar-default :background ,bg1 :weight bold))))
      `(tabbar-separator ((,class (:inherit black))))
-     `(tabbar-unselected ((,class (:inherit tabbar-default :forceground ,bg1 :background ,base-dim :slant italic :weight light))))
+     `(tabbar-unselected ((,class (:inherit tabbar-default :forceground ,bg1 :background ,bg6 :slant italic :weight light))))
 
 ;;;;; term
      `(term ((,class (:foreground ,base :background ,bg1))))
