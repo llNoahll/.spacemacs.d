@@ -10,63 +10,58 @@
 ;;; License: GPLv3
 
 
-;;; define basic functions of scheme.
-
-(defmacro define-1 (name &optional docstring &rest body)
-  "(define (f) A)"
-  (unless (or (not docstring)
-              (stringp docstring))
-    (setq body (cons docstring body))
-    (setq docstring 'nil))
-  (when (and (cdr body)
-             (not (cddr body)))
-    (setq body (car body)))
-  (list 'defun (car name) (cdr name)
-        docstring
-        (cons 'progn body)))
-
-(defmacro define-2 (name &optional docstring &rest body)
-  "(define f (lambda () ()))"
-  (unless (or (not docstring)
-              (stringp docstring))
-    (setq body (cons docstring body))
-    (setq docstring 'nil))
-  (when (and (not (cdr body))
-             (not (cdar body))
-             (cdaar body))
-    (setq body (car body)))
-  (list 'defun name (cadar body)
-        docstring
-        (cons 'progn (cddar body))))
-
-(defmacro define-3 (name &optional docstring &rest body)
-  "(define A B)"
-  (unless (or (not docstring)
-              (stringp docstring))
-    (setq body (cons docstring body))
-    (setq docstring 'nil))
-  (when (and (cdr body)
-             (not (cddr body)))
-    (setq body (car body)))
-  (defvar name '0 docstring)
-  (list 'setq name
-        (cons 'progn body)))
-
-(defmacro define (name &optional docstring &rest body)
+;;; define basic functions in scheme.
+(defmacro define (name &rest body)
   "Same with the define in scheme."
-  (unless (or (not docstring)
-              (stringp docstring))
-    (setq body (cons docstring body))
-    (setq docstring 'nil))
-  (cond ((listp name)
-         (list 'define-1 name docstring (car body)))
-        ((and
-          (listp (car body))
-          (or (string-equal (caar body) 'lambda)
-              (string-equal (caar body) 'λ)))
-         (list 'define-2 name docstring (car body)))
-        ('t
-         (list 'define-3 name docstring (car body)))))
+  (cond
+   ;; (define (f) ...)
+   ((listp name)
+    (append
+     (list 'defun (car name) (cdr name))
+     body))
+   ;; (define f (λ x ...))
+   ((and
+     (listp (cadr body))
+     (or (string-equal (caar body) 'lambda)
+         (string-equal (caar body) 'λ)))
+    (append
+     (list 'defun name (cadar body))
+     (cddar body)))
+   ;; (define a b)
+   ('t
+    (append
+     (list 'defvar name)
+     body))))
+
+(defalias 'λ 'lambda "λ is an alias for ‘lambda’.")
+(defalias '-λ '-lambda "-λ is an alias for ‘-lambda’.")
+
+(defalias 'set! 'setq "set! is an alias for ‘setq’.")
+(defalias 'set-car! 'setcar "set-car! is an alias for ‘setcar’.")
+(defalias 'set-cdr! 'setcdr "set-cdr! is an alias for ‘setcdr’.")
+(defalias 'eq? 'eq "eq? is an alias for ‘eq’.")
+(defalias 'equal? 'equal "equal? is an alias for ‘equal’.")
+(defalias 'list? 'listp "list? is an alias for ‘listp’.")
+(defalias 'symbol? 'symbolp "symbol? is an alias for ‘symbolp’.")
+(defalias 'number? 'numberp "number? is an alias for ‘numberp’.")
+(defalias 'string? 'stringp "string? is an alias for ‘strinfp’.")
+(defalias 'pair? 'consp "pair? is an alias for ‘consp’.")
+
+
+(defun circular (object)
+  "Translate a list to a circular."
+  (interactive)
+  (when (listp object)
+    (setcdr (last object) object)))
+(defun circularp (object)
+  "Return t if OBJECT is a circular.
+Otherwise, return nil."
+  (interactive)
+  (eq (last object) (cdr object)))
+(defalias 'circular? 'circularp "circular? is an alias for ‘circularp’.")
+
+
+(defalias 'remainder '% "remainder is an alias for ‘%’.")
 
 
 

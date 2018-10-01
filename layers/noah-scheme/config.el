@@ -9,8 +9,6 @@
 ;;
 ;;; License: GPLv3
 
-(defalias 'λ 'lambda "λ is an alias for ‘lambda’.")
-(defalias '-λ '-lambda "-λ is an alias for ‘-lambda’.")
 (setq else 't)
 
 
