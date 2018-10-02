@@ -1,4 +1,4 @@
-;;; layers.el --- noah layer packages file for Spacemacs.
+;;; keybindings.el --- noah-scheme layer packages file for Spacemacs.
 ;;
 ;; Copyright (c) 2012-2018 Sylvain Benner & Contributors
 ;;
@@ -9,12 +9,6 @@
 ;;
 ;;; License: GPLv3
 
-(configuration-layer/declare-layers
- '(
-   noah-scheme
-   noah-better-defaults
-   ))
-
 
 
-;;; layer.el ends here
+;;; keybindings.el ends here

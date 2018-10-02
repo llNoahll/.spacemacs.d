@@ -1,4 +1,4 @@
-;;; layers.el --- noah layer packages file for Spacemacs.
+;;; layers.el --- noah-better-defaults layer packages file for Spacemacs.
 ;;
 ;; Copyright (c) 2012-2018 Sylvain Benner & Contributors
 ;;
@@ -10,10 +10,8 @@
 ;;; License: GPLv3
 
 (configuration-layer/declare-layers
- '(
-   noah-scheme
-   noah-better-defaults
-   ))
+ '()
+ )
 
 
 

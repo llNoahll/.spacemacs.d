@@ -3,8 +3,6 @@ You can use my configuration by two steps:
 
 1. git clone --depth=1 https://github.com/llNoahll/.spacemacs.d ~/.spacemacs.d
 
-   If you use Windows, you must remove the eaf package from noah layer.
-
 2. git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d    (recommend)
 
    or git clone -b master https://github.com/syl20bnr/spacemacs ~/.emacs.d

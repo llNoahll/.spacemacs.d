@@ -21,6 +21,7 @@
      body))
    ;; (define f (λ x ...))
    ((and
+     (listp (car body))
      (listp (cadr body))
      (or (string-equal (caar body) 'lambda)
          (string-equal (caar body) 'λ)))
@@ -39,27 +40,18 @@
 (defalias 'set! 'setq "set! is an alias for ‘setq’.")
 (defalias 'set-car! 'setcar "set-car! is an alias for ‘setcar’.")
 (defalias 'set-cdr! 'setcdr "set-cdr! is an alias for ‘setcdr’.")
+
 (defalias 'eq? 'eq "eq? is an alias for ‘eq’.")
 (defalias 'equal? 'equal "equal? is an alias for ‘equal’.")
 (defalias 'list? 'listp "list? is an alias for ‘listp’.")
 (defalias 'symbol? 'symbolp "symbol? is an alias for ‘symbolp’.")
 (defalias 'number? 'numberp "number? is an alias for ‘numberp’.")
-(defalias 'string? 'stringp "string? is an alias for ‘strinfp’.")
+(defalias 'string? 'stringp "string? is an alias for ‘stringp’.")
 (defalias 'pair? 'consp "pair? is an alias for ‘consp’.")
 
-
-(defun circular (object)
-  "Translate a list to a circular."
-  (interactive)
-  (when (listp object)
-    (setcdr (last object) object)))
-(defun circularp (object)
-  "Return t if OBJECT is a circular.
-Otherwise, return nil."
-  (interactive)
-  (eq (last object) (cdr object)))
-(defalias 'circular? 'circularp "circular? is an alias for ‘circularp’.")
-
+(defalias 'string->list 'string-to-list "string->list is an alias for ‘string-to-list’.")
+(defalias 'string->number 'string-to-number "string->number is an alias for ‘string-to-number’.")
+(defalias 'number->string 'number-to-string "number->string is an alias for ‘number-to-string’.")
 
 (defalias 'remainder '% "remainder is an alias for ‘%’.")
 

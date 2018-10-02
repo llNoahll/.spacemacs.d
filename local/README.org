@@ -1,4 +1,4 @@
-# Private directory for local packages
+* Private directory for local packages
 
 The content of this directory is ignored by Git.
 
