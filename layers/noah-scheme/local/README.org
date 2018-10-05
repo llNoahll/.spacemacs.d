@@ -3,4 +3,4 @@
 The content of this directory is ignored by Git.
 
 This is the place to store the local packages that you define in
-the `dotspacemacs-additional-packages` variable of your dotfile.
+the `noah-scheme-packages` variable of your `packages.el`.
