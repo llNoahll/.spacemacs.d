@@ -240,7 +240,11 @@
 ;; set tabbar-mode
 (spacemacs/set-leader-keys "t t" 'tabbar-mode)
 
-;; delete four spaces and semi in c, c++, java, octave, matlab mode.
+;; delete four spaces and semi in nasm, c, c++, java, octave, matlab mode.
+(add-hook 'nasm-mode-hook
+          '(lambda ()
+             (define-key nasm-mode-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
+
 (add-hook 'c-mode-hook
           '(lambda ()
              (define-key c-mode-map (kbd ";") 'self-insert-command)

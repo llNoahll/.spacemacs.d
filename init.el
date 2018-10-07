@@ -84,7 +84,6 @@ values."
      spell-checking
      syntax-checking
      semantic
-     templates
      ;; ycmd
      ;; version-control
      ;; (vinegar :variables
@@ -92,6 +91,8 @@ values."
      ;; (osx :variables
      ;;      osx-dictionary-dictionary-choice "Simplified Chinese - English"
      ;;      osx-command-as 'super)
+     (templates :variables
+                templates-private-directory "~/.spacemacs.d/templates")
      (git :variables
           git-magit-status-fullscreen t
           magit-push-always-verify nil
