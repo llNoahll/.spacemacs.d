@@ -241,13 +241,19 @@
 (spacemacs/set-leader-keys "t t" 'tabbar-mode)
 
 ;; set asm-mode
-(spacemacs/set-leader-keys-for-major-mode 'asm-mode "'" 'gdb)
+(cond ((and (spacemacs/system-is-mswindows) window-system)
+       (spacemacs/set-leader-keys-for-major-mode 'asm-mode "'" 'debug))
+      ((spacemacs/system-is-linux)
+       (spacemacs/set-leader-keys-for-major-mode 'asm-mode "'" 'gdb)))
 
 ;; delete four spaces and semi in nasm, c, c++, java, octave, matlab mode.
 (add-hook 'nasm-mode-hook
           '(lambda ()
              (define-key nasm-mode-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
-(spacemacs/set-leader-keys-for-major-mode 'nasm-mode "'" 'gdb)
+(cond ((and (spacemacs/system-is-mswindows) window-system)
+       (spacemacs/set-leader-keys-for-major-mode 'nasm-mode "'" 'debug))
+      ((spacemacs/system-is-linux)
+       (spacemacs/set-leader-keys-for-major-mode 'nasm-mode "'" 'gdb)))
 
 (add-hook 'c-mode-hook
           '(lambda ()
