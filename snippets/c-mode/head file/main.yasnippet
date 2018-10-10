@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: main part of *.h
+# key: main.
+# --
+#ifndef __${1:`(upcase (file-name-sans-extension (buffer-name)))`}_H__
+#define __$1_H__
+
+${2:body}
+
+#endif // __$1_H__
