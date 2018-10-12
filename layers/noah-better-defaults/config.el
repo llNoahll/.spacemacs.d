@@ -201,9 +201,7 @@
 (add-hook 'asm-mode-hook
           '(lambda ()
              (setq-local tab-width 4)
-             (setq-local indent-line-function 'insert-tab)
-             (setq-local asm-indent-level 4)
-             (setq-local tab-always-indent 'complete)
+             (setq-local indent-line-function 'indent-relative)
              (setq-local comment-start "; ")))
 
 ;; set nasm-mode
