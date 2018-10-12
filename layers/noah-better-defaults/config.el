@@ -196,10 +196,21 @@
              (setq-local comment-start "% ")
              (rainbow-delimiters-mode t)))
 
+
+;; set asm-mode
+(add-hook 'asm-mode-hook
+          '(lambda ()
+             (setq-local tab-width 4)
+             (setq-local indent-line-function 'insert-tab)
+             (setq-local asm-indent-level 4)
+             (setq-local tab-always-indent 'complete)
+             (setq-local comment-start "; ")))
+
 ;; set nasm-mode
 (add-hook 'nasm-mode-hook
           '(lambda ()
              (setq-local comment-start "; ")))
+
 
 ;; set python-mode
 (add-hook 'python-mode-hook
@@ -216,6 +227,17 @@
              (setq-local yas-indent-line 'fixed)
              (yas-activate-extra-mode 'python-mode)))
 
+
+;; define web-mode
+(add-hook 'web-mode-hook
+          '(lambda ()
+             (setq-local electric-pair-pairs (append electric-pair-pairs '((?\< . ?\>))))))
+
+
+;; define html-mode
+(add-hook 'html-mode-hook
+          '(lambda ()
+             (setq-local electric-pair-pairs (append electric-pair-pairs '((?\< . ?\>))))))
 
 ;; set spelling-checking
 (add-hook 'text-mode-hook

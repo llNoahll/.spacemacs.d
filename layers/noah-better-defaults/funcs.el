@@ -50,6 +50,13 @@ Otherwise, return nil."
 
 
 
+;;; defun new major-mode.
+;;;###autoload
+(define-derived-mode masm-mode asm-mode "MASM"
+  "Major mode for masm.")
+
+
+
 ;;; defun noah/
 
 ;; Setting transparency

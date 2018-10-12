@@ -241,6 +241,9 @@
 (spacemacs/set-leader-keys "t t" 'tabbar-mode)
 
 ;; set asm-mode
+(add-hook 'asm-mode-hook
+          '(lambda ()
+             (define-key asm-mode-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
 (spacemacs/set-leader-keys-for-major-mode 'asm-mode "'" 'gdb)
 
 ;; delete four spaces and semi in nasm, c, c++, java, octave, matlab mode.
@@ -273,17 +276,6 @@
           '(lambda ()
              (define-key octave-mode-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
 
-
-;; define web-mode
-(add-hook 'web-mode-hook
-          '(lambda ()
-             (setq-local electric-pair-pairs (append electric-pair-pairs '((?\< . ?\>))))))
-
-
-;; define html-mode
-(add-hook 'html-mode-hook
-          '(lambda ()
-             (setq-local electric-pair-pairs (append electric-pair-pairs '((?\< . ?\>))))))
 
 ;; define racket-mode
 (add-hook 'racket-mode-hook
