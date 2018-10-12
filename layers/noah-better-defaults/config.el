@@ -44,6 +44,8 @@
 
 ;; cancel paste indent
 (add-hook 'spacemacs-indent-sensitive-modes 'snippet-mode)
+(add-hook 'spacemacs-indent-sensitive-modes 'asm-mode)
+(add-hook 'spacemacs-indent-sensitive-modes 'masm-mode)
 
 ;; add auto-mode-lists
 (add-to-list 'auto-mode-alist '("\\.snippet\\'" . snippet-mode))
