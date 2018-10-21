@@ -70,14 +70,16 @@
 
 (defcustom sublimity-map-criteria
   '((not (window-minibuffer-p))
-    (or (derived-mode-p 'prog-mode)
-        (derived-mode-p 'text-mode)
-        (derived-mode-p 'eww-mode)
-        (derived-mode-p 'css-mode)
-        (derived-mode-p 'toml-mode)
-        (derived-mode-p 'vimrc-mode)
-        (derived-mode-p 'matlab-mode)
-        (derived-mode-p 'magit-status-mode))
+    (and
+     (or (derived-mode-p 'prog-mode)
+         (derived-mode-p 'text-mode)
+         (derived-mode-p 'eww-mode)
+         (derived-mode-p 'css-mode)
+         (derived-mode-p 'toml-mode)
+         (derived-mode-p 'vimrc-mode)
+         (derived-mode-p 'matlab-mode)
+         (derived-mode-p 'magit-status-mode))
+     (not (derived-mode-p 'eaf-mode)))
     (<= (/ sublimity-map-size (window-total-width) 1.0)
         sublimity-map-max-fraction))
   "sexps that must be evaluated to non-nil when creating minimap"
