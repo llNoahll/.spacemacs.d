@@ -33,6 +33,7 @@
   '(
     (sublimity :location local)
     (vline-mode :location local)
+    evil-paredit
     highlight-indent-guides
     tabbar-ruler
     ))
@@ -78,6 +79,22 @@
     :init
     (require 'vline)
     (spacemacs/set-leader-keys "t C-v" 'vline-mode)))
+
+(defun noah-better-defaults/init-evil-paredit()
+  (use-package evil-paredit
+    :defer t
+    :init
+    (evil-define-key 'visual evil-paredit-mode-map
+      (kbd "d") 'evil-delete
+      (kbd "c") 'evil-change
+      (kbd "y") 'evil-yank
+      (kbd "D") 'evil-delete-line
+      (kbd "C") 'evil-change-line
+      (kbd "S") 'evil-change-whole-line
+      (kbd "Y") 'evil-yank-line
+      (kbd "X") 'delete-char
+      (kbd "x") 'delete-backward-char)
+    ))
 
 (defun noah-better-defaults/init-highlight-indent-guides()
   (use-package highlight-indent-guides

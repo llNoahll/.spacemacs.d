@@ -211,6 +211,11 @@
 (define-key evil-normal-state-map (kbd "x") 'delete-char)
 (define-key evil-normal-state-map (kbd "X") 'delete-backward-char)
 
+;;; set paredit-mode
+(add-hook 'paredit-mode-hook
+          '(lambda ()
+             (define-key paredit-mode-map (kbd "M-;") 'nil)))
+
 ;; add yasnippet
 (define-key evil-emacs-state-map  (kbd "C-q") 'company-yasnippet)
 (define-key evil-hybrid-state-map (kbd "C-q") 'company-yasnippet)
