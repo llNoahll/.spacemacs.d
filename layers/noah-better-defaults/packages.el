@@ -93,8 +93,7 @@
       (kbd "S") 'evil-change-whole-line
       (kbd "Y") 'evil-yank-line
       (kbd "X") 'delete-char
-      (kbd "x") 'delete-backward-char)
-    ))
+      (kbd "x") 'delete-backward-char)))
 
 (defun noah-better-defaults/init-highlight-indent-guides()
   (use-package highlight-indent-guides

@@ -140,35 +140,35 @@
 ;; set lisp-mode
 (add-hook 'lisp-mode-hook
           '(lambda ()
+             ;; (paredit-mode)
              (evil-paredit-mode)
-             (paredit-mode)
              (setq-local comment-start "; ")))
 
 ;; set common-lisp-mode
 (add-hook 'common-lisp-mode-hook
           '(lambda ()
-             (evil-paredit-mode)
-             (paredit-mode)))
+             ;; (paredit-mode)
+             (evil-paredit-mode)))
 
 ;; set emacs-lisp-mode
 (add-hook 'emacs-lisp-mode-hook
           '(lambda ()
+             ;; (paredit-mode)
              (evil-paredit-mode)
-             (paredit-mode)
              (setq-local comment-start "; ")))
 
 ;; set iell-mode
 (add-hook 'ielm-mode-hook
           '(lambda ()
+             ;; (paredit-mode)
              (evil-paredit-mode)
-             (paredit-mode)
              (setq-local comment-start "; ")))
 
 ;; set scheme-mode
 (add-hook 'scheme-mode-hook
           '(lambda ()
+             ;; (paredit-mode)
              (evil-paredit-mode)
-             (paredit-mode)
              (setq-local comment-start "; ")))
 
 ;; setq scheme's default geiser-implementations
@@ -183,15 +183,15 @@
 (add-hook 'racket-mode-hook
           '(lambda ()
              (setq-local comment-start "; ")
+             ;; (paredit-mode)
              (evil-paredit-mode)
-             (paredit-mode)
              (geiser-mode t)))
 
 (add-hook 'racket-repl-mode-hook
           '(lambda ()
              (setq-local evil-move-cursor-back nil)
+             ;; (paredit-mode)
              (evil-paredit-mode)
-             (paredit-mode)
              (geiser-mode t)))
 
 
