@@ -52,6 +52,7 @@
     :defer t
     :init
     (require 'eaf)
+
     (spacemacs/declare-prefix  "a f" "frame")
     (spacemacs/set-leader-keys "a f o" 'eaf-open)
     (spacemacs/set-leader-keys "a f a" 'eaf-open-application)
@@ -66,10 +67,10 @@
   (use-package sublimity
     :defer t
     :init
-    ;;; set the sublimity
     (require 'sublimity-map)
     ;; (require 'sublimity-scroll)
     ;; (require 'sublimity-attractive)
+
     (sublimity-map-set-delay 0.2)
     (spacemacs/set-leader-keys "t M" 'sublimity-mode)))
 
@@ -78,12 +79,19 @@
     :defer t
     :init
     (require 'vline)
+
     (spacemacs/set-leader-keys "t C-v" 'vline-mode)))
 
 (defun noah-better-defaults/init-evil-paredit()
   (use-package evil-paredit
     :defer t
     :init
+    (require 'evil-paredit)
+
+    (define-key evil-paredit-mode-map (kbd "C-<left>") 'paredit-forward-barf-sexp)
+    (define-key evil-paredit-mode-map (kbd "C-<right>") 'paredit-forward-slurp-sexp)
+    (define-key evil-paredit-mode-map (kbd "M-r") 'paredit-raise-sexp)
+
     (evil-define-key 'visual evil-paredit-mode-map
       (kbd "d") 'evil-delete
       (kbd "c") 'evil-change
