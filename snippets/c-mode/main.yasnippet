@@ -4,11 +4,12 @@
 # --
 #include <stdio.h>
 ${1:#include <stdlib.h>
-}${2:#include <string.h>
-}${3:#include <math.h>
-}$4
+}${2:#include <stdbool.h>
+}${3:#include <string.h>
+}${4:#include <math.h>
+}$5
 
-int main(${5:int argc, char *argv[]})
+int main(${6:int argc, char *argv[]})
 {
     $0
 
