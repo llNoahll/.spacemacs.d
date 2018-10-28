@@ -248,7 +248,7 @@
 ;; set asm-mode
 (add-hook 'asm-mode-hook
           '(lambda ()
-             (define-key asm-mode-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
+             (define-key evil-insert-state-local-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
 (spacemacs/set-leader-keys-for-major-mode 'asm-mode "'" 'gdb)
 
 ;; delete four spaces and semi in nasm, c, c++, java, octave, matlab mode.
