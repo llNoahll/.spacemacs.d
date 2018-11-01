@@ -80,6 +80,9 @@
 (define-key evil-insert-state-map (kbd "C-p") 'nil)
 (define-key evil-ex-completion-map (kbd "C-b") 'nil)
 
+;; set evil-insert-mode
+(define-key evil-insert-state-map (kbd "C-y") 'nil)
+
 ;; modify "C-x b" list-buffers
 (global-set-key (kbd "C-x b") 'helm-mini)
 
