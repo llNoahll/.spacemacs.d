@@ -264,11 +264,13 @@
           '(lambda ()
              (define-key c-mode-map (kbd ";") 'self-insert-command)
              (define-key c-mode-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
+(spacemacs/set-leader-keys-for-major-mode 'c-mode "'" 'gdb)
 
 (add-hook 'c++-mode-hook
           '(lambda ()
              (define-key c++-mode-map (kbd ";") 'self-insert-command)
              (define-key c++-mode-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
+(spacemacs/set-leader-keys-for-major-mode 'c++-mode "'" 'gdb)
 
 (add-hook 'java-mode-hook
           '(lambda ()
