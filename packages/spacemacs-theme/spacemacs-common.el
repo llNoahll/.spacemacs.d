@@ -89,7 +89,7 @@ to 'auto, tags may not be properly aligned. "
         ;; generic
         (act1          (if (eq variant 'dark) (if (true-color-p) "#222226" "#121212") (if (true-color-p) "#e7e5eb" "#d7dfff")))
         (act2          (if (eq variant 'dark) (if (true-color-p) "#5d4d7a" "#444444") (if (true-color-p) "#d3d3e7" "#afafd7")))
-        (base          (if (eq variant 'dark) (if (true-color-p) "#d2d2d2" "#d2d2d2") (if (true-color-p) "#000000" "#000000")))
+        (base          (if (eq variant 'dark) (if (true-color-p) "#bbc2cf" "#bbc2cf") (if (true-color-p) "#000000" "#000000")))
         (base-dim      (if (eq variant 'dark) (if (true-color-p) "#686868" "#585858") (if (true-color-p) "#a094a2" "#afafd7")))
         (bg1           (if (eq variant 'dark) (if (true-color-p) "#282c34" "#29282e") (if (true-color-p) "#fdf7e3" "#ffffff")))
         (bg2           (if (eq variant 'dark) (if (true-color-p) "#212026" "#1c1c1c") (if (true-color-p) "#eeede8" "#e4e4e4")))
