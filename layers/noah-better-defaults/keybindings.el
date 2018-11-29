@@ -17,6 +17,8 @@
 (define-key key-translation-map (kbd "<C-tab>") (kbd "<escape>"))
 
 ;; change hjkl to ijkl
+(define-key evil-normal-state-map (kbd "g h") 'evil-insert-resume)
+(define-key evil-normal-state-map (kbd "g i") 'nil)
 (define-key evil-normal-state-map (kbd "H") 'evil-insert-line)
 (define-key evil-normal-state-map (kbd "I") 'nil)
 (define-key evil-normal-state-map (kbd "h") 'evil-insert)
@@ -48,17 +50,17 @@
 (define-key evil-operator-state-map (kbd "i") 'evil-previous-line)
 (define-key evil-operator-state-map (kbd "h") evil-inner-text-objects-map)
 
-;; exchange "h" and "i"
-(let ((state '(visual operator)))
-  (evil-define-key state evil-org-mode-map (kbd "i e") 'nil)
-  (evil-define-key state evil-org-mode-map (kbd "i E") 'nil)
-  (evil-define-key state evil-org-mode-map (kbd "i r") 'nil)
-  (evil-define-key state evil-org-mode-map (kbd "i R") 'nil)
-  (evil-define-key state evil-org-mode-map (kbd "i") 'evil-previous-line)
-  (evil-define-key state evil-org-mode-map (kbd "h e") 'evil-org-inner-element)
-  (evil-define-key state evil-org-mode-map (kbd "h E") 'evil-org-inner-greater-element)
-  (evil-define-key state evil-org-mode-map (kbd "h r") 'evil-org-inner-greater-element)
-  (evil-define-key state evil-org-mode-map (kbd "h R") 'evil-org-inner-subtree))
+(evil-define-key 'visual evil-org-mode-map
+  (kbd "i e") 'nil
+  (kbd "i E") 'nil
+  (kbd "i r") 'nil
+  (kbd "i R") 'nil
+  (kbd "i")   'evil-previous-line
+  (kbd "h e") 'evil-org-inner-element
+  (kbd "h E") 'evil-org-inner-greater-element
+  (kbd "h r") 'evil-org-inner-greater-element
+  (kbd "h R") 'evil-org-inner-subtree)
+
 
 (add-hook 'eww-after-render-hook
           '(lambda ()
