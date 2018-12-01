@@ -71,7 +71,7 @@
     ;; (require 'sublimity-scroll)
     ;; (require 'sublimity-attractive)
 
-    (sublimity-map-set-delay 0.2)
+    (sublimity-map-set-delay 1.0)
     (spacemacs/set-leader-keys "t M" 'sublimity-mode)))
 
 (defun noah-better-defaults/init-vline-mode()
