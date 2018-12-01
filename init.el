@@ -102,7 +102,7 @@ values."
           magit-revision-show-gravatars nil)
      (treemacs :variables
                treemacs--width-is-locked nil
-               treemacs-width 28)
+               treemacs-width 20)
      (ibuffer :variables
               ibuffer-group-buffers-by 'projects)
      (auto-completion :variables
