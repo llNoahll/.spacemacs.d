@@ -543,7 +543,7 @@ to 'auto, tags may not be properly aligned. "
 
 ;;;;; display-current-line-numbers (Emacs 26+)
      (when (>= emacs-major-version 26)
-       `(line-number-current-line ((,class (:foreground ,comp :background ,bg3)))))
+       `(line-number-current-line ((,class (:foreground ,comp :background ,bg3 :inherit default)))))
 
 ;;;;; magit
      `(magit-blame-culprit ((,class :background ,yellow-bg :foreground ,yellow)))

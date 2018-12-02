@@ -71,6 +71,8 @@
     ;; (require 'sublimity-scroll)
     ;; (require 'sublimity-attractive)
 
+    (setq sublimity-map-size 13)
+    (setq sublimity-map-text-scale -11)
     (sublimity-map-set-delay 1.0)
     (spacemacs/set-leader-keys "t M" 'sublimity-mode)))
 

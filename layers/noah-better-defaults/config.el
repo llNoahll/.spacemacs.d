@@ -110,6 +110,7 @@
 ;; set treemacs-mode
 (add-hook 'treemacs-mode-hook
           '(lambda ()
+             (text-scale-set -1)
              (vline-mode t)
              (highlight-indentation-mode t)))
 
