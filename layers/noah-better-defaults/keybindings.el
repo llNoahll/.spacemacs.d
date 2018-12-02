@@ -259,7 +259,12 @@
              (define-key evil-emacs-state-local-map     (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
 (spacemacs/set-leader-keys-for-major-mode 'asm-mode "'" 'gdb)
 
-;; delete four spaces and semi in nasm, c, c++, java, octave, matlab mode.
+;; set masm-mode
+(add-hook 'masm-mode-hook
+          '(lambda ()
+             (define-key masm-mode-map (kbd ";") 'nil)))
+
+;; delete four spaces and semi in nasm c, c++, java, octave, matlab mode.
 (add-hook 'nasm-mode-hook
           '(lambda ()
              (define-key evil-evilified-state-local-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)
