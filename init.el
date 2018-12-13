@@ -2,6 +2,7 @@
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
+
 (defun dotspacemacs/layers ()
   "Configuration Layers declaration.
 You should not put any user code in this function besides modifying the variable
@@ -151,6 +152,7 @@ values."
 
    ))
 
+
 (defun dotspacemacs/init ()
   "Initialization function.
 This function is called at the very startup of Spacemacs initialization
@@ -581,6 +583,7 @@ values."
 
    ))
 
+
 (defun dotspacemacs/user-env ()
   "Environment variables setup.
 This function defines the environment variables for your Emacs session. By
@@ -592,6 +595,7 @@ See the header of this file for more information."
 
   )
 
+
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init', before layer configuration
@@ -613,6 +617,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   )
 
+
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.
 This function is called while dumping Spacemacs configuration. You can
@@ -621,6 +626,7 @@ in the dump."
 
   )
 
+
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
@@ -783,11 +789,11 @@ you should place your code here."
                                    (setq bosexp (point))
                                    (forward-sexp)
                                    (point)))
-	         (ret-transformer (or geiser-mode-eval-to-buffer-transformer
-			                          (lambda (msg is-error?)
-				                          (format "%s%s%s"
+           (ret-transformer (or geiser-mode-eval-to-buffer-transformer
+                                (lambda (msg is-error?)
+                                  (format "%s%s%s"
                                           geiser-mode-eval-to-buffer-prefix
-					                                (if is-error? "ERROR" "")
+                                          (if is-error? "ERROR" "")
                                           msg))))
            (ret (save-excursion
                   (geiser-eval-region bosexp ;beginning of sexp
@@ -795,17 +801,17 @@ you should place your code here."
                                       nil
                                       t
                                       print-to-buffer-p)))
-	         (err (geiser-eval--retort-error ret))
-	         (will-eval-to-buffer (if print-to-buffer-p
-				                            (not geiser-mode-eval-last-sexp-to-buffer)
-				                          geiser-mode-eval-last-sexp-to-buffer))
-	         (str (geiser-eval--retort-result-str ret
+           (err (geiser-eval--retort-error ret))
+           (will-eval-to-buffer (if print-to-buffer-p
+                                    (not geiser-mode-eval-last-sexp-to-buffer)
+                                  geiser-mode-eval-last-sexp-to-buffer))
+           (str (geiser-eval--retort-result-str ret
                                                 (when will-eval-to-buffer ""))))
       (cond  ((not will-eval-to-buffer) str)
-	           (err (insert (funcall ret-transformer
+             (err (insert (funcall ret-transformer
                                    (geiser-eval--error-str err) t)))
-	           ((string= "" str))
-	           (t (push-mark)
+             ((string= "" str))
+             (t (push-mark)
                 (insert (funcall ret-transformer str nil)))))
 
     (cond ((looking-back "\n") (left-char 2))
@@ -862,6 +868,75 @@ you should place your code here."
     (interactive)
     (winum-select-window-by-number winum--window-count))
 
+  (defun another-window (count &optional all-frames)
+    "Select another window in cyclic ordering of windows.
+  COUNT specifies the number of windows to skip, starting with the
+  selected window, before making the selection.  If COUNT is
+  positive, skip -COUNT windows backwards.  If COUNT is negative,
+  skip COUNT windows forwards.  COUNT zero means do not skip any
+  window, so select the selected window.  In an interactive call,
+  COUNT is the numeric prefix argument.  Return nil.
+
+  If the `other-window' parameter of the selected window is a
+  function and `ignore-window-parameters' is nil, call that
+  function with the arguments COUNT and ALL-FRAMES.
+
+  This function does not select a window whose `no-other-window'
+  window parameter is non-nil.
+
+  This function uses `next-window' for finding the window to
+  select.  The argument ALL-FRAMES has the same meaning as in
+  `next-window', but the MINIBUF argument of `next-window' is
+  always effectively nil."
+    (interactive "p")
+    (let* ((count (* count -1))
+           (window (selected-window))
+           (function (and (not ignore-window-parameters)
+                          (window-parameter window 'other-window)))
+           old-window old-count)
+      (if (functionp function)
+          (funcall function count all-frames)
+        ;; `next-window' and `previous-window' may return a window we are
+        ;; not allowed to select.  Hence we need an exit strategy in case
+        ;; all windows are non-selectable.
+        (catch 'exit
+          (while (> count 0)
+            (setq window (next-window window nil all-frames))
+            (cond
+             ((eq window old-window)
+              (when (= count old-count)
+                ;; Keep out of infinite loops.  When COUNT has not changed
+                ;; since we last looked at `window' we're probably in one.
+                (throw 'exit nil)))
+             ((window-parameter window 'no-other-window)
+              (unless old-window
+                ;; The first non-selectable window `next-window' got us:
+                ;; Remember it and the current value of COUNT.
+                (setq old-window window)
+                (setq old-count count)))
+             (t
+              (setq count (1- count)))))
+          (while (< count 0)
+            (setq window (previous-window window nil all-frames))
+            (cond
+             ((eq window old-window)
+              (when (= count old-count)
+                ;; Keep out of infinite loops.  When COUNT has not changed
+                ;; since we last looked at `window' we're probably in one.
+                (throw 'exit nil)))
+             ((window-parameter window 'no-other-window)
+              (unless old-window
+                ;; The first non-selectable window `previous-window' got
+                ;; us: Remember it and the current value of COUNT.
+                (setq old-window window)
+                (setq old-count count)))
+             (t
+              (setq count (1+ count)))))
+
+          (select-window window)
+          ;; Always return nil.
+          nil))))
+
 
 ;;; add some functions to youdao
   (defun youdao-search-at-point-or-from-input ()
@@ -876,7 +951,7 @@ you should place your code here."
 
   )
 
-
+
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
 (load custom-file 'no-error 'no-message)
 (defun dotspacemacs/emacs-custom-settings ()

@@ -81,6 +81,7 @@
 (define-key evil-insert-state-map (kbd "C-n") 'nil)
 (define-key evil-insert-state-map (kbd "C-p") 'nil)
 (define-key evil-ex-completion-map (kbd "C-b") 'nil)
+(define-key evil-motion-state-map (kbd "-") 'negative-argument)
 
 ;; set evil-insert-mode
 (define-key evil-insert-state-map (kbd "C-y") 'nil)
@@ -97,6 +98,7 @@
 (define-key winum-keymap (kbd "C-x w =") 'winum-select-window-max)
 (spacemacs/set-leader-keys "0" 'winum-select-window-0-or-10)
 (define-key winum-keymap (kbd "M-0") 'winum-select-window-0-or-10)
+(global-set-key (kbd "C-x O") 'another-window)
 
 ;; set treemacs
 (spacemacs/set-leader-keys "-" 'treemacs-select-window)
