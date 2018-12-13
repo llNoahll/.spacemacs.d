@@ -682,8 +682,8 @@ you should place your code here."
 ;;; add some functions to evil-mode
   (evil-define-command evil-exit-hybrid-state (&optional buffer message)
     "Exit Hybrid state.
-  Changes the state to the previous state, or to Normal state
-  if the previous state was Hybrid state."
+Changes the state to the previous state, or to Normal state
+if the previous state was Hybrid state."
     :keep-visual t
     :suppress-operator t
     (interactive '(nil t))
@@ -716,7 +716,7 @@ you should place your code here."
 
   (defun evil-newline-below (count)
     "Insert a new line below point.
-  The insertion will be repeated COUNT times."
+The insertion will be repeated COUNT times."
     (interactive "p")
     (unless (eq evil-want-fine-undo t)
       (evil-start-undo-step))
@@ -730,7 +730,7 @@ you should place your code here."
 
   (defun evil-newline-above (count)
     "Insert a new line above point.
-  The insertion will be repeated COUNT times."
+The insertion will be repeated COUNT times."
     (interactive "p")
     (unless (eq evil-want-fine-undo t)
       (evil-start-undo-step))
@@ -772,7 +772,7 @@ you should place your code here."
 ;;; add some functions to geiser-repl-mode
   (defun geiser-better-eval-last-sexp (print-to-buffer-p)
     "Eval the previous sexp in the Geiser REPL.
-  With a prefix, revert the effect of `geiser-mode-eval-last-sexp-to-buffer'."
+With a prefix, revert the effect of `geiser-mode-eval-last-sexp-to-buffer'."
     (interactive "P")
 
     (cond ((or (looking-at ")\n")
@@ -824,8 +824,8 @@ you should place your code here."
 ;;; add some functions to racket-mode
   (defun racket-better-send-last-sexp ()
     "Send the previous sexp to the Racket REPL.
-  When the previous sexp is a sexp comment the sexp itself is sent,
-  without the #; prefix."
+When the previous sexp is a sexp comment the sexp itself is sent,
+without the #; prefix."
     (interactive)
     (cond ((or (looking-at ")\n")
                (looking-at "]\n")
@@ -844,8 +844,8 @@ you should place your code here."
 
   (defun racket-repl-send-last-sexp ()
     "Send the previous sexp to the Racket REPL.
-  When the previous sexp is a sexp comment the sexp itself is sent,
-  without the #; prefix."
+When the previous sexp is a sexp comment the sexp itself is sent,
+without the #; prefix."
     (interactive)
     (if (or (looking-at ")")
             (looking-at "]")
@@ -870,24 +870,24 @@ you should place your code here."
 
   (defun another-window (count &optional all-frames)
     "Select another window in cyclic ordering of windows.
-  COUNT specifies the number of windows to skip, starting with the
-  selected window, before making the selection.  If COUNT is
-  positive, skip -COUNT windows backwards.  If COUNT is negative,
-  skip COUNT windows forwards.  COUNT zero means do not skip any
-  window, so select the selected window.  In an interactive call,
-  COUNT is the numeric prefix argument.  Return nil.
+COUNT specifies the number of windows to skip, starting with the
+selected window, before making the selection.  If COUNT is
+positive, skip -COUNT windows backwards.  If COUNT is negative,
+skip COUNT windows forwards.  COUNT zero means do not skip any
+window, so select the selected window.  In an interactive call,
+COUNT is the numeric prefix argument.  Return nil.
 
-  If the `other-window' parameter of the selected window is a
-  function and `ignore-window-parameters' is nil, call that
-  function with the arguments COUNT and ALL-FRAMES.
+If the `other-window' parameter of the selected window is a
+function and `ignore-window-parameters' is nil, call that
+function with the arguments COUNT and ALL-FRAMES.
 
-  This function does not select a window whose `no-other-window'
-  window parameter is non-nil.
+This function does not select a window whose `no-other-window'
+window parameter is non-nil.
 
-  This function uses `next-window' for finding the window to
-  select.  The argument ALL-FRAMES has the same meaning as in
-  `next-window', but the MINIBUF argument of `next-window' is
-  always effectively nil."
+This function uses `next-window' for finding the window to
+select.  The argument ALL-FRAMES has the same meaning as in
+`next-window', but the MINIBUF argument of `next-window' is
+always effectively nil."
     (interactive "p")
     (let* ((count (* count -1))
            (window (selected-window))
@@ -941,7 +941,7 @@ you should place your code here."
 ;;; add some functions to youdao
   (defun youdao-search-at-point-or-from-input ()
     "Search word at point or word from input
-  and display result with popup-tip."
+and display result with popup-tip."
     (interactive)
     (let ((word (youdao-dictionary--region-or-word)))
       (if word
