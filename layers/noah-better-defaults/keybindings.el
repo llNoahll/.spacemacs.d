@@ -82,6 +82,8 @@
 (define-key evil-insert-state-map (kbd "C-p") 'nil)
 (define-key evil-ex-completion-map (kbd "C-b") 'nil)
 (define-key evil-motion-state-map (kbd "-") 'negative-argument)
+(define-key evil-motion-state-map (kbd "$") 'mwim-end-of-code-or-line)
+(define-key evil-motion-state-map (kbd "^") 'mwim-beginning-of-code-or-line)
 
 ;; set evil-insert-mode
 (define-key evil-insert-state-map (kbd "C-y") 'nil)
