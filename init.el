@@ -756,7 +756,7 @@ The insertion will be repeated COUNT times."
 
 ;;; add some functions to occur-mode
   (defun occur-dwim ()
-    "Call 'occur' with a same default."
+    "Call `occur' with a same default."
     (interactive)
     (push (if (region-active-p)
               (buffer-substring-no-properties
