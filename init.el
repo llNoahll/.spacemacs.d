@@ -472,6 +472,7 @@ values."
                                                   text-mode
                                                   org-mode
                                                   markdown-mode
+                                                  conf-unix-mode
                                                   dired-mode
                                                   occur-mode
                                                   minimap-mode
