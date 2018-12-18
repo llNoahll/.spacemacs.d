@@ -335,6 +335,12 @@
              (define-key racket-repl-mode-map (kbd "C-w") 'nil)
              (define-key racket-repl-mode-map (kbd "C-x C-e") 'racket-repl-send-last-sexp)))
 
+;; define scheme-mode
+;; (add-hook 'scheme-mode-hook
+;;           '(lambda ()
+;;              ))
+(spacemacs/set-leader-keys-for-major-mode 'scheme-mode ";" 'geiser-mode)
+
 ;; define geiser
 (add-hook 'geiser-repl-mode-hook
           '(lambda ()
