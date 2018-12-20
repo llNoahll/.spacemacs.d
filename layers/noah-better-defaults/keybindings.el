@@ -15,6 +15,7 @@
 
 ;; set "C-Tab" as "Esc"
 (define-key key-translation-map (kbd "<C-tab>") (kbd "<escape>"))
+(global-set-key (kbd "<escape>") 'evil-normal-state)
 
 ;; change hjkl to ijkl
 (define-key evil-normal-state-map (kbd "g h") 'evil-insert-resume)
