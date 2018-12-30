@@ -1,6 +1,6 @@
 ;;; packages.el --- noah-better-defaults layer packages file for Spacemacs.
 ;;
-;; Copyright (c) 2012-2018 Sylvain Benner & Contributors
+;; Copyright (c) 2012-2019 Sylvain Benner & Contributors
 ;;
 ;; Author:  <noah-better-defaults@Archier>
 ;; URL: https://github.com/syl20bnr/spacemacs
