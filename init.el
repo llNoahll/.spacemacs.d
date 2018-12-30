@@ -46,7 +46,9 @@ values."
      c-c++
      java
      javascript
-     emacs-lisp common-lisp scheme racket
+     emacs-lisp common-lisp
+     scheme racket
+     haskell
      vimscript
      rust
      html
