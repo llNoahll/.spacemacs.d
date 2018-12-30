@@ -106,6 +106,8 @@ values."
      (treemacs :variables
                treemacs--width-is-locked nil
                treemacs-width 20)
+     (multiple-cursors :variables
+                       multiple-cursors-backend 'evil-mc)
      (ibuffer :variables
               ibuffer-group-buffers-by 'projects)
      (auto-completion :variables
