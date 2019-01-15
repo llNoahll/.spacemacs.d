@@ -822,7 +822,7 @@ skip COUNT windows forwards.  COUNT zero means do not skip any
 window, so select the selected window.  In an interactive call,
 COUNT is the numeric prefix argument.  Return nil."
     (interactive "p")
-    (other-window (* count -1) all-frames))
+    (other-window (- count) all-frames))
 
 
 ;;; add some functions to youdao
