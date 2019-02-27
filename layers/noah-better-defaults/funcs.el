@@ -49,6 +49,26 @@ Otherwise, return nil."
 (defalias 'circular? 'circularp "circular? is an alias for ‘circularp’.")
 
 
+(defmacro better-last-sexp (last-sexp)
+  (list 'progn
+        '(cond ((or (looking-at ")\n")
+                    (looking-at "]\n")
+                    (looking-at "}\n"))
+                (right-char 2))
+               ((or (looking-at ")")
+                    (looking-at "]")
+                    (looking-at "}"))
+                (right-char 1)))
+
+        last-sexp
+
+        '(cond ((looking-back "\n") (left-char 2))
+               ((or (looking-at ")")
+                    (looking-at "]")
+                    (looking-at "}"))
+                (left-char 1)))))
+
+
 
 ;;; defun new major-mode.
 ;;;###autoload

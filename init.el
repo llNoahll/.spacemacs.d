@@ -719,51 +719,7 @@ The insertion will be repeated COUNT times."
     "Eval the previous sexp in the Geiser REPL.
 With a prefix, revert the effect of `geiser-mode-eval-last-sexp-to-buffer'."
     (interactive "P")
-
-    (cond ((or (looking-at ")\n")
-               (looking-at "]\n")
-               (looking-at "}\n"))
-           (right-char 2))
-          ((or (looking-at ")")
-               (looking-at "]")
-               (looking-at "}"))
-           (right-char 1)))
-
-    (let* (bosexp
-           (eosexp (save-excursion (backward-sexp)
-                                   (setq bosexp (point))
-                                   (forward-sexp)
-                                   (point)))
-           (ret-transformer (or geiser-mode-eval-to-buffer-transformer
-                                (lambda (msg is-error?)
-                                  (format "%s%s%s"
-                                          geiser-mode-eval-to-buffer-prefix
-                                          (if is-error? "ERROR" "")
-                                          msg))))
-           (ret (save-excursion
-                  (geiser-eval-region bosexp ;beginning of sexp
-                                      eosexp ;end of sexp
-                                      nil
-                                      t
-                                      print-to-buffer-p)))
-           (err (geiser-eval--retort-error ret))
-           (will-eval-to-buffer (if print-to-buffer-p
-                                    (not geiser-mode-eval-last-sexp-to-buffer)
-                                  geiser-mode-eval-last-sexp-to-buffer))
-           (str (geiser-eval--retort-result-str ret
-                                                (when will-eval-to-buffer ""))))
-      (cond  ((not will-eval-to-buffer) str)
-             (err (insert (funcall ret-transformer
-                                   (geiser-eval--error-str err) t)))
-             ((string= "" str))
-             (t (push-mark)
-                (insert (funcall ret-transformer str nil)))))
-
-    (cond ((looking-back "\n") (left-char 2))
-          ((or (looking-at ")")
-               (looking-at "]")
-               (looking-at "}"))
-           (left-char 1))))
+    (better-last-sexp (geiser-eval-last-sexp print-to-buffer-p)))
 
 
 ;;; add some functions to racket-mode
@@ -772,39 +728,35 @@ With a prefix, revert the effect of `geiser-mode-eval-last-sexp-to-buffer'."
 When the previous sexp is a sexp comment the sexp itself is sent,
 without the #; prefix."
     (interactive)
-    (cond ((or (looking-at ")\n")
-               (looking-at "]\n")
-               (looking-at "}\n"))
-           (right-char 2))
-          ((or (looking-at ")")
-               (looking-at "]")
-               (looking-at "}"))
-           (right-char 1)))
-    (racket-send-last-sexp)
-    (cond ((looking-back "\n") (left-char 2))
-          ((or (looking-at ")")
-               (looking-at "]")
-               (looking-at "}"))
-           (left-char 1))))
+    (better-last-sexp (racket-send-last-sexp)))
+
+  (defun racket-last-sexp (print-to-buffer-p)
+    "Send the previous sexp to the Racket REPL
+and eval the previous sexp in the Geiser REPL.
+When the previous sexp is a sexp comment the sexp itself is sent,
+without the #; prefix."
+    (interactive "P")
+    (better-last-sexp
+     (progn (racket-send-last-sexp)
+            (geiser-eval-last-sexp print-to-buffer-p))))
 
   (defun racket-repl-send-last-sexp ()
     "Send the previous sexp to the Racket REPL.
 When the previous sexp is a sexp comment the sexp itself is sent,
 without the #; prefix."
     (interactive)
-    (if (or (looking-at ")")
+    (cond ((or (looking-at ")")
             (looking-at "]")
             (looking-at "}"))
-        (progn
-          (right-char)
-          (insert " ")
-          (racket-send-last-sexp)
-          (delete-backward-char 1)
-          (left-char))
-      (progn
-        (insert " ")
-        (racket-send-last-sexp)
-        (delete-backward-char 1))))
+           (right-char)
+           (insert " ")
+           (racket-send-last-sexp)
+           (delete-backward-char 1)
+           (left-char))
+          ('t
+           (insert " ")
+           (racket-send-last-sexp)
+           (delete-backward-char 1))))
 
 
 ;;; add some functions to winum-mode

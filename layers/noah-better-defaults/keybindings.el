@@ -323,11 +323,11 @@
 ;; define racket-mode
 (add-hook 'racket-mode-hook
           '(lambda ()
-             (define-key evil-hybrid-state-local-map (kbd "C-x C-e") 'racket-better-send-last-sexp)
-             (define-key evil-insert-state-local-map (kbd "C-x C-e") 'racket-better-send-last-sexp)
-             (define-key evil-motion-state-local-map (kbd "C-x C-e") 'racket-better-send-last-sexp)
-             (define-key evil-emacs-state-local-map  (kbd "C-x C-e") 'racket-better-send-last-sexp)
-             (define-key racket-mode-map (kbd "C-x C-e") 'racket-better-send-last-sexp)))
+             (define-key evil-hybrid-state-local-map (kbd "C-x C-e") 'racket-last-sexp)
+             (define-key evil-insert-state-local-map (kbd "C-x C-e") 'racket-last-sexp)
+             (define-key evil-motion-state-local-map (kbd "C-x C-e") 'racket-last-sexp)
+             (define-key evil-emacs-state-local-map  (kbd "C-x C-e") 'racket-last-sexp)
+             (define-key racket-mode-map (kbd "C-x C-e") 'racket-last-sexp)))
 
 
 (add-hook 'racket-repl-mode-hook
