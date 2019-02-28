@@ -33,6 +33,8 @@
   '(
     (sublimity :location local)
     (vline-mode :location local)
+    on-parens
+    evil-textobj-anyblock
     evil-paredit
     highlight-indent-guides
     tabbar-ruler
@@ -47,7 +49,7 @@
 
 
 
-(defun noah-better-defaults/init-eaf()
+(defun noah-better-defaults/init-eaf ()
   (use-package eaf
     :defer t
     :init
@@ -63,7 +65,7 @@
     (spacemacs/set-leader-keys "F a o" 'eaf-open-application)
     (spacemacs/set-leader-keys "F a u" 'eaf-upload-file)))
 
-(defun noah-better-defaults/init-sublimity()
+(defun noah-better-defaults/init-sublimity ()
   (use-package sublimity
     :defer t
     :init
@@ -76,7 +78,7 @@
     (sublimity-map-set-delay 1.0)
     (spacemacs/set-leader-keys "t M" 'sublimity-mode)))
 
-(defun noah-better-defaults/init-vline-mode()
+(defun noah-better-defaults/init-vline-mode ()
   (use-package vline-mode
     :defer t
     :init
@@ -84,7 +86,19 @@
 
     (spacemacs/set-leader-keys "t C-v" 'vline-mode)))
 
-(defun noah-better-defaults/init-evil-paredit()
+(defun noah-better-defaults/init-on-parens ()
+  (use-package on-parens
+    :defer t
+    :init
+    ))
+
+(defun noah-better-defaults/init-evil-textobj-anyblock ()
+  (use-package evil-textobj-anyblock
+    :defer t
+    :init
+    ))
+
+(defun noah-better-defaults/init-evil-paredit ()
   (use-package evil-paredit
     :defer t
     :init
@@ -105,13 +119,13 @@
       (kbd "X") 'delete-char
       (kbd "x") 'delete-backward-char)))
 
-(defun noah-better-defaults/init-highlight-indent-guides()
+(defun noah-better-defaults/init-highlight-indent-guides ()
   (use-package highlight-indent-guides
     :defer t
     :init
     (setq highlight-indent-guides-method 'character)))
 
-(defun noah-better-defaults/init-tabbar-ruler()
+(defun noah-better-defaults/init-tabbar-ruler ()
   (use-package tabbar-ruler
     :defer t
     :init
