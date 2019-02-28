@@ -48,8 +48,9 @@
 (add-hook 'spacemacs-indent-sensitive-modes 'masm-mode)
 
 ;; add auto-mode-lists
-(add-to-list 'auto-mode-alist '("\\.snippet\\'" . snippet-mode))
+(add-to-list 'auto-mode-alist '("\\.snippet\\'"   . snippet-mode))
 (add-to-list 'auto-mode-alist '("\\.yasnippet\\'" . snippet-mode))
+(add-to-list 'auto-mode-alist '("\\.scrbl\\'"     . racket-mode))
 
 ;; set current window's number
 (defvar spacemacs/helm-find-files-window-number 0)

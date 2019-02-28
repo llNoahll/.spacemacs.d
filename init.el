@@ -600,6 +600,7 @@ before packages are loaded."
   ;; basic hack
   (setq symon-delay 2)
   (setq nyan-bar-length 27)
+  (setq treemacs-width 20)
   (setq electric-pair-delete-adjacent-pairs 'nil)
   (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)
   (symon-mode t)
