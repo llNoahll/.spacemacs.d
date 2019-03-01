@@ -50,23 +50,23 @@ Otherwise, return nil."
 
 
 (defmacro better-last-sexp (last-sexp)
-  (list 'progn
-        '(cond ((or (looking-at ")\n")
-                    (looking-at "]\n")
-                    (looking-at "}\n"))
-                (right-char 2))
-               ((or (looking-at ")")
-                    (looking-at "]")
-                    (looking-at "}"))
-                (right-char 1)))
+  `(progn
+    (cond ((or (looking-at ")\n")
+                (looking-at "]\n")
+                (looking-at "}\n"))
+            (right-char 2))
+           ((or (looking-at ")")
+                (looking-at "]")
+                (looking-at "}"))
+            (right-char 1)))
 
-        last-sexp
+    ,last-sexp
 
-        '(cond ((looking-back "\n") (left-char 2))
-               ((or (looking-at ")")
-                    (looking-at "]")
-                    (looking-at "}"))
-                (left-char 1)))))
+    (cond ((looking-back "\n") (left-char 2))
+           ((or (looking-at ")")
+                (looking-at "]")
+                (looking-at "}"))
+            (left-char 1)))))
 
 
 

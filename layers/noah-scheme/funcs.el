@@ -16,23 +16,19 @@
   (cond
    ;; (define (f) ...)
    ((listp name)
-    (append
-     (list 'defun (car name) (cdr name))
-     body))
+    `(defun ,(car name) ,(cdr name)
+       ,@body))
    ;; (define f (λ x ...))
    ((and
      (listp (car body))
      (listp (cadr body))
      (or (string-equal (caar body) 'lambda)
          (string-equal (caar body) 'λ)))
-    (append
-     (list 'defun name (cadar body))
-     (cddar body)))
+    `(defun ,name ,(cadar body)
+       ,@(cddar body)))
    ;; (define a b)
    ('t
-    (append
-     (list 'defvar name)
-     body))))
+    `(defvar ,name ,@body))))
 
 (defalias 'λ 'lambda "λ is an alias for ‘lambda’.")
 (defalias '-λ '-lambda "-λ is an alias for ‘-lambda’.")
