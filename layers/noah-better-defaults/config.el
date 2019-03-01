@@ -51,6 +51,7 @@
 (add-to-list 'auto-mode-alist '("\\.snippet\\'"   . snippet-mode))
 (add-to-list 'auto-mode-alist '("\\.yasnippet\\'" . snippet-mode))
 (add-to-list 'auto-mode-alist '("\\.scrbl\\'"     . racket-mode))
+(add-to-list 'auto-mode-alist '("\\.rashrc\\'"    . racket-mode))
 
 ;; set current window's number
 (defvar spacemacs/helm-find-files-window-number 0)
@@ -89,7 +90,8 @@
 ;; set eshell
 (add-hook 'eshell-mode-hook
           '(lambda ()
-             (setq-local evil-move-cursor-back nil)))
+             (setq-local evil-move-cursor-back nil)
+             (smartparens-mode t)))
 
 ;; set company for text-mode
 (add-hook 'text-mode-hook
