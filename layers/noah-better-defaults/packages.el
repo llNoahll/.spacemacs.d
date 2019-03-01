@@ -33,6 +33,7 @@
   '(
     (sublimity :location local)
     (vline-mode :location local)
+    (rash-mode :location local)
     on-parens
     evil-textobj-anyblock
     evil-paredit
@@ -85,6 +86,13 @@
     (require 'vline)
 
     (spacemacs/set-leader-keys "t C-v" 'vline-mode)))
+
+(defun noah-better-defaults/init-rash-mode ()
+  (use-package rash-mode
+    :defer t
+    :init
+    (require 'rash)
+    ))
 
 (defun noah-better-defaults/init-on-parens ()
   (use-package on-parens
