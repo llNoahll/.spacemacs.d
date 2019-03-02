@@ -334,6 +334,7 @@
           '(lambda ()
              (define-key evil-insert-state-local-map (kbd "<C-return>") 'newline-and-indent)
              (define-key racket-repl-mode-map (kbd "C-w") 'nil)
+             (define-key racket-repl-mode-map (kbd "C-c C-k") 'geiser-repl-interrupt)
              (define-key racket-repl-mode-map (kbd "C-x C-e") 'racket-repl-send-last-sexp)))
 
 ;; define scheme-mode
