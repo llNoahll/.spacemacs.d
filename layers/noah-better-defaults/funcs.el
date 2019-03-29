@@ -12,7 +12,7 @@
 
 ;;; some basic funcs
 (defun cons-to-list (object)
-  "Convert a cons to a circular."
+  "Convert a cons to a list."
   (interactive)
   (when (consp object)
     (let ((end (last object)))
@@ -49,6 +49,8 @@ Otherwise, return nil."
 (defalias 'circular? 'circularp "circular? is an alias for ‘circularp’.")
 
 
+
+;;; defun funcs and macros for some packages.
 (defmacro better-last-sexp (last-sexp)
   `(progn
     (cond ((or (looking-at ")\n")
@@ -67,6 +69,17 @@ Otherwise, return nil."
                 (looking-at "]")
                 (looking-at "}"))
             (left-char 1)))))
+
+(defun evil-cleverparens-reset-keys ()
+  (if evil-cleverparens-use-regular-insert
+      ;; in case we change our mind
+      (evil-define-key 'normal evil-cleverparens-mode-map
+        "h" 'evil-insert
+        "i" 'evil-previous-line)
+    (evil-define-key 'normal evil-cleverparens-mode-map
+      "h" 'evil-cp-insert
+      "i" 'evil-previous-line
+      "a" 'evil-cp-append)))
 
 
 
@@ -104,7 +117,7 @@ Otherwise, return nil."
 (defun noah/right-char (&optional n)
   "Move point N characters to the right (to the left if N is negative).
 If right characters is \n, skip it."
-  (interactive "^p")
+  (interactive "p")
   (right-char 1)
   (if (looking-at "\n")
       (right-char (+ n 1))

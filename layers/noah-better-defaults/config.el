@@ -147,19 +147,25 @@
           '(lambda ()
              ;; (paredit-mode)
              (evil-paredit-mode)
+             (evil-cleverparens-mode)
+             (evil-cleverparens-reset-keys)
              (setq-local comment-start "; ")))
 
 ;; set common-lisp-mode
 (add-hook 'common-lisp-mode-hook
           '(lambda ()
              ;; (paredit-mode)
-             (evil-paredit-mode)))
+             (evil-paredit-mode)
+             (evil-cleverparens-mode)
+             (evil-cleverparens-reset-keys)))
 
 ;; set emacs-lisp-mode
 (add-hook 'emacs-lisp-mode-hook
           '(lambda ()
              ;; (paredit-mode)
              (evil-paredit-mode)
+             (evil-cleverparens-mode)
+             (evil-cleverparens-reset-keys)
              (setq-local comment-start "; ")))
 
 ;; set iell-mode
@@ -167,6 +173,8 @@
           '(lambda ()
              ;; (paredit-mode)
              (evil-paredit-mode)
+             (evil-cleverparens-mode)
+             (evil-cleverparens-reset-keys)
              (setq-local comment-start "; ")))
 
 ;; set scheme-mode
@@ -174,6 +182,8 @@
           '(lambda ()
              ;; (paredit-mode)
              (evil-paredit-mode)
+             (evil-cleverparens-mode)
+             (evil-cleverparens-reset-keys)
              (setq-local comment-start "; ")))
 
 ;; setq scheme's default geiser-implementations
@@ -190,6 +200,8 @@
              (setq-local comment-start "; ")
              ;; (paredit-mode)
              (evil-paredit-mode)
+             (evil-cleverparens-mode)
+             (evil-cleverparens-reset-keys)
              (geiser-mode t)))
 
 (add-hook 'racket-repl-mode-hook
@@ -197,6 +209,8 @@
              (setq-local evil-move-cursor-back nil)
              ;; (paredit-mode)
              (evil-paredit-mode)
+             (evil-cleverparens-mode)
+             (evil-cleverparens-reset-keys)
              (geiser-mode t)))
 
 
