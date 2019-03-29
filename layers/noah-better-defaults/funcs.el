@@ -71,6 +71,16 @@ Otherwise, return nil."
             (left-char 1)))))
 
 (defun evil-cp-redefine-keys ()
+  (evil-define-key 'visual evil-cleverparens-mode-map
+    (kbd "d") 'evil-delete
+    (kbd "c") 'evil-change
+    (kbd "y") 'evil-yank
+    (kbd "D") 'evil-delete-line
+    (kbd "C") 'evil-change-line
+    (kbd "S") 'evil-change-whole-line
+    (kbd "Y") 'evil-yank-line
+    (kbd "X") 'delete-char
+    (kbd "x") 'delete-backward-char)
   (if evil-cleverparens-use-regular-insert
       ;; in case we change our mind
       (evil-define-key 'normal evil-cleverparens-mode-map
