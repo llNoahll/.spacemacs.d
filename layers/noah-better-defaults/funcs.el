@@ -70,7 +70,7 @@ Otherwise, return nil."
                 (looking-at "}"))
             (left-char 1)))))
 
-(defun evil-cleverparens-reset-keys ()
+(defun evil-cp-redefine-keys ()
   (if evil-cleverparens-use-regular-insert
       ;; in case we change our mind
       (evil-define-key 'normal evil-cleverparens-mode-map
