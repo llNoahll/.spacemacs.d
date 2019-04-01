@@ -78,6 +78,7 @@ Otherwise, return nil."
     (kbd "D") 'evil-delete-line
     (kbd "C") 'evil-change-line
     (kbd "S") 'evil-change-whole-line
+    (kbd "H") 'evil-insert
     (kbd "Y") 'evil-yank-line
     (kbd "X") 'delete-char
     (kbd "x") 'delete-backward-char)
