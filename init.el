@@ -431,6 +431,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-line-numbers '(:relative t
                                :enabled-for-modes prog-mode
                                                   matlab-mode
+                                                  ams-tex-mode
                                                   vimrc-mode
                                                   toml-mode
                                                   text-mode
