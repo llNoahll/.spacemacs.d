@@ -43,6 +43,7 @@ This function should only modify configuration layer settings."
      latex
      major-modes
      c-c++
+     go
      java
      javascript
      emacs-lisp common-lisp
