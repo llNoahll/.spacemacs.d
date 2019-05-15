@@ -130,8 +130,8 @@ This function should only modify configuration layer settings."
      noah
      )
 
-   ;; list of additional packages that will be installed without being
-   ;; wrapped in a layer. If you need some configurationt for these
+   ;; List of additional packages that will be installed without being
+   ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    ;; To use a local version of a package, use the `:location' property:
