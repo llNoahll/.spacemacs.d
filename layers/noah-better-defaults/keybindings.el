@@ -109,59 +109,64 @@
 (define-key winum-keymap (kbd "C-x w -") 'treemacs-select-window)
 (global-set-key (kbd "C-x 1") 'treemacs-delete-other-windows)
 
+(evil-define-key 'insert treemacs-mode-map
+  (kbd "j") 'treemacs-next-line
+  (kbd "k") 'treemacs-previous-line
+  (kbd ":") 'evil-ex
+  (kbd "G") 'evil-goto-line
+  (kbd "m") 'evil-set-marker
+  (kbd "'") 'evil-goto-mark-line
+  (kbd "/") 'evil-ex-search-forward
+  (kbd "p") 'evil-ex-search-backward
+  (kbd "n") 'evil-ex-search-next
+  (kbd "N") 'evil-ex-search-previous)
+
+(evil-define-key 'normal treemacs-mode-map
+  (kbd "i") 'treemacs-mode
+  (kbd "j") 'treemacs-next-line
+  (kbd "k") 'treemacs-previous-line
+  (kbd "h") 'evil-backward-char
+  (kbd "d") 'evil-delete
+  (kbd "R") 'evil-rename
+  (kbd "r") 'evil-refresh
+  (kbd "c d") 'treemacs-create-dir
+  (kbd "c f") 'treemacs-create-file)
+
+(evil-define-key 'emacs treemacs-mode-map
+  (kbd "j") 'treemacs-next-line
+  (kbd "k") 'treemacs-previous-line
+  (kbd ":") 'evil-ex
+  (kbd "G") 'evil-goto-line
+  (kbd "m") 'evil-set-marker
+  (kbd "'") 'evil-goto-mark-line
+  (kbd "/") 'evil-ex-search-forward
+  (kbd "p") 'evil-ex-search-backward
+  (kbd "n") 'evil-ex-search-next
+  (kbd "N") 'evil-ex-search-previous)
+
+(evil-define-key 'hybrid treemacs-mode-map
+  (kbd "j") 'treemacs-next-line
+  (kbd "k") 'treemacs-previous-line
+  (kbd ":") 'evil-ex
+  (kbd "G") 'evil-goto-line
+  (kbd "m") 'evil-set-marker
+  (kbd "'") 'evil-goto-mark-line
+  (kbd "/") 'evil-ex-search-forward
+  (kbd "p") 'evil-ex-search-backward
+  (kbd "n") 'evil-ex-search-next
+  (kbd "N") 'evil-ex-search-previous)
+
 (add-hook 'treemacs-mode-hook
           '(lambda ()
-             (define-key evil-normal-state-local-map (kbd "i") 'treemacs-mode)
+             (define-key treemacs-mode-map (kbd "<escape>") 'evil-normal-state)))
 
-             (define-key treemacs-mode-map (kbd "<escape>") 'evil-normal-state)
-
-             (define-key evil-normal-state-local-map (kbd "k") 'evil-previous-line)
-             (define-key evil-normal-state-local-map (kbd "j") 'evil-next-line)
-             (define-key evil-normal-state-local-map (kbd "h") 'evil-backward-char)
-             (define-key evil-emacs-state-local-map  (kbd "j") 'treemacs-next-line)
-             (define-key evil-emacs-state-local-map  (kbd "k") 'treemacs-previous-line)
-             (define-key evil-hybrid-state-local-map (kbd "j") 'treemacs-next-line)
-             (define-key evil-hybrid-state-local-map (kbd "k") 'treemacs-previous-line)
-             (define-key evil-insert-state-local-map (kbd "j") 'treemacs-next-line)
-             (define-key evil-insert-state-local-map (kbd "k") 'treemacs-previous-line)
-
-             (define-key evil-normal-state-local-map (kbd "d") 'treemacs-delete)
-             (define-key evil-normal-state-local-map (kbd "R") 'treemacs-rename)
-             (define-key evil-normal-state-local-map (kbd "r") 'treemacs-refresh)
-             (define-key evil-normal-state-local-map (kbd "c d") 'treemacs-create-dir)
-             (define-key evil-normal-state-local-map (kbd "c f") 'treemacs-create-file)
-
-             (define-key evil-insert-state-local-map (kbd ":") 'evil-ex)
-             (define-key evil-insert-state-local-map (kbd "G") 'evil-goto-line)
-             (define-key evil-insert-state-local-map (kbd "m") 'evil-set-marker)
-             (define-key evil-insert-state-local-map (kbd "'") 'evil-goto-mark-line)
-             (define-key evil-insert-state-local-map (kbd "/") 'evil-ex-search-forward)
-             (define-key evil-insert-state-local-map (kbd "p") 'evil-ex-search-backward)
-             (define-key evil-insert-state-local-map (kbd "n") 'evil-ex-search-next)
-             (define-key evil-insert-state-local-map (kbd "N") 'evil-ex-search-previous)
-
-             (define-key evil-hybrid-state-local-map (kbd ":") 'evil-ex)
-             (define-key evil-hybrid-state-local-map (kbd "G") 'evil-goto-line)
-             (define-key evil-hybrid-state-local-map (kbd "m") 'evil-set-marker)
-             (define-key evil-hybrid-state-local-map (kbd "'") 'evil-goto-mark-line)
-             (define-key evil-hybrid-state-local-map (kbd "/") 'evil-ex-search-forward)
-             (define-key evil-hybrid-state-local-map (kbd "p") 'evil-ex-search-backward)
-             (define-key evil-hybrid-state-local-map (kbd "n") 'evil-ex-search-next)
-             (define-key evil-hybrid-state-local-map (kbd "N") 'evil-ex-search-previous)
-
-             (define-key evil-emacs-state-local-map  (kbd ":") 'evil-ex)
-             (define-key evil-emacs-state-local-map  (kbd "G") 'evil-goto-line)
-             (define-key evil-emacs-state-local-map  (kbd "m") 'evil-set-marker)
-             (define-key evil-emacs-state-local-map  (kbd "'") 'evil-goto-mark-line)
-             (define-key evil-emacs-state-local-map  (kbd "/") 'evil-ex-search-forward)
-             (define-key evil-emacs-state-local-map  (kbd "p") 'evil-ex-search-backward)
-             (define-key evil-emacs-state-local-map  (kbd "n") 'evil-ex-search-next)
-             (define-key evil-emacs-state-local-map  (kbd "N") 'evil-ex-search-previous)))
+;; set evil-cleverparens-mode
+(evil-define-key 'insert evil-cleverparens-mode-map
+  (kbd "C-w") 'nil)
 
 ;; set beginning/end-of-code-or-line
-(progn
-  (define-prefix-command 'mwim-leader-key)
-  (define-key evil-insert-state-map (kbd "C-w") mwim-leader-key))
+(define-prefix-command 'mwim-leader-key)
+(define-key evil-insert-state-map (kbd "C-w") mwim-leader-key)
 
 (define-key evil-insert-state-map (kbd "C-w C-e") 'mwim-end-of-code-or-line)
 (define-key evil-insert-state-map (kbd "C-w C-S-a") 'mwim-end-of-code-or-line)
@@ -355,17 +360,23 @@
              (define-key geiser-mode-map (kbd "C-x C-e") 'geiser-better-eval-last-sexp)))
 
 ;; set eshell
-(add-hook 'eshell-mode-hook
-          '(lambda ()
-             (define-key evil-emacs-state-local-map  (kbd "C-k") 'eshell-previous-matching-input-from-input)
-             (define-key evil-emacs-state-local-map  (kbd "C-j") 'eshell-next-matching-input-from-input)
-             (define-key evil-hybrid-state-local-map (kbd "C-k") 'eshell-previous-matching-input-from-input)
-             (define-key evil-hybrid-state-local-map (kbd "C-j") 'eshell-next-matching-input-from-input)
-             (define-key evil-insert-state-local-map (kbd "C-k") 'eshell-previous-matching-input-from-input)
-             (define-key evil-insert-state-local-map (kbd "C-j") 'eshell-next-matching-input-from-input)
-             (define-key evil-normal-state-local-map (kbd "C-k") 'eshell-previous-matching-input-from-input)
-             (define-key evil-normal-state-local-map (kbd "C-j") 'eshell-next-matching-input-from-input)
-             (define-key evil-normal-state-local-map (kbd "<return>") 'eshell-send-input)))
+(evil-define-key 'normal eshell-mode-map
+  (kbd "<return>") 'eshell-send-input
+  (kbd "C-k") 'eshell-previous-matching-input-from-input
+  (kbd "C-j") 'eshell-next-matching-input-from-input)
+
+(evil-define-key 'insert eshell-mode-map
+  (kbd "C-k") 'eshell-previous-matching-input-from-input
+  (kbd "C-j") 'eshell-next-matching-input-from-input)
+
+(evil-define-key 'emacs eshell-mode-map
+  (kbd "C-k") 'eshell-previous-matching-input-from-input
+  (kbd "C-j") 'eshell-next-matching-input-from-input)
+
+(evil-define-key 'hybrid eshell-mode-map
+  (kbd "C-k") 'eshell-previous-matching-input-from-input
+  (kbd "C-j") 'eshell-next-matching-input-from-input)
+
 
 ;; set term
 (add-hook 'term-mode-hook
@@ -418,18 +429,16 @@
              (define-key magit-mode-map (kbd "C-M-4") 'magit-section-show-level-4-all)))
 
 ;; set dired-mode
-(add-hook 'dired-mode-hook
-          '(lambda ()
-             (define-key evil-normal-state-local-map (kbd "<escape>") 'evil-insert)
-             (define-key evil-normal-state-local-map (kbd "k") 'evil-previous-line)
-             (define-key evil-normal-state-local-map (kbd "j") 'evil-next-line)
-             (define-key evil-normal-state-local-map (kbd "h") 'evil-backward-char)))
+(evil-define-key 'normal dired-mode-map
+  (kbd "<escape>") 'evil-insert
+  (kbd "k") 'evil-previous-line
+  (kbd "j") 'evil-next-line
+  (kbd "h") 'evil-backward-char)
 
 ;; set org-mode
-(add-hook 'org-mode-hook
-          '(lambda ()
-             (define-key evil-normal-state-local-map (kbd "I") 'evil-window-top)
-             (define-key evil-normal-state-local-map (kbd "H") 'evil-org-insert-line)))
+(evil-define-key 'normal org-mode-map
+  (kbd "I") 'evil-window-top
+  (kbd "H") 'evil-org-insert-line)
 
 ;; set company-complete
 (add-hook 'company-search-mode-hook
