@@ -213,6 +213,7 @@
 (define-key evil-insert-state-map (kbd "C-S-t") 'evil-shift-left-line)
 
 ;; define delete
+(define-key evil-normal-state-map (kbd "<delete>") 'evil-forward-char)
 (define-key evil-insert-state-map (kbd "C-D") 'nil)
 (define-key evil-insert-state-map (kbd "C-S-d") 'nil)
 (define-key evil-insert-state-map (kbd "C-d") 'nil)
