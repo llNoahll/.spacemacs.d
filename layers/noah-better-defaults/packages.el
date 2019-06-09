@@ -85,6 +85,11 @@
     :init
     (require 'vline-mode)
 
+    ;; set the highlight column color
+    (set-face-background vline-face (face-attribute hl-line-face :background))
+    ;; set idle time
+    (setq vline-idle-time 1)
+
     (spacemacs/set-leader-keys "t C-v" 'vline-mode)))
 
 (defun noah-better-defaults/init-rash-mode ()
