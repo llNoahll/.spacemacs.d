@@ -83,7 +83,7 @@
   (use-package vline-mode
     :defer t
     :init
-    (require 'vline)
+    (require 'vline-mode)
 
     (spacemacs/set-leader-keys "t C-v" 'vline-mode)))
 
