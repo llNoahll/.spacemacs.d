@@ -1,0 +1,12 @@
+## [submodule "packages/eaf"]
+## 	path = packages/eaf
+## 	url = https://github.com/manateelazycat/emacs-application-framework
+## [submodule "packages/sublimity"]
+## 	path = packages/sublimity
+## 	url = https://github.com/zk-phi/sublimity
+[submodule "packages/nyan-mode"]
+	path = packages/nyan-mode
+	url = https://github.com/TeMPOraL/nyan-mode
+[submodule "layers/noah-better-defaults/local/vline-mode"]
+	path = layers/noah-better-defaults/local/vline-mode
+	url = https://github.com/EricCrosson/vline-mode
