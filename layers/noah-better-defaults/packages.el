@@ -30,7 +30,7 @@
 ;;; Code:
 
 (defconst noah-better-defaults-packages
-  '(
+  `(
     (sublimity :location local)
     (vline-mode :location local)
     (rash-mode :location local)
@@ -39,14 +39,9 @@
     evil-paredit
     highlight-indent-guides
     tabbar-ruler
+    ,(unless (and (spacemacs/system-is-mswindows) window-system)
+       '(eaf :location local))
     ))
-
-(unless (and (spacemacs/system-is-mswindows) window-system)
-  (setq noah-better-defaults-packages
-        (append noah-better-defaults-packages
-         '(
-           (eaf :location local)
-           ))))
 
 
 
