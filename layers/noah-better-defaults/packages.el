@@ -31,9 +31,10 @@
 
 (defconst noah-better-defaults-packages
   `(
-    (sublimity :location local)
+    (sublimity  :location local)
     (vline-mode :location local)
-    (rash-mode :location local)
+    (rash-mode  :location local)
+    (yin-mode   :location local)
     on-parens
     evil-textobj-anyblock
     evil-paredit
@@ -92,6 +93,14 @@
     :defer t
     :init
     (require 'rash)
+    ))
+
+(defun noah-better-defaults/init-yin-mode ()
+  (use-package yin-mode
+    :defer t
+    :init
+    (require 'yin-mode)
+    (add-to-list 'auto-mode-alist '("\\.yin\\'" . yin-mode))
     ))
 
 (defun noah-better-defaults/init-on-parens ()
