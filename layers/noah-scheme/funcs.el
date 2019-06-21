@@ -32,6 +32,7 @@
 
 (defalias 'λ 'lambda "λ is an alias for ‘lambda’.")
 (defalias '-λ '-lambda "-λ is an alias for ‘-lambda’.")
+(defalias 'pcase-λ 'pcase-lambda "pcase-λ is an alias for ‘pcase-lambda’.")
 
 (defalias 'set! 'setq "set! is an alias for ‘setq’.")
 (defalias 'set-car! 'setcar "set-car! is an alias for ‘setcar’.")
