@@ -1,6 +1,6 @@
 ;;; spacemacs-common.el --- Color theme with a dark and light versions.
 
-;; Copyright (C) 2015-2016 Nasser Alshammari
+;; Copyright (C) 2015-2019 Nasser Alshammari
 
 ;; Author: Nasser Alshammari
 ;; URL: <https://github.com/nashamri/spacemacs-theme>
@@ -92,7 +92,7 @@ to 'auto, tags may not be properly aligned. "
         (base          (if (eq variant 'dark) (if (true-color-p) "#bbc2cf" "#bbc2cf") (if (true-color-p) "#000000" "#000000")))
         (base-dim      (if (eq variant 'dark) (if (true-color-p) "#686868" "#585858") (if (true-color-p) "#a094a2" "#afafd7")))
         (bg1           (if (eq variant 'dark) (if (true-color-p) "#282a36" "#29282e") (if (true-color-p) "#fdf7e3" "#ffffff")))
-        (bg2           (if (eq variant 'dark) (if (true-color-p) "#212026" "#1c1c1c") (if (true-color-p) "#eeede8" "#e4e4e4")))
+        (bg2           (if (eq variant 'dark) (if (true-color-p) "#23212a" "#1c1c1c") (if (true-color-p) "#eeede8" "#e4e4e4")))
         (bg3           (if (eq variant 'dark) (if (true-color-p) "#100a14" "#121212") (if (true-color-p) "#e3dedd" "#d0d0d0")))
         (bg4           (if (eq variant 'dark) (if (true-color-p) "#0a0814" "#080808") (if (true-color-p) "#d2ceda" "#bcbcbc")))
         (bg5           (if (eq variant 'dark) (if (true-color-p) "#686868" "#585858") (if (true-color-p) "#e7e7fc" "#d7d7ff")))
@@ -106,7 +106,7 @@ to 'auto, tags may not be properly aligned. "
         (const         (if (eq variant 'dark) (if (true-color-p) "#a45bad" "#d75fd7") (if (true-color-p) "#4e3163" "#8700af")))
         (comment       (if (eq variant 'dark) (if (true-color-p) "#2ca6b3" "#008787") (if (true-color-p) "#2aa1ae" "#008787")))
         (comment-light (if (eq variant 'dark) (if (true-color-p) "#2ca6b3" "#008787") (if (true-color-p) "#a49da5" "#008787")))
-        (comment-bg    (if (eq variant 'dark) (if (true-color-p) "#282c34" "#262626") (if (true-color-p) "#fdf3dc" "#ffffff")))
+        (comment-bg    (if (eq variant 'dark) (if (true-color-p) "#262c36" "#262626") (if (true-color-p) "#fdf3dc" "#ffffff")))
         (comp          (if (eq variant 'dark) (if (true-color-p) "#c56ec3" "#d75fd7") (if (true-color-p) "#6c4173" "#8700af")))
         (err           (if (eq variant 'dark) (if (true-color-p) "#e0211d" "#e0211d") (if (true-color-p) "#e0211d" "#e0211d")))
         (func          (if (eq variant 'dark) (if (true-color-p) "#bc6ec5" "#d75fd7") (if (true-color-p) "#705091" "#8700af")))
