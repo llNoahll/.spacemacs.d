@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: syntax-case
+# key: syntax-case.
+# --
+(syntax-case ${1:stx} ($2)
+  [(_ $3)
+   #'$4])$0
