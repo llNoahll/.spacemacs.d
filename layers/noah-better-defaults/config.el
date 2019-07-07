@@ -53,6 +53,7 @@
 (add-to-list 'auto-mode-alist '("\\.scrbl\\'"     . racket-mode))
 (add-to-list 'auto-mode-alist '("\\.rashrc\\'"    . racket-mode))
 (add-to-list 'auto-mode-alist '("\\.zsh-theme\\'" . shell-script-mode))
+(add-to-list 'auto-mode-alist '("\\.mat\\'"       . matlab-mode))
 
 ;; set current window's number
 (defvar spacemacs/helm-find-files-window-number 0)
