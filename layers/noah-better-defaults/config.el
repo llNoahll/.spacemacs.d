@@ -52,9 +52,16 @@
 (add-to-list 'auto-mode-alist '("\\.yasnippet\\'" . snippet-mode))
 (add-to-list 'auto-mode-alist '("\\.scrbl\\'"     . racket-mode))
 (add-to-list 'auto-mode-alist '("\\.rashrc\\'"    . racket-mode))
-(add-to-list 'auto-mode-alist '("\\.xprofile\\'" . shell-script-mode))
+(add-to-list 'auto-mode-alist '("\\.xprofile\\'"  . shell-script-mode))
 (add-to-list 'auto-mode-alist '("\\.zsh-theme\\'" . shell-script-mode))
 (add-to-list 'auto-mode-alist '("\\.mat\\'"       . matlab-mode))
+(add-to-list 'auto-mode-alist '("\\.com\\'"       . hexl-mode))
+(add-to-list 'auto-mode-alist '("\\.bin\\'"       . hexl-mode))
+(add-to-list 'auto-mode-alist '("\\.exe\\'"       . hexl-mode))
+(add-to-list 'auto-mode-alist '("\\.out\\'"       . hexl-mode))
+
+;; open binary file in hexl-mode.
+(add-hook 'find-file-hooks 'hexl-if-binary)
 
 ;; set current window's number
 (defvar spacemacs/helm-find-files-window-number 0)
@@ -194,7 +201,6 @@
          chez)
         ((regexp "\\.ss$")
          chez)))
-
 
 ;; set racket-mode
 (add-hook 'racket-mode-hook
