@@ -1,6 +1,3 @@
-[submodule "nyan-mode"]
-	path = packages/nyan-mode
-	url = https://github.com/TeMPOraL/nyan-mode
 [submodule "vline-mode"]
 	path = layers/noah-better-defaults/local/vline-mode
 	url = https://github.com/EricCrosson/vline-mode
