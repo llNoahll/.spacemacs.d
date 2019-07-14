@@ -15,7 +15,6 @@
 
 ;;;; require packages
 (require 'python)
-(require 'nyan-mode)
 
 
 ;; set fundamental-mode for big files
@@ -125,7 +124,10 @@
           '(lambda ()
              (text-scale-set -2)
              (vline-mode t)
-             (highlight-indentation-mode t)))
+             (highlight-indentation-mode t)
+             (treemacs--setup-icon treemacs-icon-tex      "~/.spacemacs.d/packages/treemacs/icons/tex.png"    "tex")
+             (treemacs--setup-icon treemacs-icon-scheme   "~/.spacemacs.d/packages/treemacs/icons/scheme.png"    "ss" "scm")
+             (treemacs--setup-icon treemacs-icon-racket   "~/.spacemacs.d/packages/treemacs/icons/racket.png"    "racket" "rkt" "rktl" "rktd" "scrbl" "scribble" "plt")))
 
 ;; set c-mode
 (add-hook 'c-mode-hook
