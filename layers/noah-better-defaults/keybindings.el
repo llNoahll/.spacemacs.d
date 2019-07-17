@@ -232,6 +232,12 @@
           '(lambda ()
              (define-key paredit-mode-map (kbd "M-;") 'nil)))
 
+;; add tabnine
+(define-key evil-emacs-state-map  (kbd "C-l") 'company-tabnine)
+(define-key evil-hybrid-state-map (kbd "C-l") 'company-tabnine)
+(define-key evil-insert-state-map (kbd "C-l") 'company-tabnine)
+(global-set-key (kbd "C-c t") 'company-tabnine)
+
 ;; add yasnippet
 (define-key evil-emacs-state-map  (kbd "C-q") 'company-yasnippet)
 (define-key evil-hybrid-state-map (kbd "C-q") 'company-yasnippet)
