@@ -88,6 +88,18 @@
 ;;          (not (and (featurep 'cc-defs)
 ;;                    c-buffer-is-cc-mode))))
 
+;; set company-mode
+(setq company-idle-delay 0)
+(setq company-show-numbers t)
+;; (add-hook 'company-mode-hook
+;;           '(lambda ()
+;;              ;; Use the tab-and-go frontend.
+;;              ;; Allows TAB to select and complete at the same time.
+;;              (company-tng-configure-default)
+;;              (setq company-frontends
+;;                    '(company-tng-frontend
+;;                      company-pseudo-tooltip-frontend
+;;                      company-echo-metadata-frontend))))
 
 ;; set default configs in prog-mode
 (add-hook 'prog-mode-hook
