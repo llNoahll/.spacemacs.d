@@ -77,6 +77,7 @@
          (derived-mode-p 'css-mode)
          (derived-mode-p 'toml-mode)
          (derived-mode-p 'vimrc-mode)
+         (derived-mode-p 'conf-unix-mode)
          (derived-mode-p 'matlab-mode)
          (derived-mode-p 'magit-status-mode))
      (not (derived-mode-p 'eaf-mode)))
