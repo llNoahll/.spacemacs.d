@@ -17,6 +17,12 @@
 (define-key key-translation-map (kbd "<C-tab>") (kbd "<escape>"))
 (global-set-key (kbd "<escape>") 'evil-normal-state)
 
+;; exchange () and []
+(keyboard-translate ?\( ?\[)
+(keyboard-translate ?\[ ?\()
+(keyboard-translate ?\) ?\])
+(keyboard-translate ?\] ?\))
+
 ;; change hjkl to ijkl
 (define-key evil-normal-state-map (kbd "g h") 'evil-insert-resume)
 (define-key evil-normal-state-map (kbd "g i") 'nil)
