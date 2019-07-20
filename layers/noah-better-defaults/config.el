@@ -47,6 +47,7 @@
 (add-hook 'spacemacs-indent-sensitive-modes 'masm-mode)
 
 ;; add auto-mode-lists
+(add-to-list 'auto-mode-alist '("\\.sls\\'"       . scheme-mode))
 (add-to-list 'auto-mode-alist '("\\.snippet\\'"   . snippet-mode))
 (add-to-list 'auto-mode-alist '("\\.yasnippet\\'" . snippet-mode))
 (add-to-list 'auto-mode-alist '("\\.scrbl\\'"     . racket-mode))
@@ -138,7 +139,7 @@
              (vline-mode t)
              (highlight-indentation-mode t)
              (treemacs--setup-icon treemacs-icon-tex      "~/.spacemacs.d/packages/treemacs/icons/tex.png"    "tex")
-             (treemacs--setup-icon treemacs-icon-scheme   "~/.spacemacs.d/packages/treemacs/icons/scheme.png"    "ss" "scm")
+             (treemacs--setup-icon treemacs-icon-scheme   "~/.spacemacs.d/packages/treemacs/icons/scheme.png"    "ss" "scm" "sls")
              (treemacs--setup-icon treemacs-icon-racket   "~/.spacemacs.d/packages/treemacs/icons/racket.png"    "racket" "rkt" "rktl" "rktd" "scrbl" "scribble" "plt")))
 
 ;; set c-mode
