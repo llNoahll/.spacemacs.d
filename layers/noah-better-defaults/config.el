@@ -142,7 +142,7 @@
              (treemacs--setup-icon treemacs-icon-tex      "~/.spacemacs.d/packages/treemacs/icons/tex.png"     "tex")
              (treemacs--setup-icon treemacs-icon-scheme   "~/.spacemacs.d/packages/treemacs/icons/scheme.png"  "ss" "scm" "sls" "sps")
              (treemacs--setup-icon treemacs-icon-racket   "~/.spacemacs.d/packages/treemacs/icons/racket.png"  "racket" "rkt" "rktl" "rktd" "scrbl" "scribble" "plt")
-             (treemacs--setup-icon treemacs-icon-vim      "~/.spacemacs.d/packages/treemacs/icons/vsc/vim.png" "vim" "vimrc" "tridactylrc" "vimperatorrc" "ideavimrc" "vrapperrc")))
+             (--each '("vim" "vimrc" "tridactylrc" "vimperatorrc" "ideavimrc" "vrapperrc") (ht-set! treemacs-icons-hash it treemacs-icon-vim))))
 
 ;; set c-mode
 (add-hook 'c-mode-hook
