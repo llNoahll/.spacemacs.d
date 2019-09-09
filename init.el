@@ -434,6 +434,7 @@ It should only modify the values of Spacemacs settings."
                                                   matlab-mode
                                                   ams-tex-mode
                                                   vimrc-mode
+                                                  json-mode
                                                   toml-mode
                                                   text-mode
                                                   org-mode
