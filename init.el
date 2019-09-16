@@ -42,12 +42,13 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      latex
      major-modes
-     c-c++
      go
+     c-c++
+     csharp
      java
      javascript
      emacs-lisp common-lisp
-     scheme racket
+     scheme racket clojure
      haskell
      vimscript
      rust
