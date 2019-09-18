@@ -51,6 +51,8 @@ This function should only modify configuration layer settings."
      scheme racket clojure
      haskell
      vimscript
+     sml
+     ruby
      rust
      html
      (asm :variables
