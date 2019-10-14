@@ -212,10 +212,12 @@
 
 ;; set scheme-mode
 (font-lock-add-keywords 'scheme-mode
-                        `(("\\_<\\(_\\|\\.\\.\\.\\)\\_>"                                          . font-lock-keyword-face)
-                          (,(concat "(" (regexp-opt '("set!" "else" "case-λ" "amb") t) "\\>")     . font-lock-keyword-face)
-                          (,(concat "(" (regexp-opt '("set-car!" "set-cdr!" "set-box!") t) "\\>") . font-lock-builtin-face)
-                          (,(concat "(" (regexp-opt '("not" "xor" "nor") t) "\\>")                . font-lock-builtin-face))
+                        `(("\\_<\\(_\\|\\.\\.\\.\\)\\_>"                                               . font-lock-keyword-face)
+                          (,(concat "(" (regexp-opt '("set!" "else" "case-λ" "amb") t) "\\>")          . font-lock-keyword-face)
+                          (,(concat "(" (regexp-opt '("set-car!" "set-cdr!" "set-box!") t) "\\>")      . font-lock-builtin-face)
+                          (,(concat "(" (regexp-opt '("empty" "null" "nil" "empty?" "nil?") t) "\\>")  . font-lock-builtin-face)
+                          (,(concat "(" (regexp-opt '("true" "false" "true?" "false?") t) "\\>")       . font-lock-builtin-face)
+                          (,(concat "(" (regexp-opt '("not" "xor" "nor" "nand"  "implies") t) "\\>")   . font-lock-builtin-face))
                         t)
 (add-hook 'scheme-mode-hook
           '(lambda ()
@@ -237,6 +239,7 @@
                         `((,(regexp-opt '("case-λ:" "opt-λ:" "pcase-λ:" "pλ:" "popt-λ:") 'symbols) . font-lock-builtin-face)
                           (,(regexp-opt '("match-λ" "match-λ*" "match-λ**") 'symbols)              . font-lock-builtin-face)
                           (,(regexp-opt '("true?") 'symbols)                                       . font-lock-builtin-face)
+                          (,(regexp-opt '("nil" "nil?") 'symbols)                                  . font-lock-builtin-face)
                           (,(regexp-opt '("case-λ" "amb") 'symbols)                                . font-lock-keyword-face))
                         t)
 (add-hook 'racket-mode-hook
