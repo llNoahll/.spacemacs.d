@@ -11,6 +11,20 @@
 
 
 ;;; some basic funcs
+(defmacro nand (&rest expr)
+  `(not (and ,@expr)))
+
+(defmacro nor (&rest expr)
+  `(not (or ,@expr)))
+
+(defmacro implies (expr1 expr2)
+  `(if ,expr1 ,expr2 't))
+
+(defun xor (expr1 expr2)
+  (or (and (not expr1) expr2)
+      (and expr1 (not expr2))))
+
+
 (defun cons-to-list (object)
   "Convert a cons to a list."
   (interactive)
