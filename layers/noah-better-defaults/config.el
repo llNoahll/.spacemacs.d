@@ -212,6 +212,7 @@
 
 ;; set scheme-mode
 (font-lock-add-keywords 'scheme-mode
+                        '(("\\<\\(_\\|...\\)\\>" . font-lock-keyword-face))
                         `((,(concat "(" (regexp-opt '("case-λ") t) "\\>") . font-lock-keyword-face)))
 (add-hook 'scheme-mode-hook
           '(lambda ()
@@ -230,7 +231,7 @@
 
 ;; set racket-mode
 (font-lock-add-keywords 'racket-mode
-                        `(("\\<\\(case-λ\\)\\>" . font-lock-keyword-face)))
+                        '(("\\<\\(case-λ\\)\\>" . font-lock-keyword-face)))
 (add-hook 'racket-mode-hook
           '(lambda ()
              (setq-local comment-start "; ")
