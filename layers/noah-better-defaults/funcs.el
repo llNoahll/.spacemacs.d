@@ -19,7 +19,8 @@
       (setcdr end (cdr (-cons-to-list end))))
     object))
 
-(defalias 'pair->list 'cons-to-list "pair->list is an alias for ‘cons-to-list’.")
+(defalias 'pair->list 'cons-to-list
+  "pair->list is an alias for ‘cons-to-list’.")
 
 
 (defun circular (&rest object)
@@ -34,7 +35,8 @@ by a list."
   (interactive)
   (when (listp object)
     (setcdr (last object) object)))
-(defalias 'list->circular 'list-to-circular "list->circular is an alias for ‘list-to-circular’.")
+(defalias 'list->circular 'list-to-circular
+  "list->circular is an alias for ‘list-to-circular’.")
 
 
 (defun circularp (object)
@@ -46,7 +48,8 @@ Otherwise, return nil."
                ('t (eq (last object) (cdr object))))
          ('t 'nil))))
 
-(defalias 'circular? 'circularp "circular? is an alias for ‘circularp’.")
+(defalias 'circular? 'circularp
+  "circular? is an alias for ‘circularp’.")
 
 
 
@@ -165,14 +168,16 @@ If right characters is \n, skip it."
     (progn (fundamental-mode)
            (hl-line-mode -1)))
   (if (and (executable-find "wc")
-           (> (string-to-number (shell-command-to-string (format "wc -l %s" (buffer-file-name))))
+           (> (string-to-number (shell-command-to-string
+                                 (format "wc -l %s" (buffer-file-name))))
               5000))
       (fundamental-mode)))
 
 (defun spacemacs/reload-python-mode ()
   "Reload python-mode to fix company-backends bugs"
   (defvar reload-python-times 0)
-  (when (and (= reload-python-times 0) (string-equal major-mode 'python-mode))
+  (when (and (= reload-python-times 0)
+             (string-equal major-mode 'python-mode))
     (python-mode)
     (setq reload-python-times 1)))
 

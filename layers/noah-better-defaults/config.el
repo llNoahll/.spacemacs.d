@@ -139,10 +139,17 @@
              (text-scale-set -2)
              (vline-mode t)
              (highlight-indentation-mode t)
-             (treemacs--setup-icon treemacs-icon-tex      "~/.spacemacs.d/packages/treemacs/icons/tex.png"     "tex")
-             (treemacs--setup-icon treemacs-icon-scheme   "~/.spacemacs.d/packages/treemacs/icons/scheme.png"  "ss" "scm" "sls" "sps")
-             (treemacs--setup-icon treemacs-icon-racket   "~/.spacemacs.d/packages/treemacs/icons/racket.png"  "racket" "rkt" "rktl" "rktd" "scrbl" "scribble" "plt")
-             (--each '("vim" "vimrc" "tridactylrc" "vimperatorrc" "ideavimrc" "vrapperrc") (ht-set! treemacs-icons-hash it treemacs-icon-vim))))
+             (treemacs--setup-icon treemacs-icon-tex
+                                   "~/.spacemacs.d/packages/treemacs/icons/tex.png"
+                                   "tex")
+             (treemacs--setup-icon treemacs-icon-scheme
+                                   "~/.spacemacs.d/packages/treemacs/icons/scheme.png"
+                                   "ss" "scm" "sls" "sps")
+             (treemacs--setup-icon treemacs-icon-racket
+                                   "~/.spacemacs.d/packages/treemacs/icons/racket.png"
+                                   "racket" "rkt" "rktl" "rktd" "scrbl" "scribble" "plt")
+             (--each '("vim" "vimrc" "tridactylrc" "vimperatorrc" "ideavimrc" "vrapperrc")
+               (ht-set! treemacs-icons-hash it treemacs-icon-vim))))
 
 ;; set c-mode
 (add-hook 'c-mode-hook
@@ -204,6 +211,8 @@
              (setq-local comment-start "; ")))
 
 ;; set scheme-mode
+(font-lock-add-keywords 'scheme-mode
+                        `((,(concat "(" (regexp-opt '("case-λ") t) "\\>") . font-lock-keyword-face)))
 (add-hook 'scheme-mode-hook
           '(lambda ()
              ;; (paredit-mode)
@@ -220,6 +229,8 @@
          chez)))
 
 ;; set racket-mode
+(font-lock-add-keywords 'racket-mode
+                        `(("\\<\\(case-λ\\)\\>" . font-lock-keyword-face)))
 (add-hook 'racket-mode-hook
           '(lambda ()
              (setq-local comment-start "; ")
@@ -298,13 +309,15 @@
 ;; define web-mode
 (add-hook 'web-mode-hook
           '(lambda ()
-             (setq-local electric-pair-pairs (append electric-pair-pairs '((?\< . ?\>))))))
+             (setq-local electric-pair-pairs
+                         (append electric-pair-pairs '((?\< . ?\>))))))
 
 
 ;; define html-mode
 (add-hook 'html-mode-hook
           '(lambda ()
-             (setq-local electric-pair-pairs (append electric-pair-pairs '((?\< . ?\>))))))
+             (setq-local electric-pair-pairs
+                         (append electric-pair-pairs '((?\< . ?\>))))))
 
 ;; set spelling-checking
 (add-hook 'text-mode-hook
