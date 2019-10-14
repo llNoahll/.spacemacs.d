@@ -212,8 +212,9 @@
 
 ;; set scheme-mode
 (font-lock-add-keywords 'scheme-mode
-                        `(("\\_<\\(_\\|\\.\\.\\.\\)\\_>"                        . font-lock-keyword-face)
-                          (,(concat "(" (regexp-opt '("case-λ" "amb") t) "\\>") . font-lock-keyword-face))
+                        `(("\\_<\\(_\\|\\.\\.\\.\\)\\_>"                                          . font-lock-keyword-face)
+                          (,(concat "(" (regexp-opt '("set!" "case-λ" "amb") t) "\\>")            . font-lock-keyword-face)
+                          (,(concat "(" (regexp-opt '("set-car!" "set-cdr!" "set-box!") t) "\\>") . font-lock-builtin-face))
                         t)
 (add-hook 'scheme-mode-hook
           '(lambda ()
