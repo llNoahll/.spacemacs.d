@@ -212,8 +212,8 @@
 
 ;; set scheme-mode
 (font-lock-add-keywords 'scheme-mode
-                        '(("\\<\\(_\\|...\\)\\>" . font-lock-keyword-face))
-                        `((,(concat "(" (regexp-opt '("case-λ") t) "\\>") . font-lock-keyword-face)))
+                        `(("\\_<\\(_\\|\\.\\.\\.\\)\\_>"                        . font-lock-keyword-face)
+                          (,(concat "(" (regexp-opt '("case-λ" "amb") t) "\\>") . font-lock-keyword-face)))
 (add-hook 'scheme-mode-hook
           '(lambda ()
              ;; (paredit-mode)
@@ -231,7 +231,9 @@
 
 ;; set racket-mode
 (font-lock-add-keywords 'racket-mode
-                        '(("\\<\\(case-λ\\)\\>" . font-lock-keyword-face)))
+                        '(("\\_<\\(case-λ:\\|opt-λ:\\|pcase-λ:\\|pλ:\\|popt-λ:\\)\\_>" . font-lock-builtin-face)
+                          ("\\_<\\(match-λ\\|match-λ\\*\\|match-λ\\*\\*\\)\\_>"        . font-lock-builtin-face)
+                          ("\\_<\\(case-λ\\|amb\\)\\_>"                                . font-lock-keyword-face)))
 (add-hook 'racket-mode-hook
           '(lambda ()
              (setq-local comment-start "; ")
