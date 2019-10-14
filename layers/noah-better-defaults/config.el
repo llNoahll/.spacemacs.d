@@ -195,6 +195,7 @@
 ;; set emacs-lisp-mode
 (font-lock-add-keywords 'emacs-lisp-mode
                         `(("\\_<\\(_\\|\\.\\.\\.\\|else\\)\\_>" . font-lock-keyword-face)
+                          (,(regexp-opt '("nil" "t") 'symbols)  . font-lock-builtin-face)
                           (,(concat "(" (regexp-opt '("setcar" "setcdr"
                                                       "cons" "consp"
                                                       "car" "cdr"
@@ -212,8 +213,7 @@
                                                       "cdadar" "cdaddr"
                                                       "cddaar" "cddadr"
                                                       "cdddar" "cddddr"
-                                                      "list" "list*" "listp"
-                                                      "null" "nil"
+                                                      "list" "list*" "listp" "null"
                                                       "true" "false"
                                                       "not" "xor")
                                                     t)
