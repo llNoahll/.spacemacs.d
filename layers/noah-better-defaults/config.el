@@ -206,7 +206,7 @@
                                  (seq ?' (1+ (or (syntax word) (syntax symbol))))
                                  (seq "#\\" (1+ (or (syntax word) (syntax symbol))))))
                            . font-lock-string-face)
-                          (,(concat "(" (regexp-opt '("eval" "apply") t) "\\>")
+                          (,(concat "(" (regexp-opt '("eval" "apply" "map") t) "\\>")
                            . font-lock-keyword-face)
                           (,(concat "(" (regexp-opt
                                          '("setcar" "setcdr"
@@ -227,7 +227,7 @@
                                            "cddaar" "cddadr"
                                            "cdddar" "cddddr"
                                            "list" "list*" "listp" "null"
-                                           "append"
+                                           "append" "reverse"
                                            "true" "false"
                                            "not" "xor")
                                          t)
@@ -304,21 +304,34 @@
                                                  (1+ (any "0-7"))))))
                                   symbol-end))
                            . font-lock-keyword-face)
-                          (,(concat "(" (regexp-opt '("set!" "eval" "apply" "case-λ" "amb") t) "\\>")
+                          (,(concat "(" (regexp-opt
+                                         '("set!"
+                                           "eval" "apply"
+                                           "amb"
+                                           "case-λ"
+                                           "filter") t) "\\>")
                            . font-lock-keyword-face)
                           (,(concat "(" (regexp-opt
-                                         '("error" "format"
+                                         '("exit" "error" "format"
                                            "display" "displayln"
                                            "write" "writeln"
                                            "print" "printf" "println" "fprintf"
+                                           "assert" "assoc"
+                                           "assp" "assq" "assv"
+                                           "assertion-violation" "assertion-violation?"
+                                           "assertion-violationf"
                                            "string" "string?"
                                            "string-length" "string-ref"
                                            "string-copy" "string-copy!" "string-append"
-                                           "string->list" "string->immutable-string" "string->number" "string->symbol"
+                                           "string->list" "string->immutable-string"
+                                           "string->number" "string->symbol"
                                            "string-normalize-nfc" "string-normalize-nfd"
                                            "string-normalize-nfkc" "string-normalize-nfkd"
-                                           "string-upcase" "string-downcase" "string-foldcase" "string-titlecase"
-                                           "string-ci<=?" "string-ci<?" "string-ci=?" "string-ci>=?" "string-ci>?"
+                                           "string-upcase" "string-downcase"
+                                           "string-foldcase" "string-titlecase"
+                                           "string-ci=?"
+                                           "string-ci<=?" "string-ci<?"
+                                           "string-ci>=?" "string-ci>?"
                                            "string=?" "string<=?" "string>=?"
                                            "string<?" "string>?"
                                            "string-set!" "string-fill!"
@@ -346,12 +359,20 @@
                                            "cdadar" "cdaddr"
                                            "cddaar" "cddadr"
                                            "cdddar" "cddddr"
-                                           "list" "list*" "list?" "append" "apeend!"
+                                           "list" "list*" "list?"
                                            "list->fxvector" "list->string" "list->vector"
                                            "list-copy" "list-sort" "list-tail"
                                            "list-ref" "list-head"
+                                           "append" "apeend!" "reverse" "reverse!"
                                            "empty" "null" "nil"
                                            "empty?" "null?" "nil?"
+                                           "member"
+                                           "memp" "memq" "memv"
+                                           "remv" "remv!"
+                                           "remp" "remq" "remq!"
+                                           "remove" "remove!"
+                                           "remainder"
+                                           "sort" "sort!"
                                            "stream-cons" "stream-first" "stream-rest"
                                            "stream-car" "stream-cdr"
                                            "stream-caar" "stream-cadr"
