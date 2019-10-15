@@ -392,6 +392,7 @@
                                            "stream-cdddar" "stream-cddddr"
                                            "stream" "stream*" "stream?"
                                            "stream-append" "stream-ref"
+                                           "stream-map" "stream-filter"
                                            "empty-stream" "stream-empty?"
                                            "true" "false" "true?" "false?"
                                            "not" "xor" "nor" "nand" "implies")
