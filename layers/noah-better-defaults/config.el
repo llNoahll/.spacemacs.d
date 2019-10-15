@@ -214,6 +214,7 @@
                                                       "cddaar" "cddadr"
                                                       "cdddar" "cddddr"
                                                       "list" "list*" "listp" "null"
+                                                      "append"
                                                       "true" "false"
                                                       "not" "xor")
                                                     t)
@@ -242,7 +243,7 @@
                         `(("\\_<\\(_\\|\\.\\.\\.\\)\\_>"                                      . font-lock-keyword-face)
                           (,(concat "(" (regexp-opt '("set!" "else" "case-λ" "amb") t) "\\>") . font-lock-keyword-face)
                           (,(concat "(" (regexp-opt '("set-car!" "set-cdr!" "set-box!"
-                                                      "cons" "pair?"
+                                                      "cons" "pair?" "last-pair"
                                                       "car" "cdr"
                                                       "caar" "cadr"
                                                       "cdar" "cddr"
@@ -258,7 +259,10 @@
                                                       "cdadar" "cdaddr"
                                                       "cddaar" "cddadr"
                                                       "cdddar" "cddddr"
-                                                      "list" "list*" "list?"
+                                                      "list" "list*" "list?" "append" "apeend!"
+                                                      "list->fxvector" "list->string" "list->vector"
+                                                      "list-copy" "list-sort" "list-tail"
+                                                      "list-ref" "list-head"
                                                       "empty" "null" "nil"
                                                       "empty?" "null?" "nil?"
                                                       "stream-cons" "stream-first" "stream-rest"
@@ -278,6 +282,7 @@
                                                       "stream-cddaar" "stream-cddadr"
                                                       "stream-cdddar" "stream-cddddr"
                                                       "stream" "stream*" "stream?"
+                                                      "stream-append" "stream-ref"
                                                       "empty-stream" "stream-empty?"
                                                       "true" "false" "true?" "false?"
                                                       "not" "xor" "nor" "nand" "implies")
