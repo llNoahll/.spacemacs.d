@@ -206,6 +206,8 @@
                                  (seq ?' (1+ (or (syntax word) (syntax symbol))))
                                  (seq "#\\" (1+ (or (syntax word) (syntax symbol))))))
                            . font-lock-string-face)
+                          (,(concat "(" (regexp-opt '("eval" "apply") t) "\\>")
+                           . font-lock-keyword-face)
                           (,(concat "(" (regexp-opt
                                          '("setcar" "setcdr"
                                            "cons" "consp"
@@ -302,7 +304,7 @@
                                                  (1+ (any "0-7"))))))
                                   symbol-end))
                            . font-lock-keyword-face)
-                          (,(concat "(" (regexp-opt '("set!" "case-λ" "amb") t) "\\>")
+                          (,(concat "(" (regexp-opt '("set!" "eval" "apply" "case-λ" "amb") t) "\\>")
                            . font-lock-keyword-face)
                           (,(concat "(" (regexp-opt
                                          '("error" "format"
