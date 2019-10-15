@@ -241,8 +241,12 @@
 
 ;; set scheme-mode
 (font-lock-add-keywords 'scheme-mode
-                        `(("\\_<\\(_\\|\\.\\.\\.\\)\\_>"                                      . font-lock-keyword-face)
-                          (,(concat "(" (regexp-opt '("set!" "else" "case-λ" "amb") t) "\\>") . font-lock-keyword-face)
+                        `((,(regexp-opt '("else" "_" "...") 'symbols) . font-lock-keyword-face)
+                          (,(regexp-opt '("+" "-" "*" "/") 'symbols)  . font-lock-builtin-face)
+                          (,(regexp-opt '("#t" "#f" "+inf.0" "-inf.0" "+nan.0") 'symbols)
+                           . font-lock-string-face)
+                          (,(concat "(" (regexp-opt '("set!" "case-λ" "amb") t) "\\>")
+                           . font-lock-keyword-face)
                           (,(concat "(" (regexp-opt '("set-car!" "set-cdr!" "set-box!"
                                                       "cons" "pair?" "last-pair"
                                                       "car" "cdr"
