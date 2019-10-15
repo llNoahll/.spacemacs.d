@@ -197,6 +197,12 @@
                         `((,(regexp-opt '("else" "_" "...") 'symbols) . font-lock-keyword-face)
                           (,(regexp-opt '("+" "-" "*" "/") 'symbols)  . font-lock-builtin-face)
                           (,(regexp-opt '("nil" "t") 'symbols)  . font-lock-string-face)
+                          (,(rx (or
+                                 ;; symbol
+                                 (seq ?' ?| (+ any) ?|)
+                                 (seq ?' (1+ (or (syntax word) (syntax symbol))))
+                                 (seq "#\\" (1+ (or (syntax word) (syntax symbol))))))
+                           . font-lock-string-face)
                           (,(concat "(" (regexp-opt '("setcar" "setcdr"
                                                       "cons" "consp"
                                                       "car" "cdr"
@@ -245,8 +251,6 @@
                           (,(regexp-opt '("+" "-" "*" "/") 'symbols)  . font-lock-builtin-face)
                           (,(regexp-opt '("#t" "#f" "+inf.0" "-inf.0" "+nan.0") 'symbols)
                            . font-lock-string-face)
-
-                          ;; Various things for racket-selfeval-face
                           (,(rx (or
                                  ;; symbol
                                  (seq ?' ?| (+ any) ?|)
@@ -254,7 +258,7 @@
                                  (seq "#\\" (1+ (or (syntax word) (syntax symbol))))))
                            . font-lock-string-face)
 
-                          ;; Numeric literals including Racket reader hash prefixes.
+                          ;; Numeric literals including Scheme reader hash prefixes.
                           (,(rx
                              (seq symbol-start
                                   (or
