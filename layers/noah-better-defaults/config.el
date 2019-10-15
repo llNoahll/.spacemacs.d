@@ -316,6 +316,7 @@
                                            "display" "displayln"
                                            "write" "writeln"
                                            "print" "printf" "println" "fprintf"
+                                           "newline"
                                            "assert" "assoc"
                                            "assp" "assq" "assv"
                                            "assertion-violation" "assertion-violation?"
