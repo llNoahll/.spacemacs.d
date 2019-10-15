@@ -245,6 +245,53 @@
                           (,(regexp-opt '("+" "-" "*" "/") 'symbols)  . font-lock-builtin-face)
                           (,(regexp-opt '("#t" "#f" "+inf.0" "-inf.0" "+nan.0") 'symbols)
                            . font-lock-string-face)
+
+                          ;; Various things for racket-selfeval-face
+                          (,(rx (or
+                                 ;; symbol
+                                 (seq ?' ?| (+ any) ?|)
+                                 (seq ?' (1+ (or (syntax word) (syntax symbol))))
+                                 (seq "#\\" (1+ (or (syntax word) (syntax symbol))))))
+                           . font-lock-string-face)
+
+                          ;; Numeric literals including Racket reader hash prefixes.
+                          (,(rx
+                             (seq symbol-start
+                                  (or
+                                   ;; #d #e #i or no hash prefix
+                                   (seq (? "#" (any "dei"))
+                                        (or (seq (? (any "-+"))
+                                                 (1+ digit)
+                                                 (? (any "./") (1+ digit)))
+                                            (seq (1+ digit)
+                                                 ?e
+                                                 (? (any "-+"))
+                                                 (1+ digit))))
+                                   ;; #x
+                                   (seq "#x"
+                                        (? (any "-+"))
+                                        (1+ hex-digit)
+                                        (? (any "./") (1+ hex-digit)))
+                                   ;; #b
+                                   (seq "#b"
+                                        (or (seq (? (any "-+"))
+                                                 (1+ (any "01"))
+                                                 (? (any "./") (1+ (any "01"))))
+                                            (seq (1+ (any "01"))
+                                                 ?e
+                                                 (? (any "-+"))
+                                                 (1+ (any "01")))))
+                                   ;; #o
+                                   (seq "#o"
+                                        (or (seq (? (any "-+"))
+                                                 (1+ (any "0-7"))
+                                                 (? (any "./") (1+ (any "0-7"))))
+                                            (seq (1+ (any "0-7"))
+                                                 ?e
+                                                 (? (any "-+"))
+                                                 (1+ (any "0-7"))))))
+                                  symbol-end))
+                           . font-lock-keyword-face)
                           (,(concat "(" (regexp-opt '("set!" "case-λ" "amb") t) "\\>")
                            . font-lock-keyword-face)
                           (,(concat "(" (regexp-opt '("set-car!" "set-cdr!" "set-box!"
