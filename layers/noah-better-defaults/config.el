@@ -194,9 +194,10 @@
 
 ;; set emacs-lisp-mode
 (font-lock-add-keywords 'emacs-lisp-mode
-                        `((,(regexp-opt '("else" "_" "...") 'symbols) . font-lock-keyword-face)
-                          (,(regexp-opt '("+" "-" "*" "/") 'symbols)  . font-lock-builtin-face)
-                          (,(regexp-opt '("nil" "t") 'symbols)  . font-lock-string-face)
+                        `((,(regexp-opt '("else" "_" "...") 'symbols)
+                           . font-lock-keyword-face)
+                          (,(regexp-opt '("+" "-" "*" "/" "nil" "t") 'symbols)
+                           . font-lock-builtin-face)
                           (,(rx (or
                                  ;; symbol
                                  (seq ?' ?| (+ any) ?|)
