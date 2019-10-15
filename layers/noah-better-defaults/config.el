@@ -196,7 +196,9 @@
 (font-lock-add-keywords 'emacs-lisp-mode
                         `((,(regexp-opt '("else" "_" "...") 'symbols)
                            . font-lock-keyword-face)
-                          (,(regexp-opt '("+" "-" "*" "/" "nil" "t") 'symbols)
+                          (,(regexp-opt '("+" "-" "*" "/"
+                                          "<" ">" "=" "<=" ">="
+                                          "nil" "t") 'symbols)
                            . font-lock-builtin-face)
                           (,(rx (or
                                  ;; symbol
@@ -250,7 +252,9 @@
 ;; set scheme-mode
 (font-lock-add-keywords 'scheme-mode
                         `((,(regexp-opt '("else" "_" "...") 'symbols) . font-lock-keyword-face)
-                          (,(regexp-opt '("+" "-" "*" "/") 'symbols)  . font-lock-builtin-face)
+                          (,(regexp-opt '("+" "-" "*" "/"
+                                          "<" ">" "=" "<=" ">=") 'symbols)
+                           . font-lock-builtin-face)
                           (,(regexp-opt '("#t" "#f" "+inf.0" "-inf.0" "+nan.0") 'symbols)
                            . font-lock-string-face)
                           (,(rx (or
