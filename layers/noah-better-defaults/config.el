@@ -410,6 +410,11 @@
                                            "stream-append" "stream-ref"
                                            "stream-map" "stream-filter"
                                            "empty-stream" "stream-empty?"
+                                           "make-date"
+                                           "make-parameter"
+                                           "make-polar" "make-rectangular"
+                                           "make-input-port" "make-output-port"
+                                           "make-list" "make-vector" "make-string"
                                            "true" "false" "true?" "false?"
                                            "not" "xor" "nor" "nand" "implies")
                                          t)
