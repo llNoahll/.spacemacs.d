@@ -313,6 +313,7 @@
                            . font-lock-keyword-face)
                           (,(concat "(" (regexp-opt
                                          '("exit" "error" "format"
+                                           "eq?" "eqv?" "equal?"
                                            "display" "displayln"
                                            "write" "writeln"
                                            "print" "printf" "println" "fprintf"
