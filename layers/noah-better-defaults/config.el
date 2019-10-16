@@ -386,7 +386,7 @@
                                            "list" "list*" "list?"
                                            "list->fxvector" "list->string" "list->vector"
                                            "list-copy" "list-sort" "list-tail"
-                                           "list-ref" "list-head"
+                                           "list-ref" "list-head" "length"
                                            "append" "apeend!" "reverse" "reverse!"
                                            "empty" "null" "nil"
                                            "empty?" "null?" "nil?"
