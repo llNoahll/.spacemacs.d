@@ -111,7 +111,7 @@ to 'auto, tags may not be properly aligned. "
         (err           (if (eq variant 'dark) (if (true-color-p) "#e0211d" "#e0211d") (if (true-color-p) "#e0211d" "#e0211d")))
         (func          (if (eq variant 'dark) (if (true-color-p) "#bc6ec5" "#d75fd7") (if (true-color-p) "#705091" "#8700af")))
         (head1         (if (eq variant 'dark) (if (true-color-p) "#4f97d7" "#268bd2") (if (true-color-p) "#3a81c3" "#268bd2")))
-        (head1-bg      (if (eq variant 'dark) (if (true-color-p) "#344554" "#262626") (if (true-color-p) "#edf1ed" "#ffffff")))
+        (head1-bg      (if (eq variant 'dark) (if (true-color-p) "#384856" "#262626") (if (true-color-p) "#edf1ed" "#ffffff")))
         (head2         (if (eq variant 'dark) (if (true-color-p) "#2d9574" "#2aa198") (if (true-color-p) "#2d9574" "#2aa198")))
         (head2-bg      (if (eq variant 'dark) (if (true-color-p) "#293235" "#262626") (if (true-color-p) "#edf2e9" "#ffffff")))
         (head3         (if (eq variant 'dark) (if (true-color-p) "#67b11d" "#67b11d") (if (true-color-p) "#67b11d" "#5faf00")))
