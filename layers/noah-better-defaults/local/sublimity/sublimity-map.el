@@ -79,6 +79,7 @@
          (derived-mode-p 'vimrc-mode)
          (derived-mode-p 'conf-unix-mode)
          (derived-mode-p 'matlab-mode)
+         (derived-mode-p 'json-mode)
          (derived-mode-p 'magit-status-mode))
      (not (derived-mode-p 'eaf-mode)))
     (<= (/ sublimity-map-size (window-total-width) 1.0)
