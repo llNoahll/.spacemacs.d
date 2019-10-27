@@ -139,17 +139,15 @@
              (text-scale-set -2)
              (vline-mode t)
              (highlight-indentation-mode t)
-             (treemacs--setup-icon treemacs-icon-tex
-                                   "~/.spacemacs.d/packages/treemacs/icons/tex.png"
-                                   "tex")
-             (treemacs--setup-icon treemacs-icon-scheme
-                                   "~/.spacemacs.d/packages/treemacs/icons/scheme.png"
-                                   "ss" "scm" "sls" "sps")
-             (treemacs--setup-icon treemacs-icon-racket
-                                   "~/.spacemacs.d/packages/treemacs/icons/racket.png"
-                                   "racket" "rkt" "rktl" "rktd" "scrbl" "scribble" "plt")
-             (--each '("vim" "vimrc" "tridactylrc" "vimperatorrc" "ideavimrc" "vrapperrc")
-               (ht-set! treemacs-icons-hash it treemacs-icon-vim))))
+
+             (treemacs-create-icon :file "~/.spacemacs.d/packages/treemacs/icons/tex.png"
+                                   :extensions ("tex"))
+             (treemacs-create-icon :file "~/.spacemacs.d/packages/treemacs/icons/scheme.png"
+                                   :extensions ("ss" "scm" "sls" "sps"))
+             (treemacs-create-icon :file "~/.spacemacs.d/packages/treemacs/icons/racket.png"
+                                   :extensions ("racket" "rkt" "rktl" "rktd" "scrbl" "scribble" "plt"))
+             (treemacs-create-icon :file "~/.spacemacs.d/packages/treemacs/icons/vsc/vim.png"
+                                   :extensions ("vim" "vimrc" "tridactylrc" "vimperatorrc" "ideavimrc" "vrapperrc"))))
 
 ;; set c-mode
 (add-hook 'c-mode-hook
