@@ -129,6 +129,12 @@ is binary, activate `hexl-mode'."
       "i" 'evil-previous-line
       "a" 'evil-cp-append)))
 
+(defun eaf-open-application ()
+  (interactive)
+  (setq app (read-string
+             (format "Application: ")))
+  (eaf-open (format "eaf-%s" app) app))
+
 
 
 ;;; defun new major-mode.

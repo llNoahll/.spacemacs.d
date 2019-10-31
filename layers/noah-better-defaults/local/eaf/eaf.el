@@ -716,12 +716,6 @@ Otherwise call send_key message to Python side."
   (interactive)
   (eaf-open "eaf-qutebrowser" "qutebrowser"))
 
-(defun eaf-open-application ()
-  (interactive)
-  (setq url (read-string
-             (format "Application (or browser-url): ")))
-  (eaf-open url))
-
 (defun eaf-open (url &optional app-name arguments)
   "Open an EAF application with URL, optional APP-NAME and ARGUMENTS.
 
