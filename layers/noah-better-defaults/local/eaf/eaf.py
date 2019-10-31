@@ -26,7 +26,6 @@ from app.browser.buffer import AppBuffer as NeverUsed # noqa
 
 from PyQt5.QtNetwork import QNetworkProxy
 from PyQt5.QtWidgets import QApplication
-from core.fake_key_event import fake_key_event
 from core.view import View
 from dbus.mainloop.glib import DBusGMainLoop
 import dbus
@@ -81,7 +80,7 @@ class EAF(dbus.service.Object):
 
     @dbus.service.method(EAF_DBUS_NAME, in_signature="sss", out_signature="")
     def scroll_buffer(self, view_info, scroll_direction, scroll_type):
-        (buffer_id, _, _, _, _, _) = view_info.split(":")
+        (buffer_id, _, _, _, _) = view_info.split(":")
         if buffer_id in self.buffer_dict:
             self.buffer_dict[buffer_id].scroll(scroll_direction, scroll_type)
 
@@ -118,7 +117,7 @@ class EAF(dbus.service.Object):
         except ImportError:
             import traceback
             traceback.print_exc()
-            return "Something wrong when import {0}".format(module_path)
+            return "EAF: Something went wrong when trying to import {0}".format(module_path)
 
     def create_buffer(self, buffer_id, url, module_path, arguments):
         global emacs_width, emacs_height
@@ -138,6 +137,7 @@ class EAF(dbus.service.Object):
         # Monitor buffer signals.
         app_buffer.update_title.connect(self.update_buffer_title)
         app_buffer.open_url.connect(self.open_buffer_url)
+        app_buffer.translate_text.connect(self.translate_text)
 
         # Send message to emacs.
         app_buffer.input_message.connect(self.input_message)
@@ -230,15 +230,18 @@ class EAF(dbus.service.Object):
             self.buffer_dict.pop(buffer_id, None)
 
     @dbus.service.method(EAF_DBUS_NAME, in_signature="ss", out_signature="")
+    def execute_function(self, buffer_id, function_name):
+        if buffer_id in self.buffer_dict:
+            try:
+                self.buffer_dict[buffer_id].execute_function(function_name)
+            except AttributeError:
+                self.message_to_emacs("Can't call function: " + function_name)
+
+    @dbus.service.method(EAF_DBUS_NAME, in_signature="ss", out_signature="")
     def send_key(self, buffer_id, event_string):
         # Send event to buffer when found match buffer.
         if buffer_id in self.buffer_dict:
-            fake_key_event(event_string, self.buffer_dict[buffer_id])
-
-    @dbus.service.method(EAF_DBUS_NAME, in_signature="ss", out_signature="")
-    def send_keystroke(self, buffer_id, keystroke):
-        if buffer_id in self.buffer_dict:
-            self.buffer_dict[buffer_id].send_keystroke(keystroke)
+            self.buffer_dict[buffer_id].fake_key_event(event_string)
 
     @dbus.service.method(EAF_DBUS_NAME, in_signature="sss", out_signature="")
     def handle_input_message(self, buffer_id, callback_type, callback_result):
@@ -260,6 +263,10 @@ class EAF(dbus.service.Object):
 
     @dbus.service.signal("com.lazycat.eaf")
     def open_buffer_url(self, url):
+        pass
+
+    @dbus.service.signal("com.lazycat.eaf")
+    def translate_text(self, text):
         pass
 
     @dbus.service.signal("com.lazycat.eaf")

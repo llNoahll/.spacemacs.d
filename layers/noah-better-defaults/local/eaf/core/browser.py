@@ -33,6 +33,7 @@ MOUSE_FORWARD_BUTTON = 16
 class BrowserView(QWebEngineView):
 
     open_url_in_new_tab = QtCore.pyqtSignal(str)
+    translate_selected_text = QtCore.pyqtSignal(str)
 
     def __init__(self):
         super(QWebEngineView, self).__init__()
@@ -46,7 +47,14 @@ class BrowserView(QWebEngineView):
         self.cookie_storage = BrowserCookieStorage()
         self.cookie_store.cookieAdded.connect(self.cookie_storage.add_cookie)
 
+        self.selectionChanged.connect(self.select_text_change)
+
         self.load_cookie()
+
+    def select_text_change(self):
+        modifiers = QApplication.keyboardModifiers()
+        if modifiers == Qt.ControlModifier:
+            self.translate_selected_text.emit(self.selectedText())
 
     def load_cookie(self):
         for cookie in self.cookie_storage.load_cookie():
@@ -156,62 +164,8 @@ class WebHitTestResult():
         self.m_linkUrl = self.page.url().toString()
         self.m_baseUrl = self.page.url().toString()
         self.viewportPos = self.page.mapToViewport(self.pos)
-        self.source = """(function() {
-        let e = document.elementFromPoint(%1, %2);
-        if (!e)
-            return;
-        function isMediaElement(e) {
-            return e.tagName == 'AUDIO' || e.tagName == 'VIDEO';
-        };
-        function isEditableElement(e) {
-            if (e.isContentEditable)
-                return true;
-            if (e.tagName === 'INPUT' || e.tagName === 'TEXTAREA')
-                return e.getAttribute('readonly') != 'readonly';
-            return false;
-        };
-        function isSelected(e) {
-            let selection = window.getSelection();
-            if (selection.type !== 'Range')
-                return false;
-            return window.getSelection().containsNode(e, true);
-        };
-        let res = {
-            baseUrl: document.baseURI,
-            alternateText: e.getAttribute('alt'),
-            boundingRect: '',
-            imageUrl: '',
-            contentEditable: isEditableElement(e),
-            contentSelected: isSelected(e),
-            linkTitle: '',
-            linkUrl: '',
-            mediaUrl: '',
-            tagName: e.tagName.toLowerCase()
-        };
-        let r = e.getBoundingClientRect();
-        res.boundingRect = [r.top, r.left, r.width, r.height];
-        if (e.tagName == 'IMG')
-            res.imageUrl = e.getAttribute('src');
-        if (e.tagName == 'A') {
-            res.linkTitle = e.text;
-            res.linkUrl = e.getAttribute('href');
-        }
-        while (e) {
-            if (res.linkTitle === '' && e.tagName === 'A') {
-                res.linkTitle = e.text;
-                if(res.linkUrl === '') {
-                res.linkUrl = e.getAttribute('href');
-                }
-            }
-            if (res.mediaUrl === '' && isMediaElement(e)) {
-                res.mediaUrl = e.currentSrc;
-                res.mediaPaused = e.paused;
-                res.mediaMuted = e.muted;
-            }
-            e = e.parentElement;
-        }
-        return res;
-        })()"""
+        with open(os.path.join(os.path.dirname(__file__), "javascript", "open_in_new_tab.js"), "r") as f:
+            self.source = f.read()
 
         self.js = self.source.replace("%1", str(self.viewportPos.x())).replace("%2", str(self.viewportPos.y()))
         self.dic = self.page.executeJavaScript(self.js)
@@ -273,20 +227,6 @@ class WebHitTestResult():
             self.m_imageUrl = data.mediaUrl().toString()
         elif data.mediaType() == QWebEngineContextMenuData.MediaTypeAudio or data.mediaType() == QWebEngineContextMenuData.MediaTypeVideo:
             self.m_mediaUrl = data.mediaUrl().toString()
-
-def webview_scroll(webview, scroll_direction, scroll_type):
-    line_offset = 50
-
-    if scroll_type == "page":
-        if scroll_direction == "up":
-            webview.buffer_widget.web_page.runJavaScript("window.scrollBy(0, screen.height)")
-        else:
-            webview.buffer_widget.web_page.runJavaScript("window.scrollBy(0, -screen.height)")
-    else:
-        if scroll_direction == "up":
-            webview.buffer_widget.web_page.runJavaScript("window.scrollBy({0}, {1});".format(0, line_offset))
-        else:
-            webview.buffer_widget.web_page.runJavaScript("window.scrollBy({0}, {1});".format(0, -line_offset))
 
 class BrowserCookieStorage:
     def __init__(self):

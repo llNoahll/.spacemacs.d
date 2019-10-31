@@ -6,8 +6,8 @@
 ;; Maintainer: Andy Stewart <lazycat.manatee@gmail.com>
 ;; Copyright (C) 2018, Andy Stewart, all rights reserved.
 ;; Created: 2018-06-15 14:10:12
-;; Version: 0.1
-;; Last-Updated: 2018-06-15 14:10:12
+;; Version: 0.3
+;; Last-Updated: 2019-10-11 13:20:12
 ;;           By: Andy Stewart
 ;; URL: http://www.emacswiki.org/emacs/download/eaf.el
 ;; Keywords:
@@ -94,7 +94,7 @@
     map)
   "Keymap used by `eaf-mode'.")
 
-(define-derived-mode eaf-mode text-mode "Eaf"
+(define-derived-mode eaf-mode text-mode "EAF"
   (interactive)
   (kill-all-local-variables)
   (setq major-mode 'eaf-mode)
@@ -131,6 +131,10 @@
 
 (defvar eaf-http-proxy-port "")
 
+(defvar eaf-find-alternate-file-in-dired nil
+  "If non-nil, when calling `eaf-file-open-in-dired', EAF unrecognizable files will be opened
+by `dired-find-alternate-file'. Otherwise they will be opened normally with `dired-find-file'.")
+
 (defcustom eaf-name "*eaf*"
   "Name of eaf buffer."
   :type 'string
@@ -139,6 +143,111 @@
 (defcustom eaf-python-command "python3"
   "The Python interpreter used to run eaf.py."
   :type 'string
+  :group 'eaf)
+
+(defcustom eaf-browser-keybinding
+  '(("M-f" . "history_forward")
+    ("M-b" . "history_backward")
+    ("M-q" . "clean_all_cookie")
+    ("C--" . "zoom_out")
+    ("C-=" . "zoom_in")
+    ("C-0" . "zoom_reset")
+    ("C-n" . "scroll_up")
+    ("C-p" . "scroll_down")
+    ("C-v" . "scroll_up_page")
+    ("M-v" . "scroll_down_page")
+    ("M-<" . "scroll_to_begin")
+    ("M->" . "scroll_to_bottom"))
+  "The keybinding of browser."
+  :type 'cons
+  :group 'eaf)
+
+(defcustom eaf-browser-key-alias
+  '(("C-a" . "<home>")
+    ("C-e" . "<end>")
+    )
+  "The key alias of browser."
+  :type 'cons
+  :group 'eaf)
+
+(defcustom eaf-pdfviewer-keybinding
+  '(("j" . "scroll_up")
+    ("k" . "scroll_down")
+    ("SPC" . "scroll_up_page")
+    ("b" . "scroll_down_page")
+    ("t" . "switch_to_read_mode")
+    ("." . "scroll_to_home")
+    ("," . "scroll_to_end")
+    ("0" . "zoom_reset")
+    ("=" . "zoom_in")
+    ("-" . "zoom_out")
+    ("g" . "jump_to_page")
+    ("p" . "jump_to_percent")
+    ("[" . "remember_current_position")
+    ("]" . "remeber_jump")
+    )
+  "The keybinding of pdf viewer."
+  :type 'cons
+  :group 'eaf)
+
+(defcustom eaf-videoplayer-keybinding
+  '(("SPC" . "toggle_play")
+    ("h" . "play_backward")
+    ("l" . "play_forward")
+    )
+  "The keybinding of video player."
+  :type 'cons
+  :group 'eaf)
+
+(defcustom eaf-imageviewer-keybinding
+  '(("j" . "load_next_image")
+    ("k" . "load_prev_image")
+    )
+  "The keybinding of image viewer."
+  :type 'cons
+  :group 'eaf)
+
+(defcustom eaf-terminal-keybinding
+  '(("C--" . "zoom_out")
+    ("C-=" . "zoom_in"))
+  "The keybinding of terminal."
+  :type 'cons
+  :group 'eaf)
+
+(defcustom eaf-pdf-extension-list
+  '("pdf" "xps" "oxps" "cbz" "epub" "fb2" "fbz" "djvu")
+  "The extension list of pdf application."
+  :type 'cons
+  :group 'eaf)
+
+(defcustom eaf-markdown-extension-list
+  '("md")
+  "The extension list of markdown previewer application."
+  :type 'cons
+  :group 'eaf)
+
+(defcustom eaf-image-extension-list
+  '("jpg" "jpeg" "png" "bmp")
+  "The extension list of image viewer application."
+  :type 'cons
+  :group 'eaf)
+
+(defcustom eaf-video-extension-list
+  '("avi" "rmvb" "ogg" "mp4" "mkv")
+  "The extension list of video player application."
+  :type 'cons
+  :group 'eaf)
+
+(defcustom eaf-browser-extension-list
+  '("html")
+  "The extension list of browser application."
+  :type 'cons
+  :group 'eaf)
+
+(defcustom eaf-org-extension-list
+  '("org")
+  "The extension list of org previewer application."
+  :type 'cons
   :group 'eaf)
 
 (defun eaf-call (method &rest args)
@@ -228,8 +337,7 @@ We need calcuate render allocation to make sure no black border around render co
          (x (nth 0 window-edges))
          (y (nth 1 window-edges))
          (w (- (nth 2 window-edges) x))
-         (h (- (nth 3 window-edges) y))
-         )
+         (h (- (nth 3 window-edges) y)))
     (list x y w h)))
 
 (defun eaf-generate-id ()
@@ -240,14 +348,13 @@ We need calcuate render allocation to make sure no black border around render co
           (random (expt 16 4))
           (random (expt 16 4))
           (random (expt 16 4))
-          (random (expt 16 4)) ))
+          (random (expt 16 4))))
 
 (defun eaf-create-buffer (input-content)
-  (let ((eaf-buffer (generate-new-buffer (truncate-string-to-width input-content eaf-title-length))))
+  (let* ((file-or-command-name (substring input-content (string-match "[^\/]*\/?$" input-content)))
+         (eaf-buffer (generate-new-buffer (truncate-string-to-width file-or-command-name eaf-title-length))))
     (with-current-buffer eaf-buffer
-      (eaf-mode)
-      (read-only-mode)
-      )
+      (eaf-mode))
     eaf-buffer))
 
 (defun eaf-is-support (url)
@@ -347,40 +454,61 @@ We need calcuate render allocation to make sure no black border around render co
               ;; (message (format "!!!!! %s %s %s %s" event key key-command key-desc))
 
               (cond
-               ;; Just send event when user insert single character.
-               ;; Don't send event 'M' if user press Ctrl + M.
-               ((and
-                 (or
-                  (equal key-command "self-insert-command")
-                  (equal key-command "completion-select-if-within-overlay"))
-                 (equal 1 (string-width (this-command-keys))))
-                (eaf-call "send_key" buffer-id key-desc))
-               ((string-match "^[CMSs]-.*" key-desc)
-                (eaf-call "send_keystroke" buffer-id key-desc))
-               ((or
-                 (equal key-command "nil")
-                 (equal key-desc "RET")
-                 (equal key-desc "DEL")
-                 (equal key-desc "TAB")
-                 (equal key-desc "<backtab>")
-                 (equal key-desc "<home>")
-                 (equal key-desc "<end>")
-                 (equal key-desc "<left>")
-                 (equal key-desc "<right>")
-                 (equal key-desc "<up>")
-                 (equal key-desc "<down>")
-                 (equal key-desc "<prior>")
-                 (equal key-desc "<next>")
+                ;; Fix #51 , don't handle F11 to make emacs toggle frame fullscreen status successfully.
+                ((equal key-desc "<f11>")
+                 t)
+                ;; Just send event when user insert single character.
+                ;; Don't send event 'M' if user press Ctrl + M.
+                ((and (or
+                       (equal key-command "self-insert-command")
+                       (equal key-command "completion-select-if-within-overlay"))
+                      (equal 1 (string-width (this-command-keys))))
+                 (cond ((equal buffer-app-name "pdf-viewer")
+                        (eaf-handle-app-key buffer-id key-desc eaf-pdfviewer-keybinding))
+                       ((equal buffer-app-name "video-player")
+                        (eaf-handle-app-key buffer-id key-desc eaf-videoplayer-keybinding))
+                       ((equal buffer-app-name "image-viewer")
+                        (eaf-handle-app-key buffer-id key-desc eaf-imageviewer-keybinding))
+                       (t
+                        (eaf-call "send_key" buffer-id key-desc))))
+                ((string-match "^[CMSs]-.*" key-desc)
+                 (cond ((equal buffer-app-name "browser")
+                        (let ((function-name-value (assoc key-desc eaf-browser-keybinding)))
+                          (if function-name-value
+                              (eaf-call "execute_function" buffer-id (cdr function-name-value))
+                            (let ((key-alias-value (assoc key-desc eaf-browser-key-alias)))
+                              (if key-alias-value
+                                  (eaf-call "send_key" buffer-id (cdr key-alias-value)))))))
+                       ((equal buffer-app-name "terminal")
+                        (let ((function-name-value (assoc key-desc eaf-terminal-keybinding)))
+                          (when function-name-value
+                            (eaf-call "execute_function" buffer-id (cdr function-name-value))))
+                        )))
+                ((or
+                  (equal key-command "nil")
+                  (equal key-desc "RET")
+                  (equal key-desc "DEL")
+                  (equal key-desc "TAB")
+                  (equal key-desc "SPC")
+                  (equal key-desc "<backtab>")
+                  (equal key-desc "<home>")
+                  (equal key-desc "<end>")
+                  (equal key-desc "<left>")
+                  (equal key-desc "<right>")
+                  (equal key-desc "<up>")
+                  (equal key-desc "<down>")
+                  (equal key-desc "<prior>")
+                  (equal key-desc "<next>")
+                  )
+                 (eaf-call "send_key" buffer-id key-desc)
                  )
-                (eaf-call "send_key" buffer-id key-desc)
-                )
-               (t
-                (unless (or
-                         (equal key-command "keyboard-quit")
-                         (equal key-command "kill-this-buffer")
-                         (equal key-command "eaf-open"))
-                  (ignore-errors (call-interactively (key-binding key))))
-                )))
+                (t
+                 (unless (or
+                          (equal key-command "keyboard-quit")
+                          (equal key-command "kill-this-buffer")
+                          (equal key-command "eaf-open"))
+                   (ignore-errors (call-interactively (key-binding key))))
+                 )))
             ;; Set `last-command-event' with nil, emacs won't notify me buffer is ready-only,
             ;; because i insert nothing in buffer.
             (setq last-command-event nil))
@@ -393,6 +521,14 @@ We need calcuate render allocation to make sure no black border around render co
      (lambda ()
        (progn
          (add-hook 'pre-command-hook #'eaf-monitor-key-event))))))
+
+(defun eaf-handle-app-key (buffer-id key-desc keybinding)
+  "Call function if match key in keybinding.
+Otherwise call send_key message to Python side."
+  (let ((function-name-value (assoc key-desc keybinding)))
+    (if function-name-value
+        (eaf-call "execute_function" buffer-id (cdr function-name-value))
+      (eaf-call "send_key" buffer-id key-desc))))
 
 (defun eaf-focus-buffer (msg)
   (let* ((coordinate-list (split-string msg ","))
@@ -430,14 +566,12 @@ We need calcuate render allocation to make sure no black border around render co
  'eaf-create-new-browser-buffer)
 
 (defun eaf-create-new-browser-buffer (new-window-buffer-id)
-  (let ((eaf-buffer (generate-new-buffer (concat "browser popup window " new-window-buffer-id))))
+  (let ((eaf-buffer (generate-new-buffer (concat "Browser Popup Window " new-window-buffer-id))))
     (with-current-buffer eaf-buffer
       (eaf-mode)
-      (read-only-mode)
       (set (make-local-variable 'buffer-id) new-window-buffer-id)
       (set (make-local-variable 'buffer-url) "")
-      (set (make-local-variable 'buffer-app-name) "browser")
-      )
+      (set (make-local-variable 'buffer-app-name) "browser"))
     (switch-to-buffer eaf-buffer)))
 
 (dbus-register-signal
@@ -461,7 +595,7 @@ We need calcuate render allocation to make sure no black border around render co
  'eaf-focus-buffer)
 
 (defun eaf-start-finish ()
-  ;; Call `eaf-open-internal' after receive `start_finish' signal from server process.
+  "Call `eaf-open-internal' after receive `start_finish' signal from server process."
   (eaf-open-internal eaf-first-start-url eaf-first-start-app-name eaf-first-start-arguments))
 
 (dbus-register-signal
@@ -488,12 +622,21 @@ We need calcuate render allocation to make sure no black border around render co
  'eaf-update-buffer-title)
 
 (defun eaf-open-buffer-url (url)
-  (eaf-open url))
+  (eaf-open-browser url))
+
+(defun eaf-translate-text (text)
+  (when (featurep 'sdcv)
+    (sdcv-search-input+ text)))
 
 (dbus-register-signal
  :session "com.lazycat.eaf" "/com/lazycat/eaf"
  "com.lazycat.eaf" "open_buffer_url"
  'eaf-open-buffer-url)
+
+(dbus-register-signal
+ :session "com.lazycat.eaf" "/com/lazycat/eaf"
+ "com.lazycat.eaf" "translate_text"
+ 'eaf-translate-text)
 
 (defun eaf-read-string (interactive-string)
   "Like `read-string', but return nil if user execute `keyboard-quit' when input."
@@ -528,8 +671,8 @@ We need calcuate render allocation to make sure no black border around render co
           (set (make-local-variable 'buffer-url) url)
           (set (make-local-variable 'buffer-app-name) app-name)
           ;; Focus to file window if is previewer application.
-          (when (or (string= app-name "markdownpreviewer")
-                    (string= app-name "orgpreviewer"))
+          (when (or (string= app-name "markdown-previewer")
+                    (string= app-name "org-previewer"))
             (other-window +1)))
       ;; Kill buffer and show error message from python server.
       (kill-buffer buffer)
@@ -537,6 +680,41 @@ We need calcuate render allocation to make sure no black border around render co
       (message buffer-result))
     ))
 
+(defun eaf-open-browser (url &optional arguments)
+  "Open EAF browser application given a URL and ARGUMENTS."
+  (interactive "MEAF Browser - Enter URL: ")
+  ;; Validate URL legitimacy
+  (if (and (not (string-prefix-p "/" url))
+           (not (string-prefix-p "~" url))
+           (string-match "^\\(https?:\/\/\\)?[a-z0-9]+\\([\-\.]\\{1\\}[a-z0-9]+\\)*\.[a-z]\\{2,5\\}\\(:[0-9]{1,5}\\)?\\(\/.*\\)?$" url))
+      (progn
+        (unless (or (string-prefix-p "http://" url)
+                    (string-prefix-p "https://" url))
+          (setq url (concat "http://" url)))
+        (eaf-open url "browser" arguments))
+    (message (format "EAF: %s is an invalid URL." url))))
+
+(defalias 'eaf-open-url 'eaf-open-browser)
+
+(defun eaf-open-demo ()
+  "Open EAF demo screen to verify that EAF is working properly."
+  (interactive)
+  (eaf-open "eaf-demo" "demo"))
+
+(defun eaf-open-camera ()
+  "Open EAF camera application."
+  (interactive)
+  (eaf-open "eaf-camera" "camera"))
+
+(defun eaf-open-terminal ()
+  "Open EAF terminal application."
+  (interactive)
+  (eaf-open "eaf-terminal" "terminal"))
+
+(defun eaf-open-qutebrowser ()
+  "Open EAF Qutebrowser application."
+  (interactive)
+  (eaf-open "eaf-qutebrowser" "qutebrowser"))
 
 (defun eaf-open-application ()
   (interactive)
@@ -544,67 +722,53 @@ We need calcuate render allocation to make sure no black border around render co
              (format "Application (or browser-url): ")))
   (eaf-open url))
 
-(defun eaf-open-url (url &optional arguments)
-  (interactive "MOpen url with EAF: ")
-  (eaf-open url "browser" arguments))
-
 (defun eaf-open (url &optional app-name arguments)
+  "Open an EAF application with URL, optional APP-NAME and ARGUMENTS.
+
+When called interactively, URL accepts a file that can be opened by EAF."
   (interactive "FOpen with EAF: ")
-  ;; Try set app-name along with url if app-name is set.
-  (unless app-name
-    (cond ((string-equal url "eaf-demo")
-           (setq app-name "demo"))
-          ((string-equal url "eaf-camera")
-           (setq app-name "camera"))
-          ((string-equal url "eaf-qutebrowser")
-           (setq app-name "qutebrowser"))
-          ((file-exists-p url)
-           (setq url (expand-file-name url))
-           (setq extension-name (file-name-extension url))
-           (cond ((member extension-name '("pdf" "xps" "oxps" "cbz" "epub" "fb2" "fbz"))
-                  (setq app-name "pdfviewer"))
-                 ((member extension-name '("md"))
-                  ;; Try get user's github token if `eaf-grip-token' is nil.
-                  (if eaf-grip-token
-                      (setq arguments eaf-grip-token)
-                    (setq arguments (read-string "Fill your own github token (or set `eaf-grip-token' with token string): ")))
-                  ;; Split window to show file and previewer.
-                  (eaf-split-preview-windows)
-                  (setq app-name "markdownpreviewer"))
-                 ((member extension-name '("jpg" "png" "bmp"))
-                  (setq app-name "imageviewer"))
-                 ((member extension-name '("avi" "rmvb" "ogg" "mp4"))
-                  (setq app-name "videoplayer"))
-                 ((member extension-name '("html"))
-                  (setq url (concat "file://" url))
-                  (setq app-name "browser"))
-                 ((member extension-name '("org"))
-                  ;; Find file first, because `find-file' will trigger `kill-buffer' operation.
-                  (save-excursion
-                    (find-file url)
-                    (with-current-buffer (buffer-name)
-                      (org-html-export-to-html)))
-                  ;; Add file name to `eaf-org-file-list' after command `find-file'.
-                  (unless (member url eaf-org-file-list)
-                    (push url eaf-org-file-list))
-                  ;; Split window to show file and previewer.
-                  (eaf-split-preview-windows)
-                  (setq app-name "orgpreviewer")
-                  )))
-          ((and (not (string-prefix-p "/" url))
-                (not (string-prefix-p "~" url))
-                (string-match thing-at-point-short-url-regexp url))
-           (setq app-name "browser")
-           (unless (string-prefix-p "http" url)
-             (setq url (concat "http://" url)))
-           )))
+  ;; Try to set app-name along with url if app-name is unset.
+  (when (and (not app-name) (file-exists-p url))
+    (setq url (expand-file-name url))
+    (setq extension-name (file-name-extension url))
+    (cond ((member extension-name eaf-pdf-extension-list)
+           (setq app-name "pdf-viewer"))
+          ((member extension-name eaf-markdown-extension-list)
+           ;; Try get user's github token if `eaf-grip-token' is nil.
+           (if eaf-grip-token
+               (setq arguments eaf-grip-token)
+             (setq arguments (read-string "Fill your own github token (or set `eaf-grip-token' with token string): ")))
+           ;; Split window to show file and previewer.
+           (eaf-split-preview-windows)
+           (setq app-name "markdown-previewer"))
+          ((member extension-name eaf-image-extension-list)
+           (setq app-name "image-viewer"))
+          ((member extension-name eaf-video-extension-list)
+           (setq app-name "video-player"))
+          ((member extension-name eaf-browser-extension-list)
+           (setq url (concat "file://" url))
+           (setq app-name "browser"))
+          ((member extension-name eaf-org-extension-list)
+           ;; Find file first, because `find-file' will trigger `kill-buffer' operation.
+           (save-excursion
+             (find-file url)
+             (with-current-buffer (buffer-name)
+               (org-html-export-to-html)))
+           ;; Add file name to `eaf-org-file-list' after command `find-file'.
+
+           (unless (member url eaf-org-file-list)
+             (push url eaf-org-file-list))
+           ;; Split window to show file and previewer.
+           (eaf-split-preview-windows)
+           (setq app-name "org-previewer"))))
+
   (unless arguments
     (setq arguments ""))
   (if app-name
       ;; Open url with eaf application if app-name is not empty.
       (if (process-live-p eaf-process)
           (let (exists-eaf-buffer)
-            ;; Try to opened buffer.
+            ;; Try to open buffer
             (catch 'found-match-buffer
               (dolist (buffer (buffer-list))
                 (set-buffer buffer)
@@ -623,14 +787,14 @@ We need calcuate render allocation to make sure no black border around render co
         (setq eaf-first-start-app-name app-name)
         (setq eaf-first-start-arguments arguments)
         (eaf-start-process)
-        (message (format "Opening %s with eaf.%s" url app-name)))
+        (message (format "Opening %s with EAF-%s..." url app-name)))
     ;; Output something to user if app-name is empty string.
     (if (or (string-prefix-p "/" url)
             (string-prefix-p "~" url))
         (if (not (file-exists-p url))
-            (message (format "EAF: %s is not exists." url))
-          (message (format "EAF Don't know how to open %s" url)))
-      (message (format "EAF Don't know how to open %s" url)))))
+            (message (format "EAF: %s does not exist." url))
+          (message (format "EAF doesn't know how to open %s." url)))
+      (message (format "EAF doesn't know how to open %s." url)))))
 
 (defun eaf-split-preview-windows ()
   (delete-other-windows)
@@ -638,44 +802,59 @@ We need calcuate render allocation to make sure no black border around render co
   (split-window-horizontally)
   (other-window +1))
 
-(defun eaf-show-file-qrcode (url)
-  (interactive "FShow file QR code: ")
-  (eaf-open url "filetransfer"))
-
-(defun dired-show-file-qrcode ()
-  (interactive)
-  (eaf-show-file-qrcode (dired-get-filename)))
-
-(defun eaf-air-share ()
+(defun eaf-file-transfer-airshare ()
+  "Open EAF Airshare application."
   (interactive)
   (let* ((current-symbol (if (use-region-p)
                              (buffer-substring-no-properties (region-beginning) (region-end))
                            (thing-at-point 'symbol)))
-         (input-string (string-trim (read-string (format "Info (%s): " current-symbol)))))
+         (input-string (string-trim (read-string (format "EAF Airshare - Info (%s): " current-symbol)))))
     (when (string-empty-p input-string)
       (setq input-string current-symbol))
     (eaf-open input-string "airshare")
     ))
 
-(defun eaf-upload-file (dir)
-  (interactive "DDirectory to save uploade file: ")
-  (eaf-open dir "fileuploader"))
+(defun eaf-file-sender-qrcode (file)
+  "Open EAF File Sender application.
 
-(defun eaf-dired-open-file ()
-  "Open html/pdf/image/video file with eaf, other file use `find-file'"
+Select the file FILE to send to your smartphone, a QR code for the corresponding file will appear.
+
+Make sure that your smartphone is connected to the same WiFi network as this computer."
+  (interactive "FEAF File Sender - Select File: ")
+  (eaf-open file "file-sender"))
+
+(defun eaf-file-sender-qrcode-in-dired ()
+  "Open EAF File Transfer application using `eaf-file-sender-qrcode' on
+the file at current cursor position in dired."
+  (interactive)
+  (eaf-file-sender-qrcode (dired-get-filename)))
+
+(defun eaf-file-receiver-qrcode (dir)
+  "Open EAF File Receiver application.
+
+Select directory DIR to receive the uploaded file.
+
+Make sure that your smartphone is connected to the same WiFi network as this computer."
+  (interactive "DEAF File Receiver - Specify Destination: ")
+  (eaf-open dir "file-receiver"))
+
+(defun eaf-file-open-in-dired ()
+  "Open html/pdf/image/video files whenever possible with EAF in dired.
+Other files will open normally with `dired-find-file' or `dired-find-alternate-file'"
   (interactive)
   (dolist (file (dired-get-marked-files))
-    (setq extension-name (file-name-extension file))
-    (cond ((member extension-name '("html"))
-           (eaf-open (concat "file://" file) "browser"))
-          ((member extension-name '("pdf" "xps" "oxps" "cbz" "epub" "fb2" "fbz"))
-           (eaf-open file "pdfviewer"))
-          ((member extension-name '("jpg" "png" "bmp"))
-           (eaf-open file "imageviewer"))
-          ((member extension-name '("avi" "rmvb" "ogg" "mp4"))
-           (eaf-open file "videoplayer"))
-          (t
-           (find-file file)))))
+    (cond ((member (file-name-extension file)
+                   (append eaf-pdf-extension-list
+                           eaf-markdown-extension-list
+                           eaf-image-extension-list
+                           eaf-video-extension-list
+                           eaf-browser-extension-list
+                           eaf-org-extension-list
+                           ))
+           (eaf-open file))
+          (eaf-find-alternate-file-in-dired
+           (dired-find-alternate-file))
+          (t (dired-find-file)))))
 
 ;;;;;;;;;;;;;;;;;;;; Utils ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun eaf-get-view-info ()
@@ -707,6 +886,25 @@ We need calcuate render allocation to make sure no black border around render co
         (if (null arg)
             (eaf-call "scroll_buffer" (eaf-get-view-info) "down" "page")
           (eaf-call "scroll_buffer" (eaf-get-view-info) "down" "line"))
+        (other-window -1))
+    (other-window -1)
+    ad-do-it))
+
+(defadvice watch-other-window-internal (around eaf-watch-other-window activate)
+  "When next buffer is `eaf-mode', do `eaf-watch-other-window'."
+  (other-window +1)
+  (if (eq major-mode 'eaf-mode)
+      (let ((direction (ad-get-arg 0))
+            (line (ad-get-arg 1)))
+        (if (string-equal direction "up")
+            (if (null line)
+                (eaf-call "scroll_buffer" (eaf-get-view-info) "up" "page")
+              (eaf-call "scroll_buffer" (eaf-get-view-info) "up" "line")
+              )
+          (if (null line)
+              (eaf-call "scroll_buffer" (eaf-get-view-info) "down" "page")
+            (eaf-call "scroll_buffer" (eaf-get-view-info) "down" "line")
+            ))
         (other-window -1))
     (other-window -1)
     ad-do-it))

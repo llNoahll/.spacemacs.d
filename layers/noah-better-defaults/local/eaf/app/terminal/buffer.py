@@ -19,15 +19,30 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from PyQt5.QtCore import QUrl
-from PyQt5.QtGui import QColor
-from core.browser_buffer import BrowserBuffer
+from PyQt5.QtGui import QColor, QFont
+from core.buffer import Buffer
+import QTermWidget
 
-class AppBuffer(BrowserBuffer):
+class AppBuffer(Buffer):
     def __init__(self, buffer_id, url, arguments):
-        BrowserBuffer.__init__(self, buffer_id, url, arguments, False, QColor(255, 255, 255, 255))
+        Buffer.__init__(self, buffer_id, url, arguments, True, QColor(0, 0, 0, 255))
 
-        self.buffer_widget.setUrl(QUrl(url))
-        self.buffer_widget.titleChanged.connect(self.change_title)
-        self.buffer_widget.open_url_in_new_tab.connect(self.open_url)
-        self.buffer_widget.translate_selected_text.connect(self.translate_text)
+        self.add_widget(QTermWidget.QTermWidget())
+
+        self.buffer_widget.setTerminalFont(QFont('Source Code Pro', 14))
+        self.buffer_widget.setColorScheme('Linux')
+
+        self.buffer_widget.finished.connect(self.request_close_buffer)
+
+    def get_key_event_widgets(self):
+        return self.buffer_widget.children()
+
+    def fake_key_event_filter(self, event_string):
+        if event_string == "RET":
+            self.buffer_widget.sendText("\n")
+
+    def zoom_out(self):
+        self.buffer_widget.zoomOut()
+
+    def zoom_in(self):
+        self.buffer_widget.zoomIn()

@@ -20,8 +20,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from PyQt5 import QtCore
-from PyQt5.QtCore import Qt, QRect
-from PyQt5.QtGui import QColor, QPixmap, QImage, QFont
+from PyQt5.QtCore import Qt, QRect, QEvent
+from PyQt5.QtGui import QColor, QPixmap, QImage, QFont, QCursor
 from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QWidget
 from core.buffer import Buffer
@@ -34,6 +34,7 @@ class AppBuffer(Buffer):
 
         self.add_widget(PdfViewerWidget(url, QColor(0, 0, 0, 255)))
         self.buffer_widget.send_input_message = self.send_input_message
+        self.buffer_widget.translate_double_click_word.connect(self.translate_text)
 
     def handle_input_message(self, result_type, result_content):
         if result_type == "jump_page":
@@ -63,13 +64,57 @@ class AppBuffer(Buffer):
         self.buffer_widget.read_mode = read_mode
         self.buffer_widget.update()
 
+    def scroll_up(self):
+        self.buffer_widget.scroll_up()
+
+    def scroll_down(self):
+        self.buffer_widget.scroll_down()
+
+    def scroll_up_page(self):
+        self.buffer_widget.scroll_up_page()
+
+    def scroll_down_page(self):
+        self.buffer_widget.scroll_down_page()
+
+    def swtich_to_read_mode(self):
+        self.buffer_widget.switch_to_read_mode()
+
+    def scroll_to_home(self):
+        self.buffer_widget.scroll_to_home()
+
+    def scroll_to_end(self):
+        self.buffer_widget.scroll_to_end()
+
+    def zoom_reset(self):
+        self.buffer_widget.zoom_reset()
+
+    def zoom_in(self):
+        self.buffer_widget.zoom_in()
+
+    def zoom_out(self):
+        self.buffer_widget.zoom_out()
+
+    def jump_to_page(self):
+        self.buffer_widget.send_input_message("Jump to: ", "jump_page")
+
+    def jump_to_percent(self):
+        self.buffer_widget.send_input_message("Jump to percent: ", "jump_percent")
+
+    def remember_current_position(self):
+        self.buffer_widget.remember_current_position()
+
+    def remeber_jump(self):
+        self.buffer_widget.remeber_jump()
+
 class PdfViewerWidget(QWidget):
+    translate_double_click_word = QtCore.pyqtSignal(str)
 
     def __init__(self, url, background_color):
         super(PdfViewerWidget, self).__init__()
 
         self.url = url
         self.background_color = background_color
+        self.installEventFilter(self)
 
         # Load document first.
         self.document = fitz.open(url)
@@ -114,11 +159,11 @@ class PdfViewerWidget(QWidget):
 
     def remember_current_position(self):
         self.remember_offset = self.scroll_offset
-        self.message_to_emacs.emit("EAF pdf viewer: remember position.")
+        self.message_to_emacs.emit("EAF PDF Viewer: Remember Position.")
 
     def remember_jump(self):
         if self.remember_offset is None:
-            self.message_to_emacs.emit("EAF pdf viewer: no position can jump.")
+            self.message_to_emacs.emit("EAF PDF Viewer: Cannot Jump From This Position.")
         else:
             current_scroll_offset = self.scroll_offset
             self.scroll_offset = self.remember_offset
@@ -145,8 +190,6 @@ class PdfViewerWidget(QWidget):
 
         self.page_cache_pixmap_dict[index] = qpixmap
 
-        print("*** New page pixmap: %s %s" % (self.url, index))
-
         return qpixmap
 
     def clean_unused_page_cache_pixmap(self):
@@ -160,7 +203,6 @@ class PdfViewerWidget(QWidget):
 
         for cache_index in cache_index_list:
             if cache_index not in index_list:
-                print("*** Clean unused page pixmap: %s %s" % (self.url, cache_index))
                 self.page_cache_pixmap_dict.pop(cache_index)
 
     def resizeEvent(self, event):
@@ -246,38 +288,8 @@ class PdfViewerWidget(QWidget):
 
     @build_context_wrap
     def wheelEvent(self, event):
-        self.update_scroll_offset(max(min(self.scroll_offset - self.scale * event.angleDelta().y() / 120 * self.mouse_scroll_offset, self.max_scroll_offset()), 0))
-
-    @build_context_wrap
-    def keyPressEvent(self, event):
-        if event.key() == Qt.Key_J:
-            self.scroll_up()
-        elif event.key() == Qt.Key_K:
-            self.scroll_down()
-        elif event.key() == Qt.Key_Space:
-            self.scroll_up_page()
-        elif event.key() == Qt.Key_B:
-            self.scroll_down_page()
-        elif event.key() == Qt.Key_T:
-            self.switch_to_read_mode()
-        elif event.key() == Qt.Key_Period:
-            self.scroll_to_home()
-        elif event.key() == Qt.Key_Comma:
-            self.scroll_to_end()
-        elif event.key() == Qt.Key_0:
-            self.zoom_reset()
-        elif event.key() == Qt.Key_Equal:
-            self.zoom_in()
-        elif event.key() == Qt.Key_Minus:
-            self.zoom_out()
-        elif event.key() == Qt.Key_G:
-            self.send_input_message("Jump to: ", "jump_page")
-        elif event.key() == Qt.Key_P:
-            self.send_input_message("Jump to percent: ", "jump_percent")
-        elif event.key() == Qt.Key_BracketLeft:
-            self.remember_current_position()
-        elif event.key() == Qt.Key_BracketRight:
-            self.remember_jump()
+        if not event.accept():
+            self.update_scroll_offset(max(min(self.scroll_offset - self.scale * event.angleDelta().y() / 120 * self.mouse_scroll_offset, self.max_scroll_offset()), 0))
 
     def get_start_page_index(self):
         return int(self.scroll_offset * 1.0 / self.scale / self.page_height)
@@ -293,7 +305,6 @@ class PdfViewerWidget(QWidget):
             start_page_index = max(0, self.get_start_page_index() - 1)
             last_page_index = min(self.page_total_number, self.get_last_page_index() + 1)
 
-            print("*** Try build %s context cache pixmap from %s to %s" % (self.url, start_page_index, last_page_index - 1))
             for index in list(range(start_page_index, last_page_index)):
                 self.get_page_pixmap(index, self.scale)
 
@@ -372,8 +383,76 @@ class PdfViewerWidget(QWidget):
         if self.scroll_offset != new_offset:
             self.scroll_offset = new_offset
             self.update()
-        else:
-            print("Scroll offset is not change, don't redraw.")
+
+    def get_event_link(self, event):
+        start_page_index = self.get_start_page_index()
+        last_page_index = self.get_last_page_index()
+
+        translate_y = (start_page_index * self.scale * self.page_height) - self.scroll_offset
+
+        ex = event.globalX()
+        ey = event.globalY()
+
+        for index in list(range(start_page_index, last_page_index)):
+            if index < self.page_total_number:
+                page = self.document[index]
+
+                for link in page.getLinks():
+                    rect = link["from"]
+
+                    link_x_start = int(rect.x0 * self.scale)
+                    link_x_end = int(rect.x1 * self.scale)
+                    link_y_start = int(rect.y0 * self.scale + translate_y)
+                    link_y_end = int(rect.y1 * self.scale + translate_y)
+
+                    if ex >= link_x_start and ex <= link_x_end and ey >= link_y_start and ey <= link_y_end:
+                        if link["page"]:
+                            return link
+
+        return None
+
+    def get_double_click_word(self, event):
+        start_page_index = self.get_start_page_index()
+        last_page_index = self.get_last_page_index()
+        pos = event.pos()
+
+        for index in list(range(start_page_index, last_page_index)):
+            if index < self.page_total_number:
+                render_width = self.page_width * self.scale
+                render_x = int((self.rect().width() - render_width) / 2)
+
+                # computer absolute coordinate of page
+                x = int((pos.x() - render_x) * 1.0 / self.scale)
+                if pos.y() + self.scroll_offset < (start_page_index + 1) * self.scale * self.page_height:
+                    page_offset = self.scroll_offset - start_page_index * self.scale * self.page_height
+                    page = self.document[index]
+                else:
+                    # if display two pages, pos.y() will add page_padding
+                    page_offset = self.scroll_offset - (start_page_index + 1) * self.scale * self.page_height - self.page_padding
+                    page = self.document[index + 1]
+                y = int((pos.y() + page_offset) * 1.0 / self.scale)
+                word_offset = 10 # 10 pixel is enough for word intersect operation
+                draw_rect = fitz.Rect(x, y, x + word_offset, y + word_offset)
+
+                page.setCropBox(page.rect)
+                page_words = page.getTextWords()
+                rect_words = [w for w in page_words if fitz.Rect(w[:4]).intersect(draw_rect)]
+                if rect_words:
+                    return rect_words[0][4]
+
+        return None
+
+    def eventFilter(self, obj, event):
+        if event.type() == QEvent.MouseButtonPress:
+            event_link = self.get_event_link(event)
+            if event_link:
+                self.jump_to_page(event_link["page"] + 1)
+        elif event.type() == QEvent.MouseButtonDblClick:
+            double_click_word = self.get_double_click_word(event)
+            if double_click_word:
+                self.translate_double_click_word.emit(double_click_word)
+
+        return False
 
 if __name__ == '__main__':
     import sys

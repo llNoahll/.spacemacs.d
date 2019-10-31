@@ -19,7 +19,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from core.browser import BrowserView, webview_scroll
+from core.browser import BrowserView
 from core.buffer import Buffer
 
 class BrowserBuffer(Buffer):
@@ -40,19 +40,53 @@ class BrowserBuffer(Buffer):
         return [self.buffer_widget.focusProxy()]
 
     def scroll(self, scroll_direction, scroll_type):
-        webview_scroll(self, scroll_direction, scroll_type)
+        if scroll_type == "page":
+            if scroll_direction == "up":
+                self.scroll_up_page()
+            else:
+                self.scroll_down_page()
+        else:
+            if scroll_direction == "up":
+                self.scroll_up()
+            else:
+                self.scroll_down()
 
-    def send_keystroke(self, keystroke):
-        if keystroke == "M-f":
-            self.buffer_widget.forward()
-        elif keystroke == "M-b":
-            self.buffer_widget.back()
-        elif keystroke == "M-q":
-            self.buffer_widget.clean_cookie()
-            self.message_to_emacs.emit("Clean all cookie")
-        elif keystroke == "C--":
-            self.buffer_widget.zoom_out()
-        elif keystroke == "C-=":
-            self.buffer_widget.zoom_in()
-        elif keystroke == "C-0":
-            self.buffer_widget.zoom_reset()
+    def eval_js(self, js):
+        self.buffer_widget.web_page.runJavaScript(js)
+
+    def history_backward(self):
+        self.buffer_widget.back()
+
+    def history_forward(self):
+        self.buffer_widget.forward()
+
+    def clean_all_cookie(self):
+        self.buffer_widget.clean_cookie()
+        self.message_to_emacs.emit("Clean all cookie")
+
+    def zoom_out(self):
+        self.buffer_widget.zoom_out()
+
+    def zoom_in(self):
+        self.buffer_widget.zoom_in()
+
+    def zoom_reset(self):
+        self.buffer_widget.zoom_reset()
+
+    def scroll_up(self):
+        self.eval_js("window.scrollBy(0, 50)")
+
+    def scroll_down(self):
+        self.eval_js("window.scrollBy(0, -50)")
+
+    def scroll_up_page(self):
+        self.eval_js("window.scrollBy(0, screen.height)")
+
+    def scroll_down_page(self):
+        self.eval_js("window.scrollBy(0, -screen.height)")
+
+    def scroll_to_begin(self):
+        self.eval_js("window.scrollTo(0, 0)")
+
+    def scroll_to_bottom(self):
+        self.eval_js("window.scrollBy(0, document.body.scrollHeight)")

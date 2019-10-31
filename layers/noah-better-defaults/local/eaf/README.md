@@ -1,12 +1,12 @@
 # What is Emacs Application Framework?
-Emacs Application Framework is a development framework, where developers can develop any PyQt program, and integrate into Emacs.
+Emacs Application Framework is a development framework, where developers can develop any PyQt program, and integrate it into Emacs.
 
 This framework mainly implements three functions:
 1. Integrate PyQt program window into Emacs Frame using Xlib Reparent technology
 2. Listening to EAF buffer's keyboard event flow and controlling the keyboard input of PyQt program via DBus IPC
 3. Created a window compositer to make the PyQt program window adapt Emacs's Window/Buffer design
 
-Using this framework, you can use PyQt to develop powerful graphics programs to extend Emacs.
+Using this framework, you can use PyQt to develop powerful GUI programs to extend Emacs.
 
 ## Screenshots of EAF
 
@@ -24,7 +24,7 @@ Using this framework, you can use PyQt to develop powerful graphics programs to 
 | <img src="./screenshot/pdf_viewer.gif" width="400"> | <img src="./screenshot/camera.gif" width="400"> |
 |                                                     |                                                 |
 
-| File Transfer                                          | File Uploader                                          |
+| File Sender                                            | File Receiver                                          |
 | :--------:                                             | :----:                                                 |
 | <img src="./screenshot/file_transfer.png" width="400"> | <img src="./screenshot/file_uploader.png" width="400"> |
 |                                                        |                                                        |
@@ -35,31 +35,38 @@ Using this framework, you can use PyQt to develop powerful graphics programs to 
 | <img src="./screenshot/air_share.png" width="400"> | <img src="./screenshot/org_previewer.gif" width="400"> |
 |                                                    |                                                        |
 
+| Terminal Emulator                                 |
+| :--------:                                        |
+| <img src="./screenshot/terminal.png" width="400"> |
+|                                                   |
+
 ## Installation
 
 1. Install python dependences:
 
-    Make sure python3 and pip has install in your operating system, then execute below command:
-
 ```Bash
-    sudo pip install dbus-python PyMuPDF grip qrcode pyqt5 python-xlib
+    sudo pip3 install dbus-python pymupdf grip qrcode python-xlib pyqt5 pyqtwebengine
+    sudo pacman -S qtermwidget-git
 ```
 
 2. Clone this repository and add below code in your ~/.emacs
+
 ```Elisp
-    (require 'eaf)
+(require 'eaf)
 ```
 
 ### Package description.
 
-| Package      | Use for                                          |
-| :--------    | :----                                            |
-| python-xlib  | Stick app window into emacs frame                |
-| python-pyqt5 | GUI library required for application development |
-| dbus-python  | DBus IPC for python and elisp                    |
-| PyMuPDF      | Render engine required for PDF Viewer            |
-| grip         | Markdown render server for Markdown Previewer    |
-| qrcode       | Render local file QR code                        |
+| Debian Package  | Package Repo | Use for                                          |
+| :--------       | :--------    | :----                                            |
+| dbus-python     | pip3         | DBus IPC for python and elisp                    |
+| pymupdf         | pip3         | Render engine required for PDF Viewer            |
+| grip            | pip3         | Markdown render server for Markdown Previewer    |
+| qrcode          | pip3         | Render local file QR code                        |
+| python-xlib     | pip3         | Stick app window into emacs frame                |
+| pyqt5           | pip3         | GUI library required for application development |
+| pyqtwebengine   | pip3         | QtWebEngine for browser application              |
+| qtermwidget-git | pacman       | QTermWidget is terminal emulator for PyQt5       |
 
 ### Or run EAF with docker
 
@@ -72,86 +79,30 @@ There are mainly three obstacles:
 3. Qt5 QGraphicsView/QGraphicsScene can't work MacOS, specify QGraphicsVideoItem can't work.
 
 ## Usage
+
+| Application Name   | Launch                                        |
+| :--------          | :----                                         |
+| Browser            | Type 'eaf-browser' RET https://www.google.com |
+| PDF Viewer         | Type 'eaf-open' RET pdf filepath              |
+| Video Player       | Type 'eaf-open' RET video filepath            |
+| Image Viewer       | Type 'eaf-open' RET image filepath            |
+| Markdown previewer | Type 'eaf-open' RET markdown filepath         |
+| Org file previewer | Type 'eaf-open' RET org filepath              |
+| Camera             | Type 'eaf-open-camera'                        |
+| Terminal           | Type 'eaf-open-terminal'                      |
+| File Sender        | Type 'eaf-file-sender-qrcode'                 |
+|                    | Or use 'eaf-file-sender-qrcode-in-dired'      |
+| File Receiver      | Type 'eaf-file-receiver-qrcode'               |
+| Airshare           | Type 'eaf-file-transfer-airshare'             |
+| Demo               | Type 'eaf-open-demo'                          |
+
+Please check [Key binding](./docs/KEYBINDING.md) to check keybinding of application.
+
 ```
 NOTE:
 EAF use DBus' session bus, it must running in general user.
 Please don't run EAF with root user, root user just can access DBus's system bus.
 ```
-### Browser
-
-```
-Type 'eaf-open-url' RET www.google.com
-```
-
-| Browser Key        | Event                    |
-| :-----:            | :----                    |
-| Left Button        | Open link in current tab |
-| Ctrl + Left Button | Open link in new tab     |
-| M-f                | Forward page in history  |
-| M-b                | Backward page in history |
-| M-q                | Delete all cookies       |
-| C-=                | Zoom in                  |
-| C--                | Zoom out                 |
-| C-0                | Zoom reset               |
-
-### PDF Viewer
-
-```
-Type 'eaf-open' RET pdf-filepath
-```
-
-| PDF Viewer Key | Event             |
-| :-----:        | :----             |
-| j              | Scroll up         |
-| k              | Scroll down       |
-| Space          | Scroll up page    |
-| b              | Scroll down page  |
-| ,              | Scroll to end     |
-| .              | Scroll to home    |
-| t              | Switch scale mode |
-| -              | Zoom out          |
-| =              | Zoom in           |
-| 0              | Zoom reset        |
-| g              | Goto page         |
-| p              | Goto to percent   |
-| [              | Remember position |
-| ]              | Remember jump     |
-
-
-### Video Player
-
-```
-Type 'eaf-open' RET video-filepath
-```
-
-| Video Player Key | Event         |
-| :-----:          | :----         |
-| Space            | Play or Pause |
-| h                | Seek backward |
-| l                | Seek forward  |
-
-### Image Viewer
-```
-Type 'eaf-open' RET image-filepath
-```
-
-| Image Viewer Key | Event                                    |
-| :-----:          | :----                                    |
-| j                | Load next image in current directory     |
-| k                | Load previous image in current directory |
-
-### Other applications
-
-| Application Name   | Launch                                        |
-| :--------          | :----                                         |
-| Markdown previewer | Type 'eaf-open' RET markdown filepath         |
-| Org file previewer | Type 'eaf-open' RET org filepath              |
-| Camera             | Type 'eaf-camera'                             |
-| Demo               | Type 'eaf-demo'                               |
-| File Transfer      | Type 'eaf-show-file-qrcode'                   |
-|                    | Or use `dired-show-file-qrcode' in dired mode |
-| File Uploader      | Type 'eaf-upload-file'                        |
-| Air Share          | Type 'eaf-air-share'                          |
 
 ## Settings
 
