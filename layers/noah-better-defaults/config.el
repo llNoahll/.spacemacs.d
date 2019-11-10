@@ -16,6 +16,8 @@
 ;;;; require packages
 (require 'python)
 
+;; set the width of line number
+(text-scale-set -8)
 
 ;; set fundamental-mode for big files
 (add-hook 'find-file-hook 'spacemacs/check-large-file)

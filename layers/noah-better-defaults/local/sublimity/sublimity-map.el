@@ -124,8 +124,7 @@ selected."
 
 ;;;###autoload
 (define-derived-mode minimap-mode fundamental-mode "MINIMAP"
-  "Major mode for view sublimity minimap."
-  (setq-local minimap-mode t))
+  "Major mode for view sublimity minimap.")
 
 ;; + create/kill the minimap
 

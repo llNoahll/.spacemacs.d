@@ -268,6 +268,8 @@ to buffers)."
 (defun spacemacs/helm-themes ()
   "Remove limit on number of candidates on `helm-themes'"
   (interactive)
-  (let (helm-candidate-number-limit)
-    (helm-themes))
-  (set-face-background vline-face (face-attribute hl-line-face :background)))
+  (let (sublimity-modep sublimity-mode)
+    (let (helm-candidate-number-limit)
+      (helm-themes))
+    (sublimity-mode sublimity-modep)
+    (set-face-background vline-face (face-attribute hl-line-face :background))))
