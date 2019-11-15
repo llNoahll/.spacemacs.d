@@ -151,10 +151,10 @@ is binary, activate `hexl-mode'."
   "Turn down the alpha"
   (interactive)
   (let ((h (car alpha-list)))
-    ((lambda (a ab)
+    ((λ (a ab)
        (set-frame-parameter (selected-frame) 'alpha (list a ab))
-       (add-to-list 'default-frame-alist (cons 'alpha (list a ab)))
-       ) (car h) (cadr h))
+       (add-to-list 'default-frame-alist (cons 'alpha (list a ab))))
+     (car h) (cadr h))
     (setq alpha-list (cdr (append alpha-list (list h))))))
 
 (defun noah/loop-alpha-up ()
@@ -162,10 +162,10 @@ is binary, activate `hexl-mode'."
   (interactive)
   (let ((g (car (last alpha-list 1)))
         (h (car (last alpha-list 2))))
-    ((lambda (a ab)
+    ((λ (a ab)
        (set-frame-parameter (selected-frame) 'alpha (list a ab))
-       (add-to-list 'default-frame-alist (cons 'alpha (list a ab)))
-       ) (car h) (cadr h))
+       (add-to-list 'default-frame-alist (cons 'alpha (list a ab))))
+     (car h) (cadr h))
     (setq alpha-list (butlast (append (list g) alpha-list) 1))))
 
 (defun noah/right-char (&optional n)

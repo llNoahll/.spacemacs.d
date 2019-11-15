@@ -70,19 +70,19 @@
 
 
 (add-hook 'eww-after-render-hook
-          '(lambda ()
-             (define-key eww-link-keymap (kbd "h") 'shr-browse-image)
-             (define-key eww-link-keymap (kbd "i") 'nil)
-             (define-key shr-image-map (kbd "h") 'shr-browse-image)
-             (define-key shr-image-map (kbd "i") 'nil)
-             (define-key shr-map (kbd "h") 'shr-browse-image)
-             (define-key shr-map (kbd "i") 'nil)))
+          (λ ()
+            (define-key eww-link-keymap (kbd "h") 'shr-browse-image)
+            (define-key eww-link-keymap (kbd "i") 'nil)
+            (define-key shr-image-map (kbd "h") 'shr-browse-image)
+            (define-key shr-image-map (kbd "i") 'nil)
+            (define-key shr-map (kbd "h") 'shr-browse-image)
+            (define-key shr-map (kbd "i") 'nil)))
 
 (add-hook 'package-menu-mode-hook
-          '(lambda ()
-             (define-key evil-normal-state-local-map (kbd "k") 'evil-previous-line)
-             (define-key evil-normal-state-local-map (kbd "j") 'evil-next-line)
-             (define-key evil-normal-state-local-map (kbd "h") 'evil-backward-char)))
+          (λ ()
+            (define-key evil-normal-state-local-map (kbd "k") 'evil-previous-line)
+            (define-key evil-normal-state-local-map (kbd "j") 'evil-next-line)
+            (define-key evil-normal-state-local-map (kbd "h") 'evil-backward-char)))
 
 ;; basic hack
 (define-key evil-insert-state-map (kbd "C-n") 'nil)
@@ -166,8 +166,8 @@
   (kbd "N") 'evil-ex-search-previous)
 
 (add-hook 'treemacs-mode-hook
-          '(lambda ()
-             (define-key treemacs-mode-map (kbd "<escape>") 'evil-normal-state)))
+          (λ ()
+            (define-key treemacs-mode-map (kbd "<escape>") 'evil-normal-state)))
 
 ;; set evil-cleverparens-mode
 (evil-define-key 'insert evil-cleverparens-mode-map
@@ -198,12 +198,12 @@
 
 ;; add some keybindings for evil-evilified-mode
 (add-hook 'evil-evilified-state-entry-hook
-          '(lambda ()
-             (define-key evil-evilified-state-map (kbd "?") 'evil-ex-search-backward)
-             (define-key evil-evilified-state-map (kbd "%") 'evil-jump-item)
-             (define-key evil-evilified-state-map (kbd "m") 'evil-set-marker)
-             (define-key evil-evilified-state-map (kbd "'") 'evil-goto-mark-line)
-             (define-key evil-evilified-state-map  (kbd "C-o") 'evil-execute-in-insert-state)))
+          (λ ()
+            (define-key evil-evilified-state-map (kbd "?") 'evil-ex-search-backward)
+            (define-key evil-evilified-state-map (kbd "%") 'evil-jump-item)
+            (define-key evil-evilified-state-map (kbd "m") 'evil-set-marker)
+            (define-key evil-evilified-state-map (kbd "'") 'evil-goto-mark-line)
+            (define-key evil-evilified-state-map  (kbd "C-o") 'evil-execute-in-insert-state)))
 
 ;; switch to another state temporarily
 (define-key evil-emacs-state-map   (kbd "C-o") 'evil-execute-in-normal-state)
@@ -238,8 +238,8 @@
 
 ;;; set paredit-mode
 (add-hook 'paredit-mode-hook
-          '(lambda ()
-             (define-key paredit-mode-map (kbd "M-;") 'nil)))
+          (λ ()
+            (define-key paredit-mode-map (kbd "M-;") 'nil)))
 
 ;; add tabnine
 (define-key evil-emacs-state-map  (kbd "C-l") 'company-tabnine)
@@ -278,102 +278,102 @@
 
 ;; set asm-mode
 (add-hook 'asm-mode-hook
-          '(lambda ()
-             (define-key evil-evilified-state-local-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)
-             (define-key evil-insert-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
-             (define-key evil-hybrid-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
-             (define-key evil-emacs-state-local-map     (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
+          (λ ()
+            (define-key evil-evilified-state-local-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)
+            (define-key evil-insert-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
+            (define-key evil-hybrid-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
+            (define-key evil-emacs-state-local-map     (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
 (spacemacs/set-leader-keys-for-major-mode 'asm-mode "'" 'gdb)
 
 ;; set masm-mode
 (add-hook 'masm-mode-hook
-          '(lambda ()
-             (define-key masm-mode-map (kbd ";") 'nil)))
+          (λ ()
+            (define-key masm-mode-map (kbd ";") 'nil)))
 
 ;; delete four spaces and semi in nasm c, c++, java, octave, matlab mode.
 (add-hook 'nasm-mode-hook
-          '(lambda ()
-             (define-key evil-evilified-state-local-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)
-             (define-key evil-insert-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
-             (define-key evil-hybrid-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
-             (define-key evil-emacs-state-local-map     (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
+          (λ ()
+            (define-key evil-evilified-state-local-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)
+            (define-key evil-insert-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
+            (define-key evil-hybrid-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
+            (define-key evil-emacs-state-local-map     (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
 (spacemacs/set-leader-keys-for-major-mode 'nasm-mode "'" 'gdb)
 
 (add-hook 'c-mode-hook
-          '(lambda ()
-             (define-key c-mode-map (kbd ";") 'self-insert-command)
-             (define-key evil-evilified-state-local-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)
-             (define-key evil-insert-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
-             (define-key evil-hybrid-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
-             (define-key evil-emacs-state-local-map     (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
+          (λ ()
+            (define-key c-mode-map (kbd ";") 'self-insert-command)
+            (define-key evil-evilified-state-local-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)
+            (define-key evil-insert-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
+            (define-key evil-hybrid-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
+            (define-key evil-emacs-state-local-map     (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
 (spacemacs/set-leader-keys-for-major-mode 'c-mode "'" 'gdb)
 
 (add-hook 'c++-mode-hook
-          '(lambda ()
-             (define-key c++-mode-map (kbd ";") 'self-insert-command)
-             (define-key evil-evilified-state-local-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)
-             (define-key evil-insert-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
-             (define-key evil-hybrid-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
-             (define-key evil-emacs-state-local-map     (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
+          (λ ()
+            (define-key c++-mode-map (kbd ";") 'self-insert-command)
+            (define-key evil-evilified-state-local-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)
+            (define-key evil-insert-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
+            (define-key evil-hybrid-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
+            (define-key evil-emacs-state-local-map     (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
 (spacemacs/set-leader-keys-for-major-mode 'c++-mode "'" 'gdb)
 
 (add-hook 'java-mode-hook
-          '(lambda ()
-             (define-key java-mode-map (kbd ";") 'self-insert-command)
-             (define-key evil-evilified-state-local-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)
-             (define-key evil-insert-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
-             (define-key evil-hybrid-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
-             (define-key evil-emacs-state-local-map     (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
+          (λ ()
+            (define-key java-mode-map (kbd ";") 'self-insert-command)
+            (define-key evil-evilified-state-local-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)
+            (define-key evil-insert-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
+            (define-key evil-hybrid-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
+            (define-key evil-emacs-state-local-map     (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
 
 (add-hook 'matlab-mode-hook
-          '(lambda ()
-             (define-key matlab-mode-map (kbd "M-;") 'nil)
-             (define-key evil-evilified-state-local-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)
-             (define-key evil-insert-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
-             (define-key evil-hybrid-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
-             (define-key evil-emacs-state-local-map     (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
+          (λ ()
+            (define-key matlab-mode-map (kbd "M-;") 'nil)
+            (define-key evil-evilified-state-local-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)
+            (define-key evil-insert-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
+            (define-key evil-hybrid-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
+            (define-key evil-emacs-state-local-map     (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
 
 (add-hook 'octave-mode-hook
-          '(lambda ()
-             (define-key evil-evilified-state-local-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)
-             (define-key evil-insert-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
-             (define-key evil-hybrid-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
-             (define-key evil-emacs-state-local-map     (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
+          (λ ()
+            (define-key evil-evilified-state-local-map (kbd "<backspace>") 'python-indent-dedent-line-backspace)
+            (define-key evil-insert-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
+            (define-key evil-hybrid-state-local-map    (kbd "<backspace>") 'python-indent-dedent-line-backspace)
+            (define-key evil-emacs-state-local-map     (kbd "<backspace>") 'python-indent-dedent-line-backspace)))
 
 
 ;; define racket-mode
 (add-hook 'racket-mode-hook
-          '(lambda ()
-             (define-key evil-hybrid-state-local-map (kbd "C-x C-e") 'racket-last-sexp)
-             (define-key evil-insert-state-local-map (kbd "C-x C-e") 'racket-last-sexp)
-             (define-key evil-motion-state-local-map (kbd "C-x C-e") 'racket-last-sexp)
-             (define-key evil-emacs-state-local-map  (kbd "C-x C-e") 'racket-last-sexp)
-             (define-key racket-mode-map (kbd "C-x C-e") 'racket-last-sexp)))
+          (λ ()
+            (define-key evil-hybrid-state-local-map (kbd "C-x C-e") 'racket-last-sexp)
+            (define-key evil-insert-state-local-map (kbd "C-x C-e") 'racket-last-sexp)
+            (define-key evil-motion-state-local-map (kbd "C-x C-e") 'racket-last-sexp)
+            (define-key evil-emacs-state-local-map  (kbd "C-x C-e") 'racket-last-sexp)
+            (define-key racket-mode-map (kbd "C-x C-e") 'racket-last-sexp)))
 
 
 (add-hook 'racket-repl-mode-hook
-          '(lambda ()
-             (define-key evil-insert-state-local-map (kbd "<C-return>") 'newline-and-indent)
-             (define-key racket-repl-mode-map (kbd "C-w") 'nil)
-             (define-key racket-repl-mode-map (kbd "C-c C-k") 'geiser-repl-interrupt)
-             (define-key racket-repl-mode-map (kbd "C-x C-e") 'racket-repl-send-last-sexp)))
+          (λ ()
+            (define-key evil-insert-state-local-map (kbd "<C-return>") 'newline-and-indent)
+            (define-key racket-repl-mode-map (kbd "C-w") 'nil)
+            (define-key racket-repl-mode-map (kbd "C-c C-k") 'geiser-repl-interrupt)
+            (define-key racket-repl-mode-map (kbd "C-x C-e") 'racket-repl-send-last-sexp)))
 
 ;; define scheme-mode
 ;; (add-hook 'scheme-mode-hook
-;;           '(lambda ()
+;;           (λ ()
 ;;              ))
 (spacemacs/set-leader-keys-for-major-mode 'scheme-mode ";" 'geiser-mode)
 
 ;; define geiser
 (add-hook 'geiser-repl-mode-hook
-          '(lambda ()
-             (define-key evil-insert-state-local-map (kbd "<C-return>") 'newline-and-indent)
-             (define-key geiser-repl-mode-map (kbd "C-d") 'nil)
-             (define-key geiser-repl-mode-map (kbd "C-x C-e") 'geiser-better-eval-last-sexp)))
+          (λ ()
+            (define-key evil-insert-state-local-map (kbd "<C-return>") 'newline-and-indent)
+            (define-key geiser-repl-mode-map (kbd "C-d") 'nil)
+            (define-key geiser-repl-mode-map (kbd "C-x C-e") 'geiser-better-eval-last-sexp)))
 
 (add-hook 'geiser-mode-hook
-          '(lambda ()
-             (define-key geiser-mode-map (kbd "C-x C-e") 'geiser-better-eval-last-sexp)))
+          (λ ()
+            (define-key geiser-mode-map (kbd "C-x C-e") 'geiser-better-eval-last-sexp)))
 
 ;; set eshell
 (evil-define-key 'normal eshell-mode-map
@@ -396,53 +396,53 @@
 
 ;; set term
 (add-hook 'term-mode-hook
-          '(lambda ()
-             (define-key evil-motion-state-local-map (kbd "RET") 'term-send-raw)))
+          (λ ()
+            (define-key evil-motion-state-local-map (kbd "RET") 'term-send-raw)))
 
 ;; set magit
 (add-hook 'magit-status-mode-hook
-          '(lambda ()
-             (define-key magit-status-mode-map (kbd "1") 'nil)
-             (define-key magit-status-mode-map (kbd "2") 'nil)
-             (define-key magit-status-mode-map (kbd "3") 'nil)
-             (define-key magit-status-mode-map (kbd "4") 'nil)
+          (λ ()
+            (define-key magit-status-mode-map (kbd "1") 'nil)
+            (define-key magit-status-mode-map (kbd "2") 'nil)
+            (define-key magit-status-mode-map (kbd "3") 'nil)
+            (define-key magit-status-mode-map (kbd "4") 'nil)
 
-             (define-key magit-status-mode-map (kbd "M-1") 'nil)
-             (define-key magit-status-mode-map (kbd "M-2") 'nil)
-             (define-key magit-status-mode-map (kbd "M-3") 'nil)
-             (define-key magit-status-mode-map (kbd "M-4") 'nil)
+            (define-key magit-status-mode-map (kbd "M-1") 'nil)
+            (define-key magit-status-mode-map (kbd "M-2") 'nil)
+            (define-key magit-status-mode-map (kbd "M-3") 'nil)
+            (define-key magit-status-mode-map (kbd "M-4") 'nil)
 
-             (define-key magit-status-mode-map (kbd "C-1") 'magit-section-show-level-1)
-             (define-key magit-status-mode-map (kbd "C-2") 'magit-section-show-level-2)
-             (define-key magit-status-mode-map (kbd "C-3") 'magit-section-show-level-3)
-             (define-key magit-status-mode-map (kbd "C-4") 'magit-section-show-level-4)
+            (define-key magit-status-mode-map (kbd "C-1") 'magit-section-show-level-1)
+            (define-key magit-status-mode-map (kbd "C-2") 'magit-section-show-level-2)
+            (define-key magit-status-mode-map (kbd "C-3") 'magit-section-show-level-3)
+            (define-key magit-status-mode-map (kbd "C-4") 'magit-section-show-level-4)
 
-             (define-key magit-status-mode-map (kbd "C-M-1") 'magit-section-show-level-1-all)
-             (define-key magit-status-mode-map (kbd "C-M-2") 'magit-section-show-level-2-all)
-             (define-key magit-status-mode-map (kbd "C-M-3") 'magit-section-show-level-3-all)
-             (define-key magit-status-mode-map (kbd "C-M-4") 'magit-section-show-level-4-all)))
+            (define-key magit-status-mode-map (kbd "C-M-1") 'magit-section-show-level-1-all)
+            (define-key magit-status-mode-map (kbd "C-M-2") 'magit-section-show-level-2-all)
+            (define-key magit-status-mode-map (kbd "C-M-3") 'magit-section-show-level-3-all)
+            (define-key magit-status-mode-map (kbd "C-M-4") 'magit-section-show-level-4-all)))
 
 (add-hook 'magit-mode-hook
-          '(lambda ()
-             (define-key magit-mode-map (kbd "1") 'nil)
-             (define-key magit-mode-map (kbd "2") 'nil)
-             (define-key magit-mode-map (kbd "3") 'nil)
-             (define-key magit-mode-map (kbd "4") 'nil)
+          (λ ()
+            (define-key magit-mode-map (kbd "1") 'nil)
+            (define-key magit-mode-map (kbd "2") 'nil)
+            (define-key magit-mode-map (kbd "3") 'nil)
+            (define-key magit-mode-map (kbd "4") 'nil)
 
-             (define-key magit-mode-map (kbd "M-1") 'nil)
-             (define-key magit-mode-map (kbd "M-2") 'nil)
-             (define-key magit-mode-map (kbd "M-3") 'nil)
-             (define-key magit-mode-map (kbd "M-4") 'nil)
+            (define-key magit-mode-map (kbd "M-1") 'nil)
+            (define-key magit-mode-map (kbd "M-2") 'nil)
+            (define-key magit-mode-map (kbd "M-3") 'nil)
+            (define-key magit-mode-map (kbd "M-4") 'nil)
 
-             (define-key magit-mode-map (kbd "C-1") 'magit-section-show-level-1)
-             (define-key magit-mode-map (kbd "C-2") 'magit-section-show-level-2)
-             (define-key magit-mode-map (kbd "C-3") 'magit-section-show-level-3)
-             (define-key magit-mode-map (kbd "C-4") 'magit-section-show-level-4)
+            (define-key magit-mode-map (kbd "C-1") 'magit-section-show-level-1)
+            (define-key magit-mode-map (kbd "C-2") 'magit-section-show-level-2)
+            (define-key magit-mode-map (kbd "C-3") 'magit-section-show-level-3)
+            (define-key magit-mode-map (kbd "C-4") 'magit-section-show-level-4)
 
-             (define-key magit-mode-map (kbd "C-M-1") 'magit-section-show-level-1-all)
-             (define-key magit-mode-map (kbd "C-M-2") 'magit-section-show-level-2-all)
-             (define-key magit-mode-map (kbd "C-M-3") 'magit-section-show-level-3-all)
-             (define-key magit-mode-map (kbd "C-M-4") 'magit-section-show-level-4-all)))
+            (define-key magit-mode-map (kbd "C-M-1") 'magit-section-show-level-1-all)
+            (define-key magit-mode-map (kbd "C-M-2") 'magit-section-show-level-2-all)
+            (define-key magit-mode-map (kbd "C-M-3") 'magit-section-show-level-3-all)
+            (define-key magit-mode-map (kbd "C-M-4") 'magit-section-show-level-4-all)))
 
 ;; set dired-mode
 (evil-define-key 'normal dired-mode-map
@@ -458,8 +458,8 @@
 
 ;; set company-complete
 (add-hook 'company-search-mode-hook
-          '(lambda ()
-             (define-key company-search-map (kbd "C-l") 'company-complete)))
+          (λ ()
+            (define-key company-search-map (kbd "C-l") 'company-complete)))
 
 
 

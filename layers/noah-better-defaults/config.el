@@ -83,114 +83,114 @@
 ;;; set semantic
 ;; disable emacs-lisp-mode
 (add-hook 'semantic-inhibit-functions
-          '(lambda ()
-             (member major-mode '(emacs-lisp-mode scheme-mode))))
+          (λ ()
+            (member major-mode '(emacs-lisp-mode scheme-mode))))
 
 ;; only enable cc-mode
 ;; (setq semantic-inhibit-functions
-;;       '(lambda ()
+;;       (λ ()
 ;;          (not (and (featurep 'cc-defs)
 ;;                    c-buffer-is-cc-mode))))
 
 ;; set company-mode
 (setq company-show-numbers t)
 (add-hook 'company-mode-hook
-          '(lambda ()
-             ;; ;; Use the tab-and-go frontend.
-             ;; ;; Allows TAB to select and complete at the same time.
-             ;; (company-tng-configure-default)
-             ;; (setq company-frontends
-             ;;       '(company-tng-frontend
-             ;;         company-pseudo-tooltip-frontend
-             ;;         company-echo-metadata-frontend))
-             (setq company-idle-delay 0)))
+          (λ ()
+            ;; ;; Use the tab-and-go frontend.
+            ;; ;; Allows TAB to select and complete at the same time.
+            ;; (company-tng-configure-default)
+            ;; (setq company-frontends
+            ;;       '(company-tng-frontend
+            ;;         company-pseudo-tooltip-frontend
+            ;;         company-echo-metadata-frontend))
+            (setq company-idle-delay 0)))
 
 ;; set default configs in prog-mode
 (add-hook 'prog-mode-hook
-          '(lambda ()
-             (setq-local require-final-newline nil)
-             (company-mode t)
-             (highlight-indent-guides-mode t)))
+          (λ ()
+            (setq-local require-final-newline nil)
+            (company-mode t)
+            (highlight-indent-guides-mode t)))
 
 ;; set eshell
 (add-hook 'eshell-mode-hook
-          '(lambda ()
-             (setq-local evil-move-cursor-back nil)
-             (smartparens-mode t)))
+          (λ ()
+            (setq-local evil-move-cursor-back nil)
+            (smartparens-mode t)))
 
 ;; set company for text-mode
 (add-hook 'text-mode-hook
-          '(lambda ()
-             (setq-local require-final-newline nil)
-             (company-mode t)))
+          (λ ()
+            (setq-local require-final-newline nil)
+            (company-mode t)))
 
 ;; set magit-status-mode
 (add-hook 'magit-status-mode-hook
-          '(lambda ()
-             (display-line-numbers-mode t)))
+          (λ ()
+            (display-line-numbers-mode t)))
 
 ;; set eww
 (add-hook 'eww-after-render-hook
-          '(lambda ()
-             (setq-local truncate-lines nil)
-             (vline-mode t)))
+          (λ ()
+            (setq-local truncate-lines nil)
+            (vline-mode t)))
 
 ;; set treemacs-mode
 (add-hook 'treemacs-mode-hook
-          '(lambda ()
-             (text-scale-set -2)
-             (vline-mode t)
-             (highlight-indentation-mode t)
+          (λ ()
+            (text-scale-set -2)
+            (vline-mode t)
+            (highlight-indentation-mode t)
 
-             (treemacs-create-icon :file "~/.spacemacs.d/packages/treemacs/icons/tex.png"
-                                   :extensions ("tex"))
-             (treemacs-create-icon :file "~/.spacemacs.d/packages/treemacs/icons/scheme.png"
-                                   :extensions ("ss" "scm" "sls" "sps"))
-             (treemacs-create-icon :file "~/.spacemacs.d/packages/treemacs/icons/racket.png"
-                                   :extensions ("racket" "rkt" "rktl" "rktd" "scrbl" "scribble" "plt"))
-             (treemacs-create-icon :file "~/.spacemacs.d/packages/treemacs/icons/vsc/vim.png"
-                                   :extensions ("vim" "vimrc" "tridactylrc" "vimperatorrc" "ideavimrc" "vrapperrc"))))
+            (treemacs-create-icon :file "~/.spacemacs.d/packages/treemacs/icons/tex.png"
+                                  :extensions ("tex"))
+            (treemacs-create-icon :file "~/.spacemacs.d/packages/treemacs/icons/scheme.png"
+                                  :extensions ("ss" "scm" "sls" "sps"))
+            (treemacs-create-icon :file "~/.spacemacs.d/packages/treemacs/icons/racket.png"
+                                  :extensions ("racket" "rkt" "rktl" "rktd" "scrbl" "scribble" "plt"))
+            (treemacs-create-icon :file "~/.spacemacs.d/packages/treemacs/icons/vsc/vim.png"
+                                  :extensions ("vim" "vimrc" "tridactylrc" "vimperatorrc" "ideavimrc" "vrapperrc"))))
 
 ;; set c-mode
 (add-hook 'c-mode-hook
-          '(lambda ()
-             (setq-local comment-start "// ")
-             (setq-local comment-end "")))
+          (λ ()
+            (setq-local comment-start "// ")
+            (setq-local comment-end "")))
 
 ;; ;; set c++-mode
 ;; (add-hook 'c++-mode-hook
-;;           '(lambda ()
+;;           (λ ()
 ;;              (setq-local comment-start "/* ")
 ;;              (setq-local comment-end   " */")))
 
 ;; ;; set java-mode
 ;; (add-hook 'java-mode-hook
-;;           '(lambda ()
+;;           (λ ()
 ;;              (setq-local comment-start "/* ")
 ;;              (setq-local comment-end   " */")))
 
 ;; set css-mode
 (add-hook 'css-mode-hook
-          '(lambda ()
-             (setq-local comment-start "/* ")
-             (setq-local comment-end   " */")))
+          (λ ()
+            (setq-local comment-start "/* ")
+            (setq-local comment-end   " */")))
 
 ;; set lisp-mode
 (add-hook 'lisp-mode-hook
-          '(lambda ()
-             ;; (paredit-mode)
-             (evil-paredit-mode)
-             (evil-cleverparens-mode)
-             (evil-cp-redefine-keys)
-             (setq-local comment-start "; ")))
+          (λ ()
+            ;; (paredit-mode)
+            (evil-paredit-mode)
+            (evil-cleverparens-mode)
+            (evil-cp-redefine-keys)
+            (setq-local comment-start "; ")))
 
 ;; set common-lisp-mode
 (add-hook 'common-lisp-mode-hook
-          '(lambda ()
-             ;; (paredit-mode)
-             (evil-paredit-mode)
-             (evil-cleverparens-mode)
-             (evil-cp-redefine-keys)))
+          (λ ()
+            ;; (paredit-mode)
+            (evil-paredit-mode)
+            (evil-cleverparens-mode)
+            (evil-cp-redefine-keys)))
 
 ;; set emacs-lisp-mode
 (font-lock-add-keywords 'emacs-lisp-mode
@@ -235,21 +235,21 @@
                            . font-lock-builtin-face))
                         t)
 (add-hook 'emacs-lisp-mode-hook
-          '(lambda ()
-             ;; (paredit-mode)
-             (evil-paredit-mode)
-             (evil-cleverparens-mode)
-             (evil-cp-redefine-keys)
-             (setq-local comment-start "; ")))
+          (λ ()
+            ;; (paredit-mode)
+            (evil-paredit-mode)
+            (evil-cleverparens-mode)
+            (evil-cp-redefine-keys)
+            (setq-local comment-start "; ")))
 
 ;; set iell-mode
 (add-hook 'ielm-mode-hook
-          '(lambda ()
-             ;; (paredit-mode)
-             (evil-paredit-mode)
-             (evil-cleverparens-mode)
-             (evil-cp-redefine-keys)
-             (setq-local comment-start "; ")))
+          (λ ()
+            ;; (paredit-mode)
+            (evil-paredit-mode)
+            (evil-cleverparens-mode)
+            (evil-cp-redefine-keys)
+            (setq-local comment-start "; ")))
 
 ;; set scheme-mode
 (font-lock-add-keywords 'scheme-mode
@@ -428,13 +428,17 @@
                                     "\\>")
                            . font-lock-builtin-face))
                         t)
+
+;; set indent for scheme
+(put 'case-λ 'scheme-indent-function 0)
+
 (add-hook 'scheme-mode-hook
-          '(lambda ()
-             ;; (paredit-mode)
-             (evil-paredit-mode)
-             (evil-cleverparens-mode)
-             (evil-cp-redefine-keys)
-             (setq-local comment-start "; ")))
+          (λ ()
+            ;; (paredit-mode)
+            (evil-paredit-mode)
+            (evil-cleverparens-mode)
+            (evil-cp-redefine-keys)
+            (setq-local comment-start "; ")))
 
 ;; setq scheme's default geiser-implementations
 (setq geiser-implementations-alist
@@ -488,105 +492,112 @@
                                           "stream-cdddar" "stream-cddddr")
                                         'symbols)
                            . font-lock-builtin-face)
-                          (,(regexp-opt '("case-λ" "amb") 'symbols) . font-lock-keyword-face))
+                          (,(regexp-opt '("eval" "case-λ" "amb") 'symbols) . font-lock-keyword-face))
                         t)
 (add-hook 'racket-mode-hook
-          '(lambda ()
-             (setq-local comment-start "; ")
-             ;; (paredit-mode)
-             (evil-paredit-mode)
-             (evil-cleverparens-mode)
-             (evil-cp-redefine-keys)
-             (geiser-mode t)))
+          (λ ()
+            (setq-local comment-start "; ")
+            ;; (paredit-mode)
+            (evil-paredit-mode)
+            (evil-cleverparens-mode)
+            (evil-cp-redefine-keys)
+            (geiser-mode t)
+
+            (mapc (λ (x)
+                    (put (car x) 'racket-indent-function (cadr x))
+                    (let ((typed (intern (format "%s:" (car x)))))
+                      (put typed 'racket-indent-function (cadr x))))
+                  '((for/stream racket--indent-for)
+                    (case-λ 0)))))
 
 (add-hook 'racket-repl-mode-hook
-          '(lambda ()
-             (setq-local evil-move-cursor-back nil)
-             ;; (paredit-mode)
-             (evil-paredit-mode)
-             (evil-cleverparens-mode)
-             (evil-cp-redefine-keys)
-             (geiser-mode t)))
+          (λ ()
+            (setq-local evil-move-cursor-back nil)
+            ;; (paredit-mode)
+            (evil-paredit-mode)
+            (evil-cleverparens-mode)
+            (evil-cp-redefine-keys)
+            (geiser-mode t)))
 
 
 ;; define octave-mode
 (add-hook 'octave-mode-hook
-          '(lambda ()
-             (setq-local comment-start "% ")))
+          (λ ()
+            (setq-local comment-start "% ")))
 
 (add-hook 'inferior-octave-mode-hook
-          '(lambda ()
-             (company-mode t)))
+          (λ ()
+            (company-mode t)))
 
 
 ;; define matlab-mode
 (add-hook 'matlab-mode-hook
-          '(lambda ()
-             (setq-local yas-indent-line 'fixed)
-             (setq-local comment-add 1)
-             (setq-local evil-shift-width 4)
-             (setq-local comment-start "% ")))
+          (λ ()
+            (setq-local yas-indent-line 'fixed)
+            (setq-local comment-add 1)
+            (setq-local evil-shift-width 4)
+            (setq-local comment-start "% ")))
 
 ;; set LaTeX-mode
 (add-hook 'LaTeX-mode-hook
-          '(lambda ()
-             (setq-local yas-indent-line 'fixed)
-             (setq-local comment-add 1)
-             (setq-local comment-start "% ")
-             (rainbow-delimiters-mode t)))
+          (λ ()
+            (setq-local yas-indent-line 'fixed)
+            (setq-local comment-add 1)
+            (setq-local comment-start "% ")
+            (rainbow-delimiters-mode t)))
 
 
 ;; set asm-mode
 (add-hook 'asm-mode-hook
-          '(lambda ()
-             (setq-local tab-width 4)
-             (setq-local indent-line-function 'indent-relative)
-             (setq-local comment-start "; ")))
+          (λ ()
+            (setq-local tab-width 4)
+            (setq-local indent-line-function 'indent-relative)
+            (setq-local comment-start "; ")))
 
 ;; set nasm-mode
 (add-hook 'nasm-mode-hook
-          '(lambda ()
-             (setq-local comment-start "; ")))
+          (λ ()
+            (setq-local comment-start "; ")))
 
 
 ;; set python-mode
 (add-hook 'python-mode-hook
-          '(lambda ()
-             (setq-local comment-add 1)
-             (setq-local yas-indent-line 'fixed)))
+          (λ ()
+            (setq-local comment-add 1)
+            (setq-local yas-indent-line 'fixed)))
 
 ;; set ein:ml-mode
 (add-hook 'ein:notebook-multilang-mode-hook
-          '(lambda ()
-             (smartparens-mode t)
-             (setq-local comment-add 1)
-             (setq-local evil-shift-width 4)
-             (setq-local yas-indent-line 'fixed)
-             (yas-activate-extra-mode 'python-mode)))
+          (λ ()
+            (smartparens-mode t)
+            (setq-local comment-add 1)
+            (setq-local evil-shift-width 4)
+            (setq-local yas-indent-line 'fixed)
+            (yas-activate-extra-mode 'python-mode)))
 
 
 ;; define web-mode
 (add-hook 'web-mode-hook
-          '(lambda ()
-             (setq-local electric-pair-pairs
-                         (append electric-pair-pairs '((?\< . ?\>))))))
+          (λ ()
+            (setq-local electric-pair-pairs
+                        (append electric-pair-pairs '((?\< . ?\>))))))
 
 
 ;; define html-mode
 (add-hook 'html-mode-hook
-          '(lambda ()
-             (setq-local electric-pair-pairs
-                         (append electric-pair-pairs '((?\< . ?\>))))))
+          (λ ()
+            (setq-local electric-pair-pairs
+                        (append electric-pair-pairs '((?\< . ?\>))))))
 
 ;; set spelling-checking
 (add-hook 'text-mode-hook
-          '(lambda ()
-             (quote spacemacs/toggle-spelling-checking-on)))
+          (λ ()
+            (quote spacemacs/toggle-spelling-checking-on)))
 
 ;; set org-mode
 (add-hook 'org-mode-hook
-          '(lambda ()
-             (setq-local truncate-lines nil)))
+          (λ ()
+            (setq-local truncate-lines nil)))
 ;; font-lock-mode in org file
 (setq-default org-src-fontify-natively t)
 
