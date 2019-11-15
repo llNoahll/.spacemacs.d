@@ -494,6 +494,15 @@
                            . font-lock-builtin-face)
                           (,(regexp-opt '("eval" "case-λ" "amb") 'symbols) . font-lock-keyword-face))
                         t)
+
+;; set indent for racket
+(mapc (λ (x)
+        (put (car x) 'racket-indent-function (cadr x))
+        (let ((typed (intern (format "%s:" (car x)))))
+          (put typed 'racket-indent-function (cadr x))))
+      '((for/stream racket--indent-for)
+        (case-λ 0)))
+
 (add-hook 'racket-mode-hook
           (λ ()
             (setq-local comment-start "; ")
@@ -501,14 +510,7 @@
             (evil-paredit-mode)
             (evil-cleverparens-mode)
             (evil-cp-redefine-keys)
-            (geiser-mode t)
-
-            (mapc (λ (x)
-                    (put (car x) 'racket-indent-function (cadr x))
-                    (let ((typed (intern (format "%s:" (car x)))))
-                      (put typed 'racket-indent-function (cadr x))))
-                  '((for/stream racket--indent-for)
-                    (case-λ 0)))))
+            (geiser-mode t)))
 
 (add-hook 'racket-repl-mode-hook
           (λ ()
