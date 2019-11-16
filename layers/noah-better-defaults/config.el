@@ -83,19 +83,19 @@
 ;;; set semantic
 ;; disable emacs-lisp-mode
 (add-hook 'semantic-inhibit-functions
-          (λ ()
+          (lambda ()
             (member major-mode '(emacs-lisp-mode scheme-mode))))
 
 ;; only enable cc-mode
 ;; (setq semantic-inhibit-functions
-;;       (λ ()
+;;       (lambda ()
 ;;          (not (and (featurep 'cc-defs)
 ;;                    c-buffer-is-cc-mode))))
 
 ;; set company-mode
 (setq company-show-numbers t)
 (add-hook 'company-mode-hook
-          (λ ()
+          (lambda ()
             ;; ;; Use the tab-and-go frontend.
             ;; ;; Allows TAB to select and complete at the same time.
             ;; (company-tng-configure-default)
@@ -107,37 +107,37 @@
 
 ;; set default configs in prog-mode
 (add-hook 'prog-mode-hook
-          (λ ()
+          (lambda ()
             (setq-local require-final-newline nil)
             (company-mode t)
             (highlight-indent-guides-mode t)))
 
 ;; set eshell
 (add-hook 'eshell-mode-hook
-          (λ ()
+          (lambda ()
             (setq-local evil-move-cursor-back nil)
             (smartparens-mode t)))
 
 ;; set company for text-mode
 (add-hook 'text-mode-hook
-          (λ ()
+          (lambda ()
             (setq-local require-final-newline nil)
             (company-mode t)))
 
 ;; set magit-status-mode
 (add-hook 'magit-status-mode-hook
-          (λ ()
+          (lambda ()
             (display-line-numbers-mode t)))
 
 ;; set eww
 (add-hook 'eww-after-render-hook
-          (λ ()
+          (lambda ()
             (setq-local truncate-lines nil)
             (vline-mode t)))
 
 ;; set treemacs-mode
 (add-hook 'treemacs-mode-hook
-          (λ ()
+          (lambda ()
             (text-scale-set -2)
             (vline-mode t)
             (highlight-indentation-mode t)
@@ -153,31 +153,31 @@
 
 ;; set c-mode
 (add-hook 'c-mode-hook
-          (λ ()
+          (lambda ()
             (setq-local comment-start "// ")
             (setq-local comment-end "")))
 
 ;; ;; set c++-mode
 ;; (add-hook 'c++-mode-hook
-;;           (λ ()
+;;           (lambda ()
 ;;              (setq-local comment-start "/* ")
 ;;              (setq-local comment-end   " */")))
 
 ;; ;; set java-mode
 ;; (add-hook 'java-mode-hook
-;;           (λ ()
+;;           (lambda ()
 ;;              (setq-local comment-start "/* ")
 ;;              (setq-local comment-end   " */")))
 
 ;; set css-mode
 (add-hook 'css-mode-hook
-          (λ ()
+          (lambda ()
             (setq-local comment-start "/* ")
             (setq-local comment-end   " */")))
 
 ;; set lisp-mode
 (add-hook 'lisp-mode-hook
-          (λ ()
+          (lambda ()
             ;; (paredit-mode)
             (evil-paredit-mode)
             (evil-cleverparens-mode)
@@ -186,7 +186,7 @@
 
 ;; set common-lisp-mode
 (add-hook 'common-lisp-mode-hook
-          (λ ()
+          (lambda ()
             ;; (paredit-mode)
             (evil-paredit-mode)
             (evil-cleverparens-mode)
@@ -235,7 +235,7 @@
                            . font-lock-builtin-face))
                         t)
 (add-hook 'emacs-lisp-mode-hook
-          (λ ()
+          (lambda ()
             ;; (paredit-mode)
             (evil-paredit-mode)
             (evil-cleverparens-mode)
@@ -244,7 +244,7 @@
 
 ;; set iell-mode
 (add-hook 'ielm-mode-hook
-          (λ ()
+          (lambda ()
             ;; (paredit-mode)
             (evil-paredit-mode)
             (evil-cleverparens-mode)
@@ -308,7 +308,7 @@
                                          '("set!"
                                            "eval" "apply"
                                            "amb"
-                                           "case-λ"
+                                           "case-lambda"
                                            "filter") t) "\\>")
                            . font-lock-keyword-face)
                           (,(concat "(" (regexp-opt
@@ -430,10 +430,10 @@
                         t)
 
 ;; set indent for scheme
-(put 'case-λ 'scheme-indent-function 0)
+(put 'case-lambda 'scheme-indent-function 0)
 
 (add-hook 'scheme-mode-hook
-          (λ ()
+          (lambda ()
             ;; (paredit-mode)
             (evil-paredit-mode)
             (evil-cleverparens-mode)
@@ -449,8 +449,8 @@
 
 ;; set racket-mode
 (font-lock-add-keywords 'racket-mode
-                        `((,(regexp-opt '("case-λ:" "opt-λ:" "pcase-λ:" "pλ:" "popt-λ:"
-                                          "match-λ" "match-λ*" "match-λ**"
+                        `((,(regexp-opt '("case-lambda:" "opt-lambda:" "pcase-lambda:" "plambda:" "popt-lambda:"
+                                          "match-lambda" "match-lambda*" "match-lambda**"
                                           "true?"
                                           "nil" "nil?"
                                           "mcaar" "mcadr"
@@ -492,19 +492,19 @@
                                           "stream-cdddar" "stream-cddddr")
                                         'symbols)
                            . font-lock-builtin-face)
-                          (,(regexp-opt '("eval" "case-λ" "amb") 'symbols) . font-lock-keyword-face))
+                          (,(regexp-opt '("eval" "case-lambda" "amb") 'symbols) . font-lock-keyword-face))
                         t)
 
 ;; set indent for racket
-(mapc (λ (x)
+(mapc (lambda (x)
         (put (car x) 'racket-indent-function (cadr x))
         (let ((typed (intern (format "%s:" (car x)))))
           (put typed 'racket-indent-function (cadr x))))
       '((for/stream racket--indent-for)
-        (case-λ 0)))
+        (case-lambda 0)))
 
 (add-hook 'racket-mode-hook
-          (λ ()
+          (lambda ()
             (setq-local comment-start "; ")
             ;; (paredit-mode)
             (evil-paredit-mode)
@@ -513,7 +513,7 @@
             (geiser-mode t)))
 
 (add-hook 'racket-repl-mode-hook
-          (λ ()
+          (lambda ()
             (setq-local evil-move-cursor-back nil)
             ;; (paredit-mode)
             (evil-paredit-mode)
@@ -524,17 +524,17 @@
 
 ;; define octave-mode
 (add-hook 'octave-mode-hook
-          (λ ()
+          (lambda ()
             (setq-local comment-start "% ")))
 
 (add-hook 'inferior-octave-mode-hook
-          (λ ()
+          (lambda ()
             (company-mode t)))
 
 
 ;; define matlab-mode
 (add-hook 'matlab-mode-hook
-          (λ ()
+          (lambda ()
             (setq-local yas-indent-line 'fixed)
             (setq-local comment-add 1)
             (setq-local evil-shift-width 4)
@@ -542,7 +542,7 @@
 
 ;; set LaTeX-mode
 (add-hook 'LaTeX-mode-hook
-          (λ ()
+          (lambda ()
             (setq-local yas-indent-line 'fixed)
             (setq-local comment-add 1)
             (setq-local comment-start "% ")
@@ -551,26 +551,26 @@
 
 ;; set asm-mode
 (add-hook 'asm-mode-hook
-          (λ ()
+          (lambda ()
             (setq-local tab-width 4)
             (setq-local indent-line-function 'indent-relative)
             (setq-local comment-start "; ")))
 
 ;; set nasm-mode
 (add-hook 'nasm-mode-hook
-          (λ ()
+          (lambda ()
             (setq-local comment-start "; ")))
 
 
 ;; set python-mode
 (add-hook 'python-mode-hook
-          (λ ()
+          (lambda ()
             (setq-local comment-add 1)
             (setq-local yas-indent-line 'fixed)))
 
 ;; set ein:ml-mode
 (add-hook 'ein:notebook-multilang-mode-hook
-          (λ ()
+          (lambda ()
             (smartparens-mode t)
             (setq-local comment-add 1)
             (setq-local evil-shift-width 4)
@@ -580,25 +580,25 @@
 
 ;; define web-mode
 (add-hook 'web-mode-hook
-          (λ ()
+          (lambda ()
             (setq-local electric-pair-pairs
                         (append electric-pair-pairs '((?\< . ?\>))))))
 
 
 ;; define html-mode
 (add-hook 'html-mode-hook
-          (λ ()
+          (lambda ()
             (setq-local electric-pair-pairs
                         (append electric-pair-pairs '((?\< . ?\>))))))
 
 ;; set spelling-checking
 (add-hook 'text-mode-hook
-          (λ ()
+          (lambda ()
             (quote spacemacs/toggle-spelling-checking-on)))
 
 ;; set org-mode
 (add-hook 'org-mode-hook
-          (λ ()
+          (lambda ()
             (setq-local truncate-lines nil)))
 ;; font-lock-mode in org file
 (setq-default org-src-fontify-natively t)

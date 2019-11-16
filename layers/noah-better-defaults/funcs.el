@@ -151,7 +151,7 @@ is binary, activate `hexl-mode'."
   "Turn down the alpha"
   (interactive)
   (let ((h (car alpha-list)))
-    ((λ (a ab)
+    ((lambda (a ab)
        (set-frame-parameter (selected-frame) 'alpha (list a ab))
        (add-to-list 'default-frame-alist (cons 'alpha (list a ab))))
      (car h) (cadr h))
@@ -162,7 +162,7 @@ is binary, activate `hexl-mode'."
   (interactive)
   (let ((g (car (last alpha-list 1)))
         (h (car (last alpha-list 2))))
-    ((λ (a ab)
+    ((lambda (a ab)
        (set-frame-parameter (selected-frame) 'alpha (list a ab))
        (add-to-list 'default-frame-alist (cons 'alpha (list a ab))))
      (car h) (cadr h))
