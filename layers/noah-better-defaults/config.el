@@ -39,6 +39,7 @@
 (electric-pair-mode t)
 (delete-selection-mode t)
 (global-font-lock-mode t)
+(global-prettify-symbols-mode t)
 
 ;; set comment-style
 (setq comment-style 'multi-line)
@@ -182,7 +183,8 @@
             (evil-paredit-mode)
             (evil-cleverparens-mode)
             (evil-cp-redefine-keys)
-            (setq-local comment-start "; ")))
+            (setq-local comment-start "; ")
+            (setq-local prettify-symbols-alist '(("lambda" . ?λ)))))
 
 ;; set common-lisp-mode
 (add-hook 'common-lisp-mode-hook
@@ -190,7 +192,8 @@
             ;; (paredit-mode)
             (evil-paredit-mode)
             (evil-cleverparens-mode)
-            (evil-cp-redefine-keys)))
+            (evil-cp-redefine-keys)
+            (setq-local prettify-symbols-alist '(("lambda" . ?λ)))))
 
 ;; set emacs-lisp-mode
 (font-lock-add-keywords 'emacs-lisp-mode
@@ -240,7 +243,8 @@
             (evil-paredit-mode)
             (evil-cleverparens-mode)
             (evil-cp-redefine-keys)
-            (setq-local comment-start "; ")))
+            (setq-local comment-start "; ")
+            (setq-local prettify-symbols-alist '(("lambda" . ?λ)))))
 
 ;; set iell-mode
 (add-hook 'ielm-mode-hook
@@ -308,7 +312,7 @@
                                          '("set!"
                                            "eval" "apply"
                                            "amb"
-                                           "case-lambda"
+                                           "case-λ"
                                            "filter") t) "\\>")
                            . font-lock-keyword-face)
                           (,(concat "(" (regexp-opt
@@ -430,7 +434,7 @@
                         t)
 
 ;; set indent for scheme
-(put 'case-lambda 'scheme-indent-function 0)
+(put 'case-λ 'scheme-indent-function 0)
 
 (add-hook 'scheme-mode-hook
           (lambda ()
@@ -438,7 +442,10 @@
             (evil-paredit-mode)
             (evil-cleverparens-mode)
             (evil-cp-redefine-keys)
-            (setq-local comment-start "; ")))
+            (setq-local comment-start "; ")
+            (setq-local prettify-symbols-alist '(("lambda" . ?λ)
+                                                 ("case-lambda" .
+                                                  (?c (Br . Bl) ?a (Br . Bl) ?s (Br . Bl) ?e (Br . Bl) ?- (Br . Bl) ?λ))))))
 
 ;; setq scheme's default geiser-implementations
 (setq geiser-implementations-alist
@@ -449,8 +456,8 @@
 
 ;; set racket-mode
 (font-lock-add-keywords 'racket-mode
-                        `((,(regexp-opt '("case-lambda:" "opt-lambda:" "pcase-lambda:" "plambda:" "popt-lambda:"
-                                          "match-lambda" "match-lambda*" "match-lambda**"
+                        `((,(regexp-opt '("case-λ:" "opt-λ:" "pcase-λ:" "pλ:" "popt-λ:"
+                                          "match-λ" "match-λ*" "match-λ**"
                                           "true?"
                                           "nil" "nil?"
                                           "mcaar" "mcadr"
@@ -492,7 +499,7 @@
                                           "stream-cdddar" "stream-cddddr")
                                         'symbols)
                            . font-lock-builtin-face)
-                          (,(regexp-opt '("eval" "case-lambda" "amb") 'symbols) . font-lock-keyword-face))
+                          (,(regexp-opt '("eval" "case-λ" "amb") 'symbols) . font-lock-keyword-face))
                         t)
 
 ;; set indent for racket
@@ -501,25 +508,82 @@
         (let ((typed (intern (format "%s:" (car x)))))
           (put typed 'racket-indent-function (cadr x))))
       '((for/stream racket--indent-for)
-        (case-lambda 0)))
+        (case-λ 0)))
 
 (add-hook 'racket-mode-hook
           (lambda ()
-            (setq-local comment-start "; ")
             ;; (paredit-mode)
             (evil-paredit-mode)
             (evil-cleverparens-mode)
             (evil-cp-redefine-keys)
-            (geiser-mode t)))
+            (geiser-mode t)
+            (setq-local comment-start "; ")
+            (setq-local prettify-symbols-alist '(("lambda" . ?λ)
+                                                 ("case-lambda" .
+                                                  (?c (Br . Bl) ?a (Br . Bl) ?s (Br . Bl) ?e (Br . Bl) ?- (Br . Bl)
+                                                      ?λ))
+                                                 ("match-lambda" .
+                                                  (?m (Br . Bl) ?a (Br . Bl) ?t (Br . Bl) ?c (Br . Bl) ?h (Br . Bl) ?- (Br . Bl)
+                                                      ?λ))
+                                                 ("match-lambda*" .
+                                                  (?m (Br . Bl) ?a (Br . Bl) ?t (Br . Bl) ?c (Br . Bl) ?h (Br . Bl) ?- (Br . Bl)
+                                                      ?λ (Br . Bl) ?*))
+                                                 ("match-lambda**" .
+                                                  (?m (Br . Bl) ?a (Br . Bl) ?t (Br . Bl) ?c (Br . Bl) ?h (Br . Bl) ?- (Br . Bl)
+                                                      ?λ (Br . Bl) ?* (Br . Bl) ?*))
+                                                 ("case-lambda:" .
+                                                  (?c (Br . Bl) ?a (Br . Bl) ?s (Br . Bl) ?e (Br . Bl) ?- (Br . Bl)
+                                                      ?λ (Br . Bl) ?:))
+                                                 ("opt-lambda:" .
+                                                  (?o (Br . Bl) ?p (Br . Bl) ?t (Br . Bl) ?- (Br . Bl)
+                                                      ?λ (Br . Bl) ?:))
+                                                 ("pcase-lambda:" .
+                                                  (?p (Br . Bl) ?c (Br . Bl) ?a (Br . Bl) ?s (Br . Bl) ?e (Br . Bl) ?- (Br . Bl)
+                                                      ?λ (Br . Bl) ?:))
+                                                 ("plambda:" .
+                                                  (?p (Br . Bl)
+                                                      ?λ (Br . Bl) ?:))
+                                                 ("popt-lambda:" .
+                                                  (?p (Br . Bl) ?o (Br . Bl) ?p (Br . Bl) ?t (Br . Bl) ?- (Br . Bl)
+                                                      ?λ (Br . Bl) ?:))))))
 
 (add-hook 'racket-repl-mode-hook
           (lambda ()
-            (setq-local evil-move-cursor-back nil)
             ;; (paredit-mode)
             (evil-paredit-mode)
             (evil-cleverparens-mode)
             (evil-cp-redefine-keys)
-            (geiser-mode t)))
+            (geiser-mode t)
+            (setq-local evil-move-cursor-back nil)
+            (setq-local comment-start "; ")
+            (setq-local prettify-symbols-alist '(("lambda" . ?λ)
+                                                 ("case-lambda" .
+                                                  (?c (Br . Bl) ?a (Br . Bl) ?s (Br . Bl) ?e (Br . Bl) ?- (Br . Bl)
+                                                      ?λ))
+                                                 ("match-lambda" .
+                                                  (?m (Br . Bl) ?a (Br . Bl) ?t (Br . Bl) ?c (Br . Bl) ?h (Br . Bl) ?- (Br . Bl)
+                                                      ?λ))
+                                                 ("match-lambda*" .
+                                                  (?m (Br . Bl) ?a (Br . Bl) ?t (Br . Bl) ?c (Br . Bl) ?h (Br . Bl) ?- (Br . Bl)
+                                                      ?λ (Br . Bl) ?*))
+                                                 ("match-lambda**" .
+                                                  (?m (Br . Bl) ?a (Br . Bl) ?t (Br . Bl) ?c (Br . Bl) ?h (Br . Bl) ?- (Br . Bl)
+                                                      ?λ (Br . Bl) ?* (Br . Bl) ?*))
+                                                 ("case-lambda:" .
+                                                  (?c (Br . Bl) ?a (Br . Bl) ?s (Br . Bl) ?e (Br . Bl) ?- (Br . Bl)
+                                                      ?λ (Br . Bl) ?:))
+                                                 ("opt-lambda:" .
+                                                  (?o (Br . Bl) ?p (Br . Bl) ?t (Br . Bl) ?- (Br . Bl)
+                                                      ?λ (Br . Bl) ?:))
+                                                 ("pcase-lambda:" .
+                                                  (?p (Br . Bl) ?c (Br . Bl) ?a (Br . Bl) ?s (Br . Bl) ?e (Br . Bl) ?- (Br . Bl)
+                                                      ?λ (Br . Bl) ?:))
+                                                 ("plambda:" .
+                                                  (?p (Br . Bl)
+                                                      ?λ (Br . Bl) ?:))
+                                                 ("popt-lambda:" .
+                                                  (?p (Br . Bl) ?o (Br . Bl) ?p (Br . Bl) ?t (Br . Bl) ?- (Br . Bl)
+                                                      ?λ (Br . Bl) ?:))))))
 
 
 ;; define octave-mode
