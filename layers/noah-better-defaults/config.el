@@ -456,7 +456,7 @@
 
 ;; set racket-mode
 (font-lock-add-keywords 'racket-mode
-                        `((,(regexp-opt '("case-λ:" "opt-λ:" "pcase-λ:" "pλ:" "popt-λ:"
+                        `((,(regexp-opt '("case-λ:" "λ:" "opt-λ:" "pcase-λ:" "pλ:" "popt-λ:"
                                           "match-λ" "match-λ*" "match-λ**"
                                           "true?"
                                           "nil" "nil?"
@@ -531,6 +531,8 @@
                                                  ("match-lambda**" .
                                                   (?m (Br . Bl) ?a (Br . Bl) ?t (Br . Bl) ?c (Br . Bl) ?h (Br . Bl) ?- (Br . Bl)
                                                       ?λ (Br . Bl) ?* (Br . Bl) ?*))
+                                                 ("lambda:" .
+                                                  (?λ (Br . Bl) ?:))
                                                  ("case-lambda:" .
                                                   (?c (Br . Bl) ?a (Br . Bl) ?s (Br . Bl) ?e (Br . Bl) ?- (Br . Bl)
                                                       ?λ (Br . Bl) ?:))
