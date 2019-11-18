@@ -426,7 +426,7 @@
                                            "make-polar" "make-rectangular"
                                            "make-input-port" "make-output-port"
                                            "make-list" "make-vector" "make-string"
-                                           "zero?"
+                                           "zero?" "sub1" "add1" "1+" "1-" "-1+"
                                            "true" "false" "true?" "false?"
                                            "not" "xor" "nor" "nand" "implies")
                                          t)
