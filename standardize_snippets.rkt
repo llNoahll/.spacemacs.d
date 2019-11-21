@@ -1,16 +1,21 @@
-#lang racket
+#lang typed/racket
 
 
+(: deal-file [-> Path Void])
 (define deal-file
   (λ (file-path)
 
+    (: modify-file [-> Path Void])
     (define modify-file
       (λ (file-path)
+
+        (: new-content String)
         (define new-content
           (string-trim
            (call-with-input-file file-path
-             (λ (in)
-               (let loop ([line (read-line in)] [content ""])
+             (λ ([in : Input-Port]) : String
+               (let loop : String ([line : (U EOF String) (read-line in)]
+                                   [content : String ""])
                  (cond [(eof-object? line) content]
                        [(string-prefix? line "# key:")
                         (cond [(string-suffix? line ".")
@@ -23,13 +28,15 @@
                                      (string-append content (string-append line ".\n")))])]
                        [else (loop (read-line in) (string-append content line "\n"))]))))))
 
+
         (call-with-output-file file-path #:exists 'replace
-          (λ (out)
+          (λ ([out : Output-Port]) : String
             (display new-content out)))))
 
+    (: rename-file [-> Path Void])
     (define rename-file
       (λ (file-path)
-        (let ([file-name (path->string file-path)])
+        (let ([file-name : String (path->string file-path)])
           (cond [(string-suffix? file-name ".org") (void)]
                 [(string-suffix? file-name ".markdown") (void)]
                 [(string-suffix? file-name ".el") (void)]
@@ -54,6 +61,7 @@
     (modify-file file-path)
     (rename-file file-path)))
 
+(: deal-dir [-> Path Void])
 (define deal-dir
   (λ (dir-path)
     (for ([path (directory-list dir-path #:build? #t)])
