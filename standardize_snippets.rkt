@@ -73,7 +73,9 @@
              (displayln (format "deal files under: ~a" path))
              (deal-dir path)]
             [else
-             (displayln (format "~a is not a directory or a file!" path))]))))
+             (displayln "\n**********************************************************************")
+             (displayln (format "~a is not a directory or a file!" path))
+             (displayln "\n**********************************************************************")]))))
 
 
 (deal-dir (string->path "snippets"))
