@@ -30,7 +30,7 @@
 
 
         (call-with-output-file file-path #:exists 'replace
-          (λ ([out : Output-Port]) : String
+          (λ ([out : Output-Port]) : Void
             (display new-content out)))))
 
     (: rename-file [-> Path Void])
