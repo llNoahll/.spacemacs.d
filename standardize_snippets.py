@@ -52,6 +52,10 @@ def standardize_yasnippet(path):
             pass
         elif '.markdown' == path[-9:]:
             pass
+        elif '.el' == path[-3:]:
+            pass
+        elif '.elc' == path[-4:]:
+            pass
         elif '.js' == path[-3:]:
             pass
         elif '.gitignore' == path[-10:]:
