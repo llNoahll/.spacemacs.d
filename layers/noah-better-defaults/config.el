@@ -453,7 +453,8 @@
 
 ;; set racket-mode
 (font-lock-add-keywords 'racket-mode
-                        `((,(regexp-opt '("case-λ:" "λ:" "opt-λ:" "pcase-λ:" "pλ:" "popt-λ:"
+                        `((,(regexp-opt '(":-" "?" "~"
+                                          "case-λ:" "λ:" "opt-λ:" "pcase-λ:" "pλ:" "popt-λ:"
                                           "match-λ" "match-λ*" "match-λ**"
                                           "true?"
                                           "nil" "nil?"
