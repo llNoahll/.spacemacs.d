@@ -227,6 +227,7 @@
                                            "cdddar" "cddddr"
                                            "list" "list*" "listp" "null"
                                            "append" "reverse"
+
                                            "true" "false"
                                            "not" "xor")
                                          t)
@@ -318,7 +319,9 @@
                                            "write" "writeln"
                                            "print" "printf" "println" "fprintf"
                                            "newline"
+
                                            "read" "read-char"
+
                                            "close-port" "close-input-port" "close-output-port"
                                            "open-bytevector-output-port"
                                            "open-bytevector-input-port"
@@ -334,16 +337,20 @@
                                            "open-string-input-port"
                                            "open-string-output-port"
                                            "open-process-ports"
+
                                            "assert" "assoc"
                                            "assp" "assq" "assv"
                                            "assertion-violation" "assertion-violation?"
                                            "assertion-violationf"
+
                                            "number?"
                                            "number->string"
                                            "numerator"
+
                                            "symbol?"
                                            "symbol=?"
                                            "symbol->string"
+
                                            "string" "string?"
                                            "string-length" "string-ref"
                                            "string-copy" "string-copy!" "string-append"
@@ -359,15 +366,18 @@
                                            "string=?" "string<=?" "string>=?"
                                            "string<?" "string>?"
                                            "string-set!" "string-fill!"
-                                           "set-car!" "set-cdr!"
+
                                            "vector" "vector?"
                                            "vector-length" "vector-ref"
                                            "vector->immutable-vector" "vector->list"
                                            "vector-set!" "vector-sort!" "vector-fill!"
                                            "vector-map" "vector-sort" "vector-copy"
+
                                            "box" "box-immutable" "box?"
                                            "set-box!" "box-cas!"
+
                                            "cons" "pair?" "last-pair"
+                                           "set-car!" "set-cdr!"
                                            "car" "cdr"
                                            "caar" "cadr"
                                            "cdar" "cddr"
@@ -397,6 +407,7 @@
                                            "remove" "remove!"
                                            "remainder"
                                            "sort" "sort!"
+
                                            "stream-cons" "stream-first" "stream-rest"
                                            "stream-car" "stream-cdr"
                                            "stream-caar" "stream-cadr"
@@ -417,11 +428,13 @@
                                            "stream-append" "stream-ref"
                                            "stream-map" "stream-filter"
                                            "empty-stream" "stream-empty?"
+
                                            "make-date"
                                            "make-parameter"
                                            "make-polar" "make-rectangular"
                                            "make-input-port" "make-output-port"
                                            "make-list" "make-vector" "make-string"
+
                                            "zero?" "sub1" "add1" "1+" "1-" "-1+"
                                            "true" "false" "true?" "false?"
                                            "not" "xor" "nor" "nand" "implies")
@@ -456,10 +469,13 @@
                         `((,(regexp-opt '(":-" "?" "~"
                                           "datalog" "datalog!"
                                           "make-theory" "write-theory" "read-theory" "theory/c"
+
                                           "case-λ:" "λ:" "opt-λ:" "pcase-λ:" "pλ:" "popt-λ:"
                                           "match-λ" "match-λ*" "match-λ**"
+
                                           "true?"
                                           "nil" "nil?"
+
                                           "mcaar" "mcadr"
                                           "mcdar" "mcddr"
                                           "mcaaar" "mcaadr"
@@ -482,6 +498,7 @@
                                           "mmap" "mfor-each"
                                           "mmember" "mmemv" "mmemq" "massoc"
                                           "massv" "massq"
+
                                           "stream-car" "stream-cdr"
                                           "stream-caar" "stream-cadr"
                                           "stream-cdar" "stream-cddr"
@@ -496,7 +513,19 @@
                                           "stream-cdaaar" "stream-cdaadr"
                                           "stream-cdadar" "stream-cdaddr"
                                           "stream-cddaar" "stream-cddadr"
-                                          "stream-cdddar" "stream-cddddr")
+                                          "stream-cdddar" "stream-cddddr"
+
+                                          "serializable?" "serialize" "deserialize" "serialized=?"
+                                          "deserialize-module-guard"
+                                          "serializable-struct"
+                                          "define-serializable-struct"
+                                          "serializable-struct/versions"
+                                          "define-serializable-struct/versions"
+                                          "make-deserialize-info"
+                                          "prop:serializable"
+                                          "make-serialize-info"
+
+                                          "s-exp->fasl" "fasl->s-exp")
                                         'symbols)
                            . font-lock-builtin-face)
                           (,(regexp-opt '("eval" "case-λ" "amb") 'symbols) . font-lock-keyword-face))
