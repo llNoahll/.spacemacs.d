@@ -454,7 +454,8 @@
 ;; set racket-mode
 (font-lock-add-keywords 'racket-mode
                         `((,(regexp-opt '(":-" "?" "~"
-                                          "datalog" "make-theory"
+                                          "datalog" "datalog!"
+                                          "make-theory" "write-theory" "read-theory" "theory/c"
                                           "case-λ:" "λ:" "opt-λ:" "pcase-λ:" "pλ:" "popt-λ:"
                                           "match-λ" "match-λ*" "match-λ**"
                                           "true?"
