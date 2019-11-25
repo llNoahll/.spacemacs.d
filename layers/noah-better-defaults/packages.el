@@ -33,6 +33,7 @@
   `(
     (sublimity  :location local)
     (vline-mode :location local)
+    ;; (quack-mode :location local)
     (rash-mode  :location local)
     (yin-mode   :location local)
     on-parens
@@ -88,6 +89,13 @@
     (setq vline-idle-time 1)
 
     (spacemacs/set-leader-keys "t C-v" 'vline-mode)))
+
+(defun noah-better-defaults/init-quack-mode ()
+  (use-package quack-mode
+    :defer t
+    :init
+    (require 'quack)
+    ))
 
 (defun noah-better-defaults/init-rash-mode ()
   (use-package rash-mode
