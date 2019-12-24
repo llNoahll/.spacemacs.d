@@ -571,9 +571,15 @@ It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
   (setq configuration-layer-elpa-archives
-        '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
-          ("org-cn"   . "http://elpa.emacs-china.org/org/")
-          ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
+        '(("melpa-cn"             . "http://elpa.emacs-china.org/melpa/")
+          ("org-cn"               . "http://elpa.emacs-china.org/org/")
+          ("gnu-cn"               . "http://elpa.emacs-china.org/gnu/")
+          ("marmalade-cn"         . "http://elpa.emacs-china.org/marmalade/")
+          ("user42-cn"            . "http://elpa.emacs-china.org/user42/")
+          ("melpa-stable-cn"      . "http://elpa.emacs-china.org/melpa-stable/")
+          ("sunrise-commander-cn" . "http://elpa.emacs-china.org/sunrise-commander/")))
+  (setq configuration-layer--elpa-archives configuration-layer-elpa-archives)
+  (setq package-archives configuration-layer-elpa-archives)
 
   ;; https://github.com/syl20bnr/spacemacs/issues/2705
   ;; (setq tramp-mode nil)
