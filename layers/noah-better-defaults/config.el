@@ -154,11 +154,12 @@
             (setq-local comment-start "// ")
             (setq-local comment-end "")))
 
-;; ;; set c++-mode
-;; (add-hook 'c++-mode-hook
-;;           (lambda ()
-;;              (setq-local comment-start "/* ")
-;;              (setq-local comment-end   " */")))
+;; set c++-mode
+(add-hook 'c++-mode-hook
+          (lambda ()
+             (setq-local comment-start "/* ")
+             (setq-local comment-end   " */")
+             (flycheck-mode t)))
 
 ;; ;; set java-mode
 ;; (add-hook 'java-mode-hook
@@ -467,8 +468,8 @@
 ;; set racket-mode
 (font-lock-add-keywords 'racket-mode
                         `((,(regexp-opt '(":-" "?" "~" "!="
-                                          "datalog" "datalog!"
-                                          "make-theory" "write-theory" "read-theory" "theory/c"
+                                          ;; "datalog" "datalog!"
+                                          ;; "make-theory" "write-theory" "read-theory" "theory/c"
 
                                           "case-λ:" "λ:" "opt-λ:" "pcase-λ:" "pλ:" "popt-λ:"
                                           "match-λ" "match-λ*" "match-λ**"
