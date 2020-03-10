@@ -1,3 +1,6 @@
+[submodule "r6lint"]
+	path = layers/noah-scheme/local/r6lint
+	url = https://github.com/weinholt/r6lint
 [submodule "vline-mode"]
 	path = layers/noah-better-defaults/local/vline-mode
 	url = https://github.com/EricCrosson/vline-mode

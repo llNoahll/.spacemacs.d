@@ -31,11 +31,11 @@
 
 (defconst noah-better-defaults-packages
   `(
-    (sublimity  :location local)
-    (vline-mode :location local)
-    ;; (quack-mode :location local)
-    (rash-mode  :location local)
-    (yin-mode   :location local)
+    (sublimity       :location local)
+    (vline-mode      :location local)
+    ;; (quack-mode      :location local)
+    (rash-mode       :location local)
+    (yin-mode        :location local)
     on-parens
     evil-textobj-anyblock
     evil-paredit

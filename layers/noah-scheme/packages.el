@@ -30,8 +30,18 @@
 ;;; Code:
 
 (defconst noah-scheme-packages
-  '()
-  )
+  '(
+    (r6lint :location local)
+    ))
+
+
+
+(defun noah-scheme/init-r6lint ()
+  (use-package r6lint
+    :defer t
+    :init
+    (require 'flycheck-r6lint)
+    (eval-after-load 'flycheck '(flycheck-r6lint-setup))))
 
 
 
