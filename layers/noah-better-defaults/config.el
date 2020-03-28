@@ -664,6 +664,8 @@
 (add-hook 'verilog-mode-hook
           (lambda ()
             (setq-local verilog-align-ifelse t)
+            (setq-local verilog-auto-newline nil)
+            (setq-local verilog-auto-delete-trailing-whitespace nil)
 
             (setq-local verilog-highlight-grouping-keywords t)
             (setq-local verilog-highlight-modules t)
