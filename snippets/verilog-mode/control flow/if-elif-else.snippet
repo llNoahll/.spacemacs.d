@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: if, elif, else
+# key: ifee.
+# --
+if(${1:condition}) begin
+    $3
+end else if(${2:condition}) begin
+    $4
+end else begin
+    $0
+end

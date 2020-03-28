@@ -660,6 +660,24 @@
             (setq-local comment-start "; ")))
 
 
+;; set verilog-mode
+(add-hook 'verilog-mode-hook
+          (lambda ()
+            (setq-local verilog-align-ifelse t)
+
+            (setq-local verilog-highlight-grouping-keywords t)
+            (setq-local verilog-highlight-modules t)
+
+            (setq-local verilog-case-indent 0)
+            (setq-local verilog-cexp-indent 0)
+
+            (setq-local verilog-indent-level 4)
+            (setq-local verilog-indent-level-behavioral 4)
+            (setq-local verilog-indent-level-module 4)
+            (setq-local verilog-indent-level-declaration 4)
+            (setq-local tab-width 4)))
+
+
 ;; set python-mode
 (add-hook 'python-mode-hook
           (lambda ()
