@@ -670,9 +670,8 @@
             (setq-local verilog-highlight-grouping-keywords t)
             (setq-local verilog-highlight-modules t)
 
-            (setq-local verilog-case-indent 0)
             (setq-local verilog-cexp-indent 0)
-
+            (setq-local verilog-case-indent 4)
             (setq-local verilog-indent-level 4)
             (setq-local verilog-indent-level-behavioral 4)
             (setq-local verilog-indent-level-module 4)
