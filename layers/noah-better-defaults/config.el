@@ -676,7 +676,9 @@
             (setq-local verilog-indent-level-behavioral 4)
             (setq-local verilog-indent-level-module 4)
             (setq-local verilog-indent-level-declaration 4)
-            (setq-local tab-width 4)))
+            (setq-local tab-width 4)
+
+            (flycheck-mode t)))
 
 
 ;; set python-mode
