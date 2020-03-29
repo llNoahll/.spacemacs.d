@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: `ifndef
+# key: ifndef.
+# --
+`ifndef ${1:`(upcase (file-name-sans-extension (buffer-name)))`}
+`define $1
+
+$0
+
+`endif
