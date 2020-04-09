@@ -450,7 +450,7 @@
 (add-hook 'scheme-mode-hook
           (lambda ()
             ;; (paredit-mode)
-            (flycheck-mode t)
+            ;; (flycheck-mode t)
             (evil-paredit-mode)
             (evil-cleverparens-mode)
             (evil-cp-redefine-keys)
@@ -544,7 +544,7 @@
 (add-hook 'racket-mode-hook
           (lambda ()
             ;; (paredit-mode)
-            (flycheck-mode t)
+            ;; (flycheck-mode t)
             (evil-paredit-mode)
             (evil-cleverparens-mode)
             (evil-cp-redefine-keys)
