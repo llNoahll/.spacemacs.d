@@ -157,15 +157,15 @@
 ;; set c++-mode
 (add-hook 'c++-mode-hook
           (lambda ()
-             (setq-local comment-start "/* ")
-             (setq-local comment-end   " */")
+            (setq-local comment-start "// ")
+            (setq-local comment-end "")
              (flycheck-mode t)))
 
 ;; ;; set java-mode
 ;; (add-hook 'java-mode-hook
 ;;           (lambda ()
-;;              (setq-local comment-start "/* ")
-;;              (setq-local comment-end   " */")))
+;;             (setq-local comment-start "// ")
+;;             (setq-local comment-end "")))
 
 ;; set css-mode
 (add-hook 'css-mode-hook
