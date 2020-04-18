@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: try, catch, finally
+# key: trycf.
+# --
+try {
+    $3
+} catch(${1:const std::exception&} ${2:ex}) {
+    $4
+} catch(...) {
+    $0
+}
