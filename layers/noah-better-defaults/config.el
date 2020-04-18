@@ -149,12 +149,40 @@
             ))
 
 ;; set c-mode
+(font-lock-add-keywords 'c-mode
+                        `((,(regexp-opt '("&&" "||" "!"
+                                          "..." ";" ":"
+                                          "lambda" "λ")
+                                        'symbols)
+                           . font-lock-keyword-face)
+                          (,(regexp-opt '("="
+                                          "+" "-" "*" "/" "%"
+                                          "&" "|" "^" "~"
+                                          "<<" ">>" ">>>"
+                                          "<" ">" "==" "<=" ">=")
+                                        'symbols)
+                           . font-lock-builtin-face))
+                        t)
 (add-hook 'c-mode-hook
           (lambda ()
             (setq-local comment-start "// ")
             (setq-local comment-end "")))
 
 ;; set c++-mode
+(font-lock-add-keywords 'c++-mode
+                        `((,(regexp-opt '("&&" "||" "!"
+                                          "..." ";" ":" "::"
+                                          "lambda" "λ")
+                                        'symbols)
+                           . font-lock-keyword-face)
+                          (,(regexp-opt '("="
+                                          "+" "-" "*" "/" "%"
+                                          "&" "|" "^" "~"
+                                          "<<" ">>" ">>>"
+                                          "<" ">" "==" "<=" ">=")
+                                        'symbols)
+                           . font-lock-builtin-face))
+                        t)
 (add-hook 'c++-mode-hook
           (lambda ()
             (setq-local comment-start "// ")
@@ -162,6 +190,20 @@
              (flycheck-mode t)))
 
 ;; ;; set java-mode
+(font-lock-add-keywords 'java-mode
+                        `((,(regexp-opt '("&&" "||" "!"
+                                          "..." ";" ":"
+                                          "lambda" "λ")
+                                        'symbols)
+                           . font-lock-keyword-face)
+                          (,(regexp-opt '("="
+                                          "+" "-" "*" "/" "%"
+                                          "&" "|" "^" "~"
+                                          "<<" ">>" ">>>"
+                                          "<" ">" "==" "<=" ">=")
+                                        'symbols)
+                           . font-lock-builtin-face))
+                        t)
 ;; (add-hook 'java-mode-hook
 ;;           (lambda ()
 ;;             (setq-local comment-start "// ")
@@ -194,7 +236,7 @@
 
 ;; set emacs-lisp-mode
 (font-lock-add-keywords 'emacs-lisp-mode
-                        `((,(regexp-opt '("else" "_" "...") 'symbols)
+                        `((,(regexp-opt '("else" "_" "..." ".") 'symbols)
                            . font-lock-keyword-face)
                           (,(regexp-opt '("+" "-" "*" "/"
                                           "<" ">" "=" "<=" ">="
@@ -255,7 +297,7 @@
 
 ;; set scheme-mode
 (font-lock-add-keywords 'scheme-mode
-                        `((,(regexp-opt '("else" "_" "...") 'symbols) . font-lock-keyword-face)
+                        `((,(regexp-opt '("else" "_" "..." ".") 'symbols) . font-lock-keyword-face)
                           (,(regexp-opt '("+" "-" "*" "/"
                                           "<" ">" "=" "<=" ">=") 'symbols)
                            . font-lock-builtin-face)
@@ -468,7 +510,8 @@
 
 ;; set racket-mode
 (font-lock-add-keywords 'racket-mode
-                        `((,(regexp-opt '(":-" "?" "~" "!="
+                        `((,(regexp-opt '("eval" "case-λ" "amb" ".") 'symbols) . font-lock-keyword-face)
+                          (,(regexp-opt '(":-" "?" "~" "!="
                                           ;; "datalog" "datalog!"
                                           ;; "make-theory" "write-theory" "read-theory" "theory/c"
 
@@ -529,8 +572,7 @@
 
                                           "s-exp->fasl" "fasl->s-exp")
                                         'symbols)
-                           . font-lock-builtin-face)
-                          (,(regexp-opt '("eval" "case-λ" "amb") 'symbols) . font-lock-keyword-face))
+                           . font-lock-builtin-face))
                         t)
 
 ;; set indent for racket
