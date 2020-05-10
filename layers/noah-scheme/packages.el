@@ -30,7 +30,7 @@
 ;;; Code:
 
 (defconst noah-scheme-packages
-  '(
+  `(
     ,(unless (and (spacemacs/system-is-mswindows) window-system)
        '(r6lint :location local))
     ))
