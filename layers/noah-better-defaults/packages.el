@@ -36,6 +36,7 @@
     ;; (quack-mode      :location local)
     (rash-mode       :location local)
     (yin-mode        :location local)
+    mips-mode
     on-parens
     evil-textobj-anyblock
     evil-paredit
@@ -114,6 +115,12 @@
 
 (defun noah-better-defaults/init-on-parens ()
   (use-package on-parens
+    :defer t
+    :init
+    ))
+
+(defun noah-better-defaults/init-mips-mode ()
+  (use-package mips-mode
     :defer t
     :init
     ))
