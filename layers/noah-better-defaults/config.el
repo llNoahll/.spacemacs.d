@@ -761,8 +761,8 @@
 (add-hook 'org-mode-hook
           (lambda ()
             (setq-local truncate-lines nil)))
-;; font-lock-mode in org file
 (setq-default org-src-fontify-natively t)
+(setq-default org-pretty-entities t)
 
 
 
