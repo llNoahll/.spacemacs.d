@@ -54,7 +54,6 @@
 (add-to-list 'auto-mode-alist '("\\.sps\\'"       . scheme-mode))
 (add-to-list 'auto-mode-alist '("\\.snippet\\'"   . snippet-mode))
 (add-to-list 'auto-mode-alist '("\\.yasnippet\\'" . snippet-mode))
-(add-to-list 'auto-mode-alist '("\\.scrbl\\'"     . racket-mode))
 (add-to-list 'auto-mode-alist '("\\.rashrc\\'"    . racket-mode))
 (add-to-list 'auto-mode-alist '("\\.xprofile\\'"  . shell-script-mode))
 (add-to-list 'auto-mode-alist '("\\.zsh-theme\\'" . shell-script-mode))
@@ -508,7 +507,7 @@
         ((regexp "\\.ss$")
          chez)))
 
-;; set racket-mode
+;;; set racket-mode
 (font-lock-add-keywords 'racket-mode
                         `((,(regexp-opt '("eval" "case-λ" "amb" ".") 'symbols) . font-lock-keyword-face)
                           (,(regexp-opt '(":-" "?" "~" "!="
@@ -660,6 +659,11 @@
                                                  ("popt-lambda:" .
                                                   (?p (Br . Bl) ?o (Br . Bl) ?p (Br . Bl) ?t (Br . Bl) ?- (Br . Bl)
                                                       ?λ (Br . Bl) ?:))))))
+
+;;; set scribble-mode
+(add-hook 'scribble-mode-hook
+          (lambda ()
+            (setq-local comment-start "@;; ")))
 
 
 ;; define octave-mode

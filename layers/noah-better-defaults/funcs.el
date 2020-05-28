@@ -138,6 +138,7 @@ is binary, activate `hexl-mode'."
 
 
 ;;; defun new major-mode.
+
 ;;;###autoload
 (define-derived-mode masm-mode asm-mode "MASM"
   "Major mode for masm.")

@@ -35,6 +35,7 @@
     (vline-mode      :location local)
     ;; (quack-mode      :location local)
     (rash-mode       :location local)
+    (scribble-mode   :location local)
     (yin-mode        :location local)
     mips-mode
     on-parens
@@ -103,6 +104,13 @@
     :defer t
     :init
     (require 'rash)
+    ))
+
+(defun noah-better-defaults/init-scribble-mode ()
+  (use-package scribble-mode
+    :defer t
+    :init
+    (require 'scribble)
     ))
 
 (defun noah-better-defaults/init-yin-mode ()
