@@ -629,6 +629,7 @@ before packages are loaded."
   (setq treemacs-width 20)
   (setq electric-pair-delete-adjacent-pairs 'nil)
   (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)
+  (setq powerline-default-separator 'slant)
   (symon-mode t)
 
   ;; Solve the problem of alignment between Chinese and English in the org table
