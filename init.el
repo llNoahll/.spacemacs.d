@@ -284,7 +284,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   dotspacemacs-mode-line-theme '(spacemacs :separator slant :separator-scale 1.5)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -629,7 +629,6 @@ before packages are loaded."
   (setq treemacs-width 20)
   (setq electric-pair-delete-adjacent-pairs 'nil)
   (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)
-  (setq powerline-default-separator 'slant)
   (symon-mode t)
 
   ;; Solve the problem of alignment between Chinese and English in the org table
