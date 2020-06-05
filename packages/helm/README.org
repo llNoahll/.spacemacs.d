@@ -1,8 +1,10 @@
 #+TITLE: Helm layer
 
+#+TAGS: completion|layer
+
 [[file:img/helm.png]]
 
-* Table of Contents                                        :TOC_4_gh:noexport:
+* Table of Contents                     :TOC_5_gh:noexport:
 - [[#description][Description]]
   - [[#features][Features:]]
 - [[#install][Install]]
@@ -17,6 +19,7 @@
   - [[#hjkl-navigation][hjkl navigation]]
   - [[#transient-state][Transient state]]
   - [[#bookmarks][Bookmarks]]
+  - [[#colorsfaces][Colors/Faces]]
   - [[#c-z-and-tab-switch][C-z and Tab switch]]
   - [[#helm-focus][Helm focus]]
   - [[#helm-swoop][Helm-swoop]]
@@ -125,10 +128,10 @@ if set the layer variable =spacemacs-helm-rg-max-column-number=.
 * Key bindings
 ** hjkl navigation
 When using the Vim style or Hybrid style with the variable
-=hybrid-mode-enable-hjkl-bindings= set to =t=, Spacemacs adds navigation in the
+=hybrid-style-enable-hjkl-bindings= set to =t=, Spacemacs adds navigation in the
 Helm buffers with ~hjkl~.
 
-| Key Binding | Description                  |
+| Key binding | Description                  |
 |-------------+------------------------------|
 | ~C-h~       | go to next source            |
 | ~C-H~       | describe key (replace ~C-h~) |
@@ -142,7 +145,7 @@ plugin.
 
 Initiate the transient state with ~M-SPC~ or ~s-M-SPC~ while in a =Helm= buffer.
 
-| Key Binding          | Description                                          |
+| Key binding          | Description                                          |
 |----------------------+------------------------------------------------------|
 | ~M-SPC~ or ~s-M-SPC~ | initiate the transient state                         |
 | ~q~                  | quit transient state                                 |
@@ -171,12 +174,19 @@ Initiate the transient state with ~M-SPC~ or ~s-M-SPC~ while in a =Helm= buffer.
 ** Bookmarks
 In the =helm-bookmarks= buffer:
 
-| Key Binding | Description                                  |
+| Key binding | Description                                  |
 |-------------+----------------------------------------------|
 | ~C-d~       | delete the selected bookmark                 |
 | ~C-e~       | edit the selected bookmark                   |
 | ~C-f~       | toggle filename location                     |
 | ~C-o~       | open the selected bookmark in another window |
+
+** Colors/Faces
+
+| Key binding | Description            |
+|-------------+------------------------|
+| ~SPC C l~   | =helm-colors=          |
+| ~SPC h d F~ | =spacemacs/helm-faces= |
 
 ** C-z and Tab switch
 The command bound to ~C-z~ is much more useful than the one bound to Tab, so it
@@ -194,8 +204,9 @@ real-time and navigate between them easily.
 You can even edit the occurrences directly in the =helm= buffer and apply the
 modifications to the buffer.
 
-| Key Binding | Description                    |
+| Key binding | Description                    |
 |-------------+--------------------------------|
+| ~SPC s C~   | clear =helm-swoop= own cache   |
 | ~SPC s s~   | execute =helm-swoop=           |
 | ~SPC s S~   | execute =helm-multi-swoop=     |
 | ~SPC s C-s~ | execute =helm-multi-swoop-all= |
@@ -209,13 +220,13 @@ first, select the command you want to run, and press ~C-u~ before pressing
 If you have =rg=, =ag=, =pt= or =ack= installed, replacing an occurrence of text
 in several files can be performed via [[https://github.com/syohex/emacs-helm-ag][helm-ag]].
 
-Say you want to replace all =foo= occurrences by =bar= in your current
-project:
-  - initiate a search with ~SPC /~
-  - enter in edit mode with ~C-c C-e~
-  - go to the occurrence and enter in =iedit state= with ~SPC s e~
-  - edit the occurrences then leave the =iedit state=
-  - press ~C-c C-c~
+To replace all occurrences of =foo= with =bar= in your current project:
+- Initiate a search with ~SPC /~ (in a project)
+- Open =helm-ag-edit= with ~C-c C-e~
+- Go to an occurrence of =foo= and enter =iedit-mode= with ~SPC s e~
+- Change =foo= to =bar=
+- Save the modifications and leave =helm-ag-edit= with ~C-c C-c~
+- Alternatively, discard all changes and leave =helm-ag-edit= with ~C-c C-k~
 
 *Note*: In Spacemacs, =helm-ag= despite its name works with =rg=, =pt= and =ack=
 as well (but not with =grep=).
