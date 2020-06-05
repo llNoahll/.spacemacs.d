@@ -55,8 +55,8 @@
                 [(string-suffix? file-name ".yansnippet")
                  (rename-file-or-directory file-path
                                            (string-replace file-name ".yansnippet" ".snippet"))]
-                [else (rename-file-or-directory file-path
-                                                (string-append file-name ".snippet"))]))))
+                [else (void)
+                      #;(rename-file-or-directory file-path (string-append file-name ".snippet"))]))))
 
     (modify-file file-path)
     (rename-file file-path)))

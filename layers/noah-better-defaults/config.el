@@ -141,6 +141,15 @@
             (text-scale-set -2)
             (vline-mode t)
             (highlight-indentation-mode t)
+            ;; (treemacs-create-icon :file "root.png"
+            ;;                       :extensions (root)
+            ;;                       :fallback "")
+            ;; (treemacs-create-icon :file "dir-closed.png"
+            ;;                       :extensions (dir-closed)
+            ;;                       :fallback (propertize "+ " 'face 'treemacs-term-node-face))
+            ;; (treemacs-create-icon :file "dir-open.png"
+            ;;                       :extensions (dir-open)
+            ;;                       :fallback (propertize "- " 'face 'treemacs-term-node-face))
             ;; (treemacs-create-icon :file "scheme.png"
             ;;                       :extensions ("ss" "scm" "sls" "sps"))
             ;; (treemacs-create-icon :file "vsc/vim.png"
