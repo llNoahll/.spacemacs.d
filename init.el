@@ -43,7 +43,6 @@ This function should only modify configuration layer settings."
      latex
      major-modes
      go
-     c-c++
      csharp
      java
      javascript
@@ -55,6 +54,8 @@ This function should only modify configuration layer settings."
      ruby
      rust
      html
+     (c-c++ :variables
+            c-c++-default-mode-for-headers 'c++-mode)
      (asm :variables
           comment-add 1
           evil-shift-width 4)
@@ -90,7 +91,7 @@ This function should only modify configuration layer settings."
      spell-checking
      syntax-checking
      semantic
-     lsp
+     ;; lsp
      ;; ycmd
      ;; version-control
      ;; (vinegar :variables
