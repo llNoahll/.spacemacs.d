@@ -1,25 +1,23 @@
 * Install
   You can use my configuration by two steps:
 
-  1. 
-     #+begin_src sh
-       git clone --recursive --depth=1 https://github.com/llNoahll/.spacemacs.d ~/.spacemacs.d
-     #+end_src
+** .spacemacs.d
+   #+begin_src sh
+     git clone --recursive --depth=1 https://github.com/llNoahll/.spacemacs.d ~/.spacemacs.d
+   #+end_src
 
-  2.
-  #+begin_src sh
-    git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
-  #+end_src
-  (recommend)
-  
-  or
-  #+begin_src sh
-    git clone -b master https://github.com/syl20bnr/spacemacs ~/.emacs.d
-  #+end_src
+** .emacs.d
+   #+begin_src sh
+     git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
+   #+end_src
+   (recommend)
 
+   or
+   #+begin_src sh
+     git clone -b master https://github.com/syl20bnr/spacemacs ~/.emacs.d
+   #+end_src
 
+* ꧁༺๑ ͜҉๑҉Ƹ̵̡̄Ӝ̵̨̄Ʒ҉๑҉͜ ๑༻꧂
   And you can use spacemacs-theme and helm layers in ~/.spacemacs.d/packages/ instand of initial layers.
 
   Happy Hacking!  <(~︶~)>
-
-  ꧁༺๑ ͜҉๑҉Ƹ̵̡̄Ӝ̵̨̄Ʒ҉๑҉͜ ๑༻꧂
