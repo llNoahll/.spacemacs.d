@@ -1,14 +1,14 @@
 * Install
-You can use my configuration by two steps:
+  You can use my configuration by two steps:
 
-1. git clone --depth=1 https://github.com/llNoahll/.spacemacs.d ~/.spacemacs.d
+  1. git clone --depth=1 https://github.com/llNoahll/.spacemacs.d ~/.spacemacs.d
 
-2. git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d    (recommend)
+  2. git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d    (recommend)
 
-   or git clone -b master https://github.com/syl20bnr/spacemacs ~/.emacs.d
+     or git clone -b master https://github.com/syl20bnr/spacemacs ~/.emacs.d
 
-And you can use spacemacs-theme and helm layers in ~/.spacemacs.d/packages/ instand of initial layers.
+  And you can use spacemacs-theme and helm layers in ~/.spacemacs.d/packages/ instand of initial layers.
 
-Happy Hacking!  <(~︶~)> 
+  Happy Hacking!  <(~︶~)>
 
-꧁༺๑ ͜҉๑҉Ƹ̵̡̄Ӝ̵̨̄Ʒ҉๑҉͜ ๑༻꧂
+  ꧁༺๑ ͜҉๑҉Ƹ̵̡̄Ӝ̵̨̄Ʒ҉๑҉͜ ๑༻꧂
