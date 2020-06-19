@@ -22,16 +22,18 @@
 from PyQt5.QtCore import Qt, QSizeF
 from PyQt5.QtGui import QBrush
 from PyQt5.QtGui import QColor
-from PyQt5.QtMultimedia import QCameraInfo, QCamera
+from PyQt5.QtMultimedia import QCameraInfo, QCamera, QCameraImageCapture
 from PyQt5.QtMultimediaWidgets import QGraphicsVideoItem
 from PyQt5.QtWidgets import QGraphicsScene, QGraphicsView
 from PyQt5.QtWidgets import QWidget, QVBoxLayout
 from core.buffer import Buffer
+from pathlib import Path
+import time
+import os
 
 class AppBuffer(Buffer):
-    def __init__(self, buffer_id, url, arguments):
-        Buffer.__init__(self, buffer_id, url, arguments, True, QColor(0, 0, 0, 255))
-
+    def __init__(self, buffer_id, url, config_dir, arguments, emacs_var_dict, module_path):
+        Buffer.__init__(self, buffer_id, url, arguments, emacs_var_dict, module_path, True)
         self.add_widget(CameraWidget(QColor(0, 0, 0, 255)))
 
     def all_views_hide(self):
@@ -41,6 +43,17 @@ class AppBuffer(Buffer):
     def some_view_show(self):
         # Re-start camero after some view show.
         self.buffer_widget.camera.start()
+
+    def take_photo(self):
+        if os.path.exists(os.path.expanduser(self.emacs_var_dict["eaf-camera-save-path"])):
+            self.buffer_widget.take_photo(self.emacs_var_dict["eaf-camera-save-path"])
+        else:
+            self.buffer_widget.take_photo("~/Downloads")
+
+    def destroy_buffer(self):
+        self.buffer_widget.stop_camera()
+
+        super().destroy_buffer()
 
 class CameraWidget(QWidget):
 
@@ -76,6 +89,16 @@ class CameraWidget(QWidget):
         self.camera.setViewfinder(self.video_item)
         self.camera.setCaptureMode(QCamera.CaptureStillImage)
         self.camera.start()
+
+    def take_photo(self, camera_save_path):
+        image_capture = QCameraImageCapture(self.camera)
+        save_path = str(Path(os.path.expanduser(camera_save_path)))
+        photo_path = os.path.join(save_path, "EAF_Camera_Photo_" + time.strftime("%Y-%m-%d_%H:%M:%S", time.localtime(int(time.time()))))
+        image_capture.capture(photo_path)
+        self.message_to_emacs.emit("Captured Photo at " + photo_path)
+
+    def stop_camera(self):
+        self.camera.stop()
 
 if __name__ == "__main__":
     from PyQt5.QtWidgets import QApplication

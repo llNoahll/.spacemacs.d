@@ -21,12 +21,12 @@
 
 from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QColor
-from core.browser_buffer import BrowserBuffer
+from core.browser import BrowserBuffer
 import os
 
 class AppBuffer(BrowserBuffer):
-    def __init__(self, buffer_id, url, arguments):
-        BrowserBuffer.__init__(self, buffer_id, url, arguments, False, QColor(255, 255, 255, 255))
+    def __init__(self, buffer_id, url, config_dir, arguments, emacs_var_dict, module_path):
+        BrowserBuffer.__init__(self, buffer_id, url, config_dir, arguments, emacs_var_dict, module_path, False)
 
         self.url = url
 

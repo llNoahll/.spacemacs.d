@@ -20,10 +20,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from PyQt5 import QtCore
-from PyQt5.QtCore import Qt, QEvent
-from PyQt5.QtGui import QPainter
+from PyQt5.QtCore import Qt, QEvent, QPoint
+from PyQt5.QtGui import QPainter, QWindow
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QGraphicsView
-from core.xutils import get_xlib_display
 
 class View(QWidget):
 
@@ -67,12 +66,34 @@ class View(QWidget):
         # Resize after show to trigger fit view operation.
         self.resize(self.width, self.height)
 
+        self.buffer.aspect_ratio_change.connect(self.adjust_aspect_ratio)
+
     def resizeEvent(self, event):
         # Fit content to view rect just when buffer fit_to_view option is enable.
         if self.buffer.fit_to_view:
             if event.oldSize().isValid():
                 self.graphics_view.fitInView(self.graphics_view.scene().sceneRect(), Qt.KeepAspectRatio)
         QWidget.resizeEvent(self, event)
+
+    def adjust_aspect_ratio(self):
+        widget_width = self.width
+        widget_height = self.height
+
+        if self.buffer.aspect_ratio == 0:
+            self.buffer.buffer_widget.resize(self.width, self.height)
+
+            self.layout.setContentsMargins(0, 0, 0, 0)
+        else:
+            view_height = widget_height * (1 - 2 * self.buffer.vertical_padding_ratio)
+            view_width = view_height * self.buffer.aspect_ratio
+            horizontal_padding = (widget_width - view_width) / 2
+            vertical_padding = self.buffer.vertical_padding_ratio * widget_height
+
+            self.buffer.buffer_widget.resize(view_width, view_height)
+
+            self.layout.setContentsMargins(
+                horizontal_padding, vertical_padding,
+                horizontal_padding, vertical_padding)
 
     def eventFilter(self, obj, event):
         # Focus emacs buffer when user click view.
@@ -95,15 +116,9 @@ class View(QWidget):
         self.graphics_view.horizontalScrollBar().setValue(0)
 
     def reparent(self):
-        xlib_display = get_xlib_display()
+        qwindow = self.windowHandle()
+        qwindow.setParent(QWindow.fromWinId(self.emacs_xid))
+        qwindow.setPosition(QPoint(self.x, self.y))
 
-        view_xid = self.winId().__int__()
-        view_xwindow = xlib_display.create_resource_object("window", view_xid)
-        emacs_xwindow = xlib_display.create_resource_object("window", self.emacs_xid)
-
-        view_xwindow.reparent(emacs_xwindow, self.x, self.y)
-
-        xlib_display.sync()
-
-    def handle_destroy(self):
+    def destroy_view(self):
         self.destroy()
