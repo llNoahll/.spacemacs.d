@@ -47,16 +47,16 @@
                 [(string-suffix? file-name ".yas-parents") (void)]
                 [(string-suffix? file-name ".yas-make-groups") (void)]
                 [(string-suffix? file-name ".yasnippet")
-                 (rename-file-or-directory file-path
-                                           (string-replace file-name ".yasnippet" ".snippet"))]
+                 (path-replace-extension file-path #".snippet")
+                 (void)]
                 [(string-suffix? file-name ".yasinppet")
-                 (rename-file-or-directory file-path
-                                           (string-replace file-name ".yasinppet" ".snippet"))]
+                 (path-replace-extension file-path #".snippet")
+                 (void)]
                 [(string-suffix? file-name ".yansnippet")
-                 (rename-file-or-directory file-path
-                                           (string-replace file-name ".yansnippet" ".snippet"))]
+                 (path-replace-extension file-path #".snippet")
+                 (void)]
                 [else (void)
-                      #;(rename-file-or-directory file-path (string-append file-name ".snippet"))]))))
+                      #; (path-replace-extension file-path #".snippet")]))))
 
     (modify-file file-path)
     (rename-file file-path)))

@@ -1,6 +1,6 @@
 ;;; rash.el --- the Racket command shell  -*- lexical-binding:t -*-
 ;;
-;; Copyright (c) 2012-2019 Noah
+;; Copyright (c) 2012-2020 Noah
 ;;
 ;; Author:  <noah@Archier>
 ;; URL: https://github.com/llNoahll/.spacemacs.d
