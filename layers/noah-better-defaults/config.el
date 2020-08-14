@@ -359,13 +359,18 @@
                           (,(concat "(" (regexp-opt
                                          '("set!"
                                            "eval" "apply"
+                                           "filter"
                                            "amb"
                                            "case-λ"
-                                           "filter") t) "\\>")
+
+                                           "untrace" "trace" "trace-call"
+                                           "trace-lambda" "trace-let"
+                                           "trace-define" "trace-define-syntax") t) "\\>")
                            . font-lock-keyword-face)
                           (,(concat "(" (regexp-opt
                                          '("exit" "error" "format"
                                            "eq?" "eqv?" "equal?"
+
                                            "display" "displayln"
                                            "write" "writeln"
                                            "print" "printf" "println" "fprintf"
@@ -507,7 +512,10 @@
             (setq-local comment-start "; ")
             (setq-local prettify-symbols-alist '(("lambda" . ?λ)
                                                  ("case-lambda" .
-                                                  (?c (Br . Bl) ?a (Br . Bl) ?s (Br . Bl) ?e (Br . Bl) ?- (Br . Bl) ?λ))))))
+                                                  (?c (Br . Bl) ?a (Br . Bl) ?s (Br . Bl) ?e (Br . Bl) ?- (Br . Bl) ?λ))
+                                                 ("trace-lambda" .
+                                                  (?t (Br . Bl) ?r (Br . Bl) ?a (Br . Bl) ?c (Br . Bl) ?e (Br . Bl) ?- (Br . Bl)
+                                                      ?λ))))))
 
 ;; setq scheme's default geiser-implementations
 (setq geiser-implementations-alist
@@ -518,13 +526,19 @@
 
 ;;; set racket-mode
 (font-lock-add-keywords 'racket-mode
-                        `((,(regexp-opt '("eval" "case-λ" "amb" ".") 'symbols) . font-lock-keyword-face)
+                        `((,(regexp-opt '("eval" "case-λ" "amb" "."
+
+                                          "untrace" "trace" "trace-call"
+                                          "trace-lambda" "trace-let"
+                                          "trace-define" "trace-define-syntax")
+                                        'symbols)
+                           . font-lock-keyword-face)
                           (,(regexp-opt '(":-" "?" "~" "!="
                                           ;; "datalog" "datalog!"
                                           ;; "make-theory" "write-theory" "read-theory" "theory/c"
 
-                                          "case-λ:" "λ:" "opt-λ:" "pcase-λ:" "pλ:" "popt-λ:"
-                                          "match-λ" "match-λ*" "match-λ**"
+                                          ;; "case-λ:" "λ:" "opt-λ:" "pcase-λ:" "pλ:" "popt-λ:"
+                                          ;; "match-λ" "match-λ*" "match-λ**"
 
                                           "true?"
                                           "nil" "nil?"
@@ -601,6 +615,9 @@
             (geiser-mode t)
             (setq-local comment-start "; ")
             (setq-local prettify-symbols-alist '(("lambda" . ?λ)
+                                                 ("trace-lambda" .
+                                                  (?t (Br . Bl) ?r (Br . Bl) ?a (Br . Bl) ?c (Br . Bl) ?e (Br . Bl) ?- (Br . Bl)
+                                                      ?λ))
                                                  ("case-lambda" .
                                                   (?c (Br . Bl) ?a (Br . Bl) ?s (Br . Bl) ?e (Br . Bl) ?- (Br . Bl)
                                                       ?λ))
