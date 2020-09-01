@@ -404,6 +404,8 @@
 ;; set magit
 (add-hook 'magit-status-mode-hook
           (lambda ()
+            (define-key magit-status-mode-map (kbd "p") 'magit-push-popup)
+
             (define-key magit-status-mode-map (kbd "1") 'nil)
             (define-key magit-status-mode-map (kbd "2") 'nil)
             (define-key magit-status-mode-map (kbd "3") 'nil)

@@ -127,6 +127,7 @@
 ;; set magit-status-mode
 (add-hook 'magit-status-mode-hook
           (lambda ()
+            (evil-evilified-state)
             (display-line-numbers-mode t)))
 
 ;; set eww
