@@ -577,7 +577,7 @@ to buffers)."
              (when (>= num-buffers-placed num-windows) (cl-return))
              (set-window-buffer (winum-get-window-by-number cur-win) buffer)
              (setq cur-win (+ 1 (mod cur-win num-windows)))
-             (incf num-buffers-placed))))
+             (cl-incf num-buffers-placed))))
 
 (defun spacemacs/helm-find-buffers-windows ()
   (interactive)
@@ -647,4 +647,4 @@ to buffers)."
   (interactive)
   (let ((completion-styles completion-styles))
     (add-to-list 'completion-styles `,(if (version< emacs-version "27") 'helm-flex 'flex) t)
-    (command-execute 'helm-M-x)))
+    (call-interactively 'helm-M-x)))
