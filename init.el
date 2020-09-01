@@ -464,7 +464,7 @@ It should only modify the values of Spacemacs settings."
                                                   minimap-mode
                                                   treemacs-mode
                                                   ibuffer-mode
-                                                  ;; magit-mode
+                                                  magit-mode
                                                   eww-mode
                                                   ein:notebook-multilang-mode
                                                   ein:notebooklist-mode
