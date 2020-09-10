@@ -782,6 +782,12 @@
             (setq-local electric-pair-pairs
                         (append electric-pair-pairs '((?\< . ?\>))))))
 
+;; define xml-mode
+(add-hook 'xml-mode-hook
+          (lambda ()
+            (setq-local electric-pair-pairs
+                        (append electric-pair-pairs '((?\< . ?\>))))))
+
 ;; set spelling-checking
 (add-hook 'text-mode-hook
           (lambda ()
