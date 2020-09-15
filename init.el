@@ -45,6 +45,7 @@ This function should only modify configuration layer settings."
      csharp
      java
      javascript
+     php
      emacs-lisp common-lisp
      scheme racket clojure
      haskell
