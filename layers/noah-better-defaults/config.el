@@ -195,7 +195,7 @@
           (lambda ()
             (setq-local comment-start "// ")
             (setq-local comment-end "")
-             (flycheck-mode t)))
+            (flycheck-mode t)))
 
 ;; ;; set java-mode
 (font-lock-add-keywords 'java-mode
@@ -244,7 +244,7 @@
 
 ;; set emacs-lisp-mode
 (font-lock-add-keywords 'emacs-lisp-mode
-                        `((,(regexp-opt '("else" "_" "..." ".") 'symbols)
+                        `((,(regexp-opt '("else" "_" "..." "...+" ".") 'symbols)
                            . font-lock-keyword-face)
                           (,(regexp-opt '("+" "-" "*" "/"
                                           "<" ">" "=" "<=" ">="
@@ -305,7 +305,7 @@
 
 ;; set scheme-mode
 (font-lock-add-keywords 'scheme-mode
-                        `((,(regexp-opt '("else" "_" "..." ".") 'symbols) . font-lock-keyword-face)
+                        `((,(regexp-opt '("else" "_" "..." "...+" ".") 'symbols) . font-lock-keyword-face)
                           (,(regexp-opt '("+" "-" "*" "/"
                                           "<" ">" "=" "<=" ">=") 'symbols)
                            . font-lock-builtin-face)
@@ -526,7 +526,10 @@
 
 ;;; set racket-mode
 (font-lock-add-keywords 'racket-mode
-                        `((,(regexp-opt '("eval" "case-λ" "amb" "."
+                        `((,(regexp-opt '("eval" "case-λ" "amb" "." "...+" "fn"
+
+                                          "define-syntax-parser"
+                                          "define/syntax-parse"
 
                                           "untrace" "trace" "trace-call"
                                           "trace-lambda" "trace-let"
@@ -592,7 +595,104 @@
                                           "prop:serializable"
                                           "make-serialize-info"
 
-                                          "s-exp->fasl" "fasl->s-exp")
+                                          "s-exp->fasl" "fasl->s-exp"
+
+
+                                          "define-splicing-syntax-class"
+                                          "define-syntax-class"
+
+                                          "define-conventions"
+                                          "define-literal-set"
+                                          "literal-set->predicate"
+
+
+                                          "syntax-parse-state-ref"
+                                          "syntax-parse-state-set!"
+                                          "syntax-parse-state-update!"
+                                          "syntax-parse-state-cons!"
+                                          "syntax-parse-track-literals"
+
+                                          "syntax-class-attributes"
+                                          "syntax-class-arity"
+                                          "syntax-class-keywords"
+                                          "syntax-class-parse"
+                                          "debug-parse"
+                                          "debug-syntax-parse!"
+
+
+                                          "provide-syntax-class/contract"
+                                          "syntax-class/c"
+
+                                          "reify-syntax-class"
+                                          "reified-syntax-class?"
+                                          "reified-splicing-syntax-class?"
+                                          "reified-syntax-class-attributes"
+                                          "reified-syntax-class-arity"
+                                          "reified-syntax-class-keywords"
+                                          "reified-syntax-class-curry"
+
+                                          "~reflect"
+                                          "~splicing-reflect"
+
+                                          "define-primitive-splicing-syntax-class"
+                                          "~eh-var"
+
+                                          "define-syntax-class/specialize"
+                                          "template"
+                                          "template/loc"
+                                          "quasitemplate"
+                                          "quasitemplate/loc"
+                                          "datum-template"
+
+                                          "??"
+                                          "~?"
+                                          "?@"
+                                          "~@"
+                                          "define-template-metafunction"
+
+
+                                          "prop:syntax-class"
+                                          "pattern"
+                                          "attribute"
+                                          "this-syntax"
+
+                                          "prop:pattern-expander"
+                                          "pattern-expander"
+                                          "pattern-expander?"
+                                          "syntax-local-syntax-parse-pattern-introduce"
+
+
+                                          "~!"
+                                          "~bind"
+                                          "~fail"
+                                          "~parse"
+                                          "~do"
+                                          "~undo"
+
+                                          "~var"
+                                          "~literal"
+                                          "~datum"
+
+                                          "~and"
+                                          "~or*"
+                                          "~or"
+                                          "~not"
+
+                                          "~rest"
+                                          "~describe"
+                                          "~commit"
+                                          "~delimit-cut"
+                                          "~post"
+
+                                          "~seq"
+                                          "~optional"
+
+                                          "~peek"
+                                          "~peek-not"
+
+                                          "~alt"
+                                          "~once"
+                                          "~between")
                                         'symbols)
                            . font-lock-builtin-face))
                         t)
