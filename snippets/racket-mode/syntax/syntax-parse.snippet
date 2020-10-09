@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: syntax-parse
+# key: syntax-parse.
+# --
+(syntax-parse ${1:stx} ($2)
+  [(_ $3)
+   #'$4])$0
