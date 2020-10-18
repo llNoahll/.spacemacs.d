@@ -48,6 +48,7 @@ This function should only modify configuration layer settings."
      php
      emacs-lisp common-lisp
      scheme racket clojure
+     idris
      haskell
      vimscript
      sml
