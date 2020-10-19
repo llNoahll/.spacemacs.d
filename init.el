@@ -50,6 +50,7 @@ This function should only modify configuration layer settings."
      scheme racket clojure
      idris
      haskell
+     sql
      vimscript
      sml
      ruby
