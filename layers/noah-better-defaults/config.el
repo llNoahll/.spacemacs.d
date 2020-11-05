@@ -52,6 +52,7 @@
 ;; add auto-mode-lists
 (add-to-list 'auto-mode-alist '("\\.sls\\'"       . scheme-mode))
 (add-to-list 'auto-mode-alist '("\\.sps\\'"       . scheme-mode))
+(add-to-list 'auto-mode-alist '("\\.xexpr\\'"     . racket-mode))
 (add-to-list 'auto-mode-alist '("\\.snippet\\'"   . snippet-mode))
 (add-to-list 'auto-mode-alist '("\\.yasnippet\\'" . snippet-mode))
 (add-to-list 'auto-mode-alist '("\\.rashrc\\'"    . racket-mode))
@@ -150,6 +151,8 @@
             ;; (treemacs-create-icon :file "dir-open.png"
             ;;                       :extensions (dir-open)
             ;;                       :fallback (propertize "- " 'face 'treemacs-term-node-face))
+            ;; (treemacs-create-icon :file "racket.png"
+            ;;                       :extensions ("racket" "rkt" "rktl" "rktd" "scrbl" "scribble" "xexpr" "plt"))
             ;; (treemacs-create-icon :file "scheme.png"
             ;;                       :extensions ("ss" "scm" "sls" "sps"))
             ;; (treemacs-create-icon :file "vsc/vim.png"
