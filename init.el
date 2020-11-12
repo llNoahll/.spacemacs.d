@@ -78,6 +78,7 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      csv
      pdf
+     yaml
 
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
