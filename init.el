@@ -816,11 +816,11 @@ COUNT is the numeric prefix argument.  Return nil."
     "Search word at point or word from input
 and display result with popup-tip."
     (interactive)
+
     (let ((word (youdao-dictionary--region-or-word)))
-      (if word
-          (popup-tip (youdao-dictionary--format-result word))
-        (let ((word (read-string (format "Translate -> "))))
-          (popup-tip (youdao-dictionary--format-result word))))))
+      (popup-tip (youdao-dictionary--format-result
+                  (youdao-dictionary--request
+                   (if word word (read-string (format "Translate -> "))))))))
 
   )
 
