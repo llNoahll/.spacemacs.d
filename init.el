@@ -88,6 +88,7 @@ This function should only modify configuration layer settings."
      ;; ivy
      helm
      github
+     slack
      markdown
      smex
      imenu-list
