@@ -38,6 +38,7 @@
       (λ (file-path)
         (let ([file-name : String (path->string file-path)])
           (cond [(string-suffix? file-name ".org") (void)]
+                [(string-suffix? file-name ".md") (void)]
                 [(string-suffix? file-name ".markdown") (void)]
                 [(string-suffix? file-name ".el") (void)]
                 [(string-suffix? file-name ".elc") (void)]
