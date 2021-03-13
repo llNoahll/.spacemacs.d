@@ -57,14 +57,14 @@
 (define-key evil-operator-state-map (kbd "i") 'evil-previous-line)
 (define-key evil-operator-state-map (kbd "h") evil-inner-text-objects-map)
 
-(evil-define-key 'visual evil-org-mode-map
+(evil-define-key '(visual operator) 'evil-org-mode
   (kbd "i e") 'nil
   (kbd "i E") 'nil
   (kbd "i r") 'nil
   (kbd "i R") 'nil
   (kbd "i")   'evil-previous-line
-  (kbd "h e") 'evil-org-inner-element
-  (kbd "h E") 'evil-org-inner-greater-element
+  (kbd "h e") 'evil-org-inner-object
+  (kbd "h E") 'evil-org-inner-element
   (kbd "h r") 'evil-org-inner-greater-element
   (kbd "h R") 'evil-org-inner-subtree)
 
