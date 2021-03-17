@@ -48,7 +48,10 @@ This function should only modify configuration layer settings."
      typescript
      php
      emacs-lisp common-lisp
-     scheme racket clojure
+     clojure
+     scheme racket
+     coq
+     agda
      idris
      haskell
      sql
