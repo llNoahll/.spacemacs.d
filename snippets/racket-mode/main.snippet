@@ -2,9 +2,17 @@
 # name: main module
 # key: main.
 # --
-(define (main . args)
-    (void))
+${1:(: main [-> String * (Values Any)])
+}(define main
+  (λ argv
+    (call/cc
+     (λ ([${2:return} : [-> Any Nothing]])
+       (when (null? argv)
+         (set! argv (vector->list (current-command-line-arguments))))
 
-(module+ main
-  $0
-)
+
+       $0
+
+
+       ($2 ${3:0})))))
+(module+ main (call-with-values (λ () (main)) exit))
