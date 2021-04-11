@@ -582,7 +582,11 @@ It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
   (setq configuration-layer-elpa-archives
-        '(("melpa-cn"             . "http://elpa.emacs-china.org/melpa/")
+        '(("melpa"                . "https://melpa.org/packages/")
+          ("org"                  . "http://orgmode.org/elpa/")
+          ("gnu"                  . "https://elpa.gnu.org/packages/")
+
+          ("melpa-cn"             . "http://elpa.emacs-china.org/melpa/")
           ("org-cn"               . "http://elpa.emacs-china.org/org/")
           ("gnu-cn"               . "http://elpa.emacs-china.org/gnu/")
           ("marmalade-cn"         . "http://elpa.emacs-china.org/marmalade/")
