@@ -44,25 +44,9 @@
     highlight-indent-guides
     tabbar-ruler
     company-tabnine
-    ,(unless (and (spacemacs/system-is-mswindows) window-system)
-       '(eaf :location local))
     ))
 
 
-
-(defun noah-better-defaults/init-eaf ()
-  (use-package eaf
-    :defer t
-    :init
-    (require 'eaf)
-
-    (spacemacs/declare-prefix  "a f" "frame")
-    (spacemacs/set-leader-keys "a f o" 'eaf-open)
-    (spacemacs/set-leader-keys "a f a" 'eaf-open-application)
-
-    (spacemacs/declare-prefix  "F a" "applications")
-    (spacemacs/set-leader-keys "F a o" 'eaf-open)
-    (spacemacs/set-leader-keys "F a o" 'eaf-open-application)))
 
 (defun noah-better-defaults/init-sublimity ()
   (use-package sublimity

@@ -266,6 +266,13 @@
 (spacemacs/declare-prefix "o" "occur")
 (spacemacs/set-leader-keys "o d" 'occur-dwim)
 
+;; set eaf
+(spacemacs/set-leader-keys "a a a" 'eaf-open-application)
+
+(spacemacs/declare-prefix  "F a" "applications")
+(spacemacs/set-leader-keys "F a f" 'eaf-open)
+(spacemacs/set-leader-keys "F a a" 'eaf-open-application)
+
 ;; set youdao translation
 (global-set-key (kbd "<f1>") 'youdao-search-at-point-or-from-input)
 
